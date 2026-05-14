@@ -236,13 +236,50 @@ body.main-reveal {
 ========================================================================== */
 .marquee {
     overflow: hidden;
-    white-space: nowrap;
-    font-size: 30px;
-    animation: scroll 10s linear infinite;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    margin: 4rem 0;
+    position: relative;
+    background: linear-gradient(120deg, rgba(0, 245, 212, 0.14), rgba(255, 60, 125, 0.14));
+    margin: auto;
+    max-width: 1400px;
 }
+
+.marquee::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(5, 6, 11, 0.5), transparent);
+    animation: sweep 5s linear infinite;
+}
+
+@keyframes sweep {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.marquee-track {
+    display: flex;
+    gap: 4rem;
+    padding: 1rem 2rem;
+    width: max-content;
+    white-space: nowrap;
+    animation: scroll 20s linear infinite;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+}
+.marquee-track > * {
+    flex: 0 0 auto;
+}
+
 @keyframes scroll {
-    0% { transform: translateX(100%); }
-    100% { transform: translateX(-100%); }
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
 }
 /* ==========================================================================
    6. 進度條效果
