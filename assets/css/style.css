@@ -1,0 +1,195 @@
+/* ==========================================================================
+   1. 核心變數與基礎設定
+   ========================================================================== */
+:root {
+    --primary-color: #2a9d8f;
+    --accent-color: #e9c46a;
+    --text-dark: #264653;
+    --text-secondary: #6c757d;
+    --bg-main: #f4f7f6;
+    --card-bg: #ffffff;
+    --white: #ffffff;
+    --aurora-1: #0a0a2a;
+    --aurora-2: #00c497;
+    --radius-lg: 16px;
+    --shadow: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] {
+    --bg-main: #121212;
+    --card-bg: #1e1e1e;
+    --text-dark: #e0e0e0;
+    --text-secondary: #b0b0b0;
+    --shadow: rgba(0, 0, 0, 0.4);
+    --aurora-1: #000000;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+    background-color: var(--aurora-1);
+    color: var(--text-dark);
+    overflow-x: hidden;
+    transition: background-color 1s ease, color 0.5s ease;
+}
+
+body.main-reveal { background-color: var(--bg-main); }
+
+/* ==========================================================================
+   2. 互動：深色模式按鈕
+   ========================================================================== */
+.theme-toggle {
+    position: fixed;
+    bottom: 30px; right: 30px;
+    width: 60px; height: 60px;
+    background: var(--primary-color);
+    color: white; border-radius: 50%;
+    display: none; justify-content: center; align-items: center;
+    cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    z-index: 10001; font-size: 1.5rem; border: none;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.theme-toggle:hover { transform: scale(1.15) rotate(15deg); }
+
+/* ==========================================================================
+   3. 轉場效果：極光、貓咪（含對話框）與圓形閃光
+   ========================================================================== */
+.landing-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle at center, #001f3f 0%, var(--aurora-1) 100%);
+    display: flex; justify-content: center; align-items: center;
+    z-index: 9999; transition: all 1s ease;
+    overflow: hidden;
+}
+
+.aurora-bg {
+    position: absolute;
+    width: 200%; height: 200%;
+    background: linear-gradient(125deg, var(--aurora-1) 0%, #001f3f 40%, var(--aurora-2) 60%, var(--aurora-1) 100%);
+    background-size: 400% 400%;
+    animation: auroraFlow 20s ease infinite;
+    opacity: 0.6; z-index: 1;
+}
+
+@keyframes auroraFlow {
+    0% { background-position: 0% 50%; transform: scale(1); }
+    50% { background-position: 100% 50%; transform: scale(1.1); }
+    100% { background-position: 0% 50%; transform: scale(1); }
+}
+
+.circle-flash {
+    position: fixed;
+    top: 50%; left: 50%;
+    width: 10px; height: 10px;
+    background: white; border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    z-index: 10000; opacity: 0; filter: blur(10px);
+    box-shadow: 0 0 100px 50px white;
+    pointer-events: none;
+}
+
+.circle-flash.active { animation: circleWarp 1.2s cubic-bezier(0.7, 0, 0.3, 1) forwards; }
+@keyframes circleWarp {
+    0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+    30% { opacity: 1; }
+    100% { transform: translate(-50%, -50%) scale(150); opacity: 0; }
+}
+
+.landing-content { position: relative; z-index: 10; text-align: center; display: flex; flex-direction: column; align-items: center; }
+
+/* 貓咪嚮導與對話框樣式 */
+.cat-navigator { font-size: 5.5rem; margin-bottom: 20px; animation: catFloat 3s ease-in-out infinite; display: flex; flex-direction: column; align-items: center; }
+.cat-bubble {
+    background: white; color: var(--text-dark);
+    padding: 10px 22px; border-radius: 25px;
+    font-size: 1.1rem; font-weight: bold;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+    margin-top: 15px; transition: opacity 0.3s ease;
+}
+
+.cat-dash { animation: catIntoCircle 0.9s cubic-bezier(0.7, 0, 0.3, 1) forwards !important; }
+
+@keyframes catIntoCircle {
+    0% { transform: scale(1); opacity: 1; }
+    30% { transform: scale(1.4) translateY(20px); }
+    100% { transform: scale(0) translateY(-200px); opacity: 0; filter: blur(15px); }
+}
+
+@keyframes catFloat {
+    0%, 100% { transform: translateY(0) rotate(-4deg); }
+    50% { transform: translateY(-20px) rotate(4deg); }
+}
+
+.typewriter {
+    color: var(--white); font-size: 2.8rem; overflow: hidden; 
+    border-right: .15em solid var(--accent-color);
+    white-space: nowrap; letter-spacing: .15em; 
+    width: 0; margin: 35px 0;
+    text-shadow: 0 0 20px var(--aurora-2);
+}
+.start-typing { animation: typing 3s steps(30, end) forwards; }
+@keyframes typing { from { width: 0 } to { width: 100% } }
+
+.landing-overlay.warp-exit { transform: scale(4); opacity: 0; filter: blur(30px); pointer-events: none; }
+
+/* ==========================================================================
+   4. 主網頁模組：翻轉卡片與網格
+   ========================================================================== */
+#main-content { display: none; opacity: 0; transition: opacity 1.5s ease; }
+
+.hero-section {
+    height: 100vh;
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1920&q=80');
+    background-size: cover; background-position: center;
+    display: flex; justify-content: center; align-items: center; text-align: center;
+}
+
+.hero-title { color: white; font-size: 4.8rem; font-weight: 900; text-shadow: 0 10px 40px rgba(0,0,0,0.8); }
+
+.spot-container { padding: 100px 5%; max-width: 1400px; margin: 0 auto; }
+.grid-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 40px; margin-top: 50px; }
+
+/* --- 左邊卡片：3D 翻轉 --- */
+.spot-card-container { perspective: 1000px; height: 480px; }
+.spot-card-inner {
+    position: relative; width: 100%; height: 100%;
+    transition: transform 0.8s; transform-style: preserve-3d;
+}
+.spot-card-container:hover .spot-card-inner { transform: rotateY(180deg); }
+
+.card-face {
+    position: absolute; width: 100%; height: 100%;
+    -webkit-backface-visibility: hidden; backface-visibility: hidden;
+    border-radius: var(--radius-lg); overflow: hidden;
+    background: var(--card-bg); box-shadow: 0 10px 20px var(--shadow);
+    display: flex; flex-direction: column;
+}
+.card-face-back {
+    background: var(--primary-color); color: white;
+    transform: rotateY(180deg); display: flex; justify-content: center;
+    align-items: center; padding: 30px; text-align: center;
+}
+
+/* --- 中間與右邊卡片：浮起 --- */
+.spot-card-float {
+    background: var(--card-bg); border-radius: var(--radius-lg);
+    overflow: hidden; box-shadow: 0 10px 20px var(--shadow);
+    transition: transform 0.4s, background-color 0.5s;
+    display: flex; flex-direction: column; min-height: 480px;
+}
+.spot-card-float:hover { transform: translateY(-15px); }
+
+.image-box { height: 280px; overflow: hidden; flex-shrink: 0; }
+.image-box img { width: 100%; height: 100%; object-fit: cover; }
+
+.card-body { padding: 25px 25px 35px 25px; flex-grow: 1; }
+.spot-name { font-size: 1.5rem; font-weight: 800; margin-bottom: 12px; }
+.card-body p { color: var(--text-secondary); line-height: 1.8; font-size: 1.1rem; }
+
+.footer { background: #1a1a1a; color: white; text-align: center; padding: 60px; margin-top: 100px; }
+
+[data-reveal] { opacity: 0; transform: translateY(60px); transition: all 1s ease; }
+[data-reveal].visible { opacity: 1; transform: translateY(0); }

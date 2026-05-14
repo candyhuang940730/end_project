@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>探索旅程 | 動畫程式設計期末作品</title>
+    <!-- 引入外部 CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<!-- 深色模式切換鈕 -->
+<button class="theme-toggle" id="theme-toggle">🌙</button>
+
+<div class="home-page">
+    <!-- 圓形放射閃光 -->
+    <div class="circle-flash" id="circle-flash"></div>
+
+    <!-- 1. 開場遮罩 -->
+    <div id="landing-page" class="landing-overlay">
+        <div class="aurora-bg"></div>
+        <div class="landing-content">
+            <div id="cat-navigator" class="cat-navigator">
+                <div class="cat-sprite">🐱</div>
+                <div class="cat-bubble" id="cat-bubble">喵！跟緊我的腳步！</div>
+            </div>
+            <h1 class="typewriter" id="typewriter-text">準備好進入旅程了嗎？</h1>
+            <button id="enter-btn" class="button--primary" style="opacity: 0; padding: 15px 35px; border-radius: 10px; border:none; cursor:pointer; font-weight: bold; background: var(--primary-color); color: white;">開啟旅程</button>
+        </div>
+    </div>
+
+    <!-- 2. 主網頁內容 -->
+    <main id="main-content">
+        <section class="hero-section">
+            <div class="hero-content" data-reveal>
+                <h1 class="hero-title">妳的下一趟完美旅程</h1>
+            </div>
+        </section>
+
+        <section class="spot-container">
+            <div data-reveal>
+                <h2 style="font-size: 3rem;">🏝️ 貓咪嚴選目的地</h2>
+                <p style="color: var(--text-secondary); margin-top: 1rem;">左側翻轉，右側浮起，完美體驗喵！</p>
+            </div>
+
+            <div class="grid-layout">
+                <!-- 左邊：翻轉卡片 -->
+                <div class="spot-card-container" data-reveal>
+                    <div class="spot-card-inner">
+                        <!-- 正面 -->
+                        <div class="card-face card-face-front">
+                            <div class="image-box">
+                                <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=600&q=60" alt="新宿">
+                            </div>
+                            <div class="card-body">
+                                <h3 class="spot-name">新宿之春</h3>
+                                <p>移除掉繁雜的放射線，現在的轉場更加清爽且流暢。</p>
+                            </div>
+                        </div>
+                        <!-- 背面 -->
+                        <div class="card-face card-face-back">
+                            <div>
+                                <h3>🐱 貓咪悄悄話</h3>
+                                <p style="color: white; margin-top: 10px;">這裡的櫻花非常漂亮，要不要跟我一起去野餐？</p>
+                                <button style="margin-top: 20px; padding: 10px 20px; border-radius: 5px; border: none; cursor: pointer; background: white; color: var(--primary-color); font-weight: bold;">立即預約</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 中間：浮起卡片 -->
+                <article class="spot-card-float" data-reveal>
+                    <div class="image-box">
+                        <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=600&q=60" alt="阿爾卑斯">
+                    </div>
+                    <div class="card-body">
+                        <h3 class="spot-name">阿爾卑斯峰</h3>
+                        <p>保留了絕美的極光背景，展現最純粹的視覺美感。</p>
+                    </div>
+                </article>
+
+                <!-- 右邊：浮起卡片 -->
+                <article class="spot-card-float" data-reveal>
+                    <div class="image-box">
+                        <img src="https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?auto=format&fit=crop&w=600&q=60" alt="七星潭">
+                    </div>
+                    <div class="card-body">
+                        <h3 class="spot-name">花蓮七星潭</h3>
+                        <p>如同清晨的海風，帶來最順滑的互動體驗。</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+        
+        <section class="spot-container" id="usage" data-reveal>
+            <h2 style="margin-bottom: 20px;">🚀 動畫技術完整實作說明</h2>
+            <div style="background: var(--card-bg); padding: 40px; border-radius: 20px; box-shadow: 0 10px 40px var(--shadow);">
+                <p style="font-size: 1.1rem; line-height: 1.8;">
+                    <strong>1. 3D 翻轉模組 (Card Flip)：</strong> 透過 <code>perspective</code> 與 <code>preserve-3d</code>，實現流暢的空間旋轉效果，增加 UI 的層次感。<br>
+                    <strong>2. 全螢幕互動：</strong> 整合了深色模式切換與 <code>Intersection Observer</code> 的滾動進場，展現全方位的動畫控制力。<br>
+                    <strong>3. 故事性轉場：</strong> 貓咪嚮導引領使用者透過「圓形放射閃光」進入主頁面，建立強烈的情感連結。
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>動畫程式設計期末作品 | 專家建議實作 | 學生：黃欣怡</p>
+    </footer>
+</div>
+
+    <!-- 引入外部 JS -->
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
