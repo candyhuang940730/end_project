@@ -93,6 +93,9 @@
         </section>
         
         <section class="spot-container" id="usage" data-reveal>
+            <div class="progress-container">
+                <div class="progress-bar"></div>
+            </div>
             <div class="marquee">這裡暫時不知道要打啥</div>
             <h2 style="margin-bottom: 20px;">🚀 動畫技術完整實作說明</h2>
             <div style="background: var(--card-bg); padding: 40px; border-radius: 20px; box-shadow: 0 10px 40px var(--shadow);">
@@ -101,6 +104,17 @@
                     <strong>2. 全螢幕互動：</strong> 整合了深色模式切換與 <code>Intersection Observer</code> 的滾動進場，展現全方位的動畫控制力。<br>
                     <strong>3. 故事性轉場：</strong> 貓咪嚮導引領使用者透過「圓形放射閃光」進入主頁面，建立強烈的情感連結。
                 </p>
+            </div>
+        </section>
+        <section class="count" data-reveal>
+            <!-- 白色小方塊外殼 -->
+            <div class="counter">
+                <div id="counterDisplay" class="counter__display">0</div>
+                <div id="buttonGroup" class="buttonGroup">
+                    <button class="button" id="decrease">-</button>
+                    <button class="button" id="reset">Reset</button>
+                    <button class="button" id="increase">+</button>
+                </div>
             </div>
         </section>
     </main>

@@ -4,7 +4,7 @@
 :root {
     --primary-color: #2a9d8f;
     --accent-color: #e9c46a;
-    --text-dark: #264653;
+    --text-dark: #030607;
     --text-secondary: #6c757d;
     --bg-main: #f4f7f6;
     --card-bg: #ffffff;
@@ -34,7 +34,9 @@ body {
     transition: background-color 1s ease, color 0.5s ease;
 }
 
-body.main-reveal { background-color: var(--bg-main); }
+body.main-reveal { 
+    background-color: var(--bg-main); 
+}
 
 /* ==========================================================================
    2. 互動：深色模式按鈕
@@ -199,7 +201,7 @@ body.main-reveal { background-color: var(--bg-main); }
 [data-reveal].visible { opacity: 1; transform: translateY(0); }
 
 /* ==========================================================================
-   5. 額外：跑馬燈效果
+   5. 跑馬燈效果
 ========================================================================== */
 .marquee {
     overflow: hidden;
@@ -210,4 +212,96 @@ body.main-reveal { background-color: var(--bg-main); }
 @keyframes scroll {
     0% { transform: translateX(100%); }
     100% { transform: translateX(-100%); }
+}
+/* ==========================================================================
+   6. 進度條效果
+========================================================================== */
+.progress-container {
+  width: 100%;
+  background-color: #e0e0e0;
+  border-radius: 10px;
+}
+.progress-bar {
+  width: 0;
+  height: 20px;
+  background-color: #4CAF50;
+  text-align: center;
+  color: white;
+  overflow: hidden;
+  border-radius: 10px;
+  animation: load 5s ease-in-out infinite;
+}
+
+@keyframes load {
+   0% {
+       width: 0;
+   }
+   50% {
+       width: 100%;
+   }
+   100% {
+       width: 0;
+   }
+}
+/* ==========================================================================
+   7. 計數器效果  
+========================================================================== */
+.count {
+    min-height: 80vh; /* 調整高度，不用到 100vh 以免太長 */
+    display: contents;
+    justify-content: center;
+    align-items: center;
+    margin: 50px 0;
+    border-radius: 20px; /* 邊緣也給它一點圓角 */
+    width: 60vh;
+}
+
+.counter {
+    border-radius: 1.5rem; /* 更圓潤的角 */
+    padding: 3rem 5rem;
+    text-align: center;
+    box-shadow: 0 10px 30px var(--shadow);
+    background-color: var(--bg-main); /* 白色方塊 */
+    width: 350px;
+    margin: auto;
+}
+
+.counter__display {
+    font-size: 6rem; /* 數字大一點 */
+    font-weight: 900;
+    color: var(--text-dark);
+    margin-bottom: 2rem;
+}
+
+.buttonGroup {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+    
+}
+
+.button {
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-size: 2.5rem;
+    padding: 10px 0px;
+    width: 100%;
+    border-radius: 0.8rem;
+    transition: all 0.2s;
+    color: var(--text-dark);
+    font-weight: bold;
+    align-items: center;
+    
+}
+
+.button:hover {
+    background-color: var(--bg-secondary);
+    transform: translateY(-2px);
+}
+
+.button:active {
+    transform: scale(0.9); 
 }
