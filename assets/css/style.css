@@ -175,10 +175,14 @@ body.main-reveal { background-color: var(--bg-main); }
 
 /* --- 中間與右邊卡片：浮起 --- */
 .spot-card-float {
-    background: var(--card-bg); border-radius: var(--radius-lg);
-    overflow: hidden; box-shadow: 0 10px 20px var(--shadow);
+    background: var(--card-bg); 
+    border-radius: var(--radius-lg);
+    overflow: hidden; 
+    box-shadow: 0 10px 20px var(--shadow);
     transition: transform 0.4s, background-color 0.5s;
-    display: flex; flex-direction: column; min-height: 480px;
+    display: flex; 
+    flex-direction: column; 
+    min-height: 480px;
 }
 .spot-card-float:hover { transform: translateY(-15px); }
 
@@ -193,3 +197,17 @@ body.main-reveal { background-color: var(--bg-main); }
 
 [data-reveal] { opacity: 0; transform: translateY(60px); transition: all 1s ease; }
 [data-reveal].visible { opacity: 1; transform: translateY(0); }
+
+/* ==========================================================================
+   5. 額外：跑馬燈效果
+========================================================================== */
+.marquee {
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 30px;
+    animation: scroll 10s linear infinite;
+}
+@keyframes scroll {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+}
