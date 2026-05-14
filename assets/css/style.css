@@ -195,6 +195,37 @@ body.main-reveal {
 .spot-name { font-size: 1.5rem; font-weight: 800; margin-bottom: 12px; }
 .card-body p { color: var(--text-secondary); line-height: 1.8; font-size: 1.1rem; }
 
+.spot-card {
+    background: var(--card-bg); 
+    border-radius: var(--radius-lg);
+    overflow: hidden; 
+    box-shadow: 0 10px 20px var(--shadow);
+    transition: transform 0.4s, background-color 0.5s;
+    display: flex; 
+    flex-direction: column; 
+    min-height: 480px;
+}
+
+/* 震動卡片專用：當滑鼠移入時觸發動畫 */
+.card-shake:hover {
+    animation: shake-animation 0.5s infinite; /* 無限循環震動 */
+}
+
+/* 定義震動動畫軌跡 */
+@keyframes shake-animation {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
 .footer { background: #1a1a1a; color: white; text-align: center; padding: 60px; margin-top: 100px; }
 
 [data-reveal] { opacity: 0; transform: translateY(60px); transition: all 1s ease; }
@@ -305,3 +336,6 @@ body.main-reveal {
 .button:active {
     transform: scale(0.9); 
 }
+
+
+
