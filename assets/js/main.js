@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', () => {
     // 1. 開場動畫時序
     initOpeningAnimation();
@@ -17,8 +16,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 6. 跑馬燈功能
     const marqueeTrack = document.querySelector('.marquee-track');
-    cloneMarquee(marqueeTrack);
+    if (marqueeTrack) {
+        cloneMarquee(marqueeTrack);  
+    }
+
+    // 7. 預約彈窗功能
+    initBookingModal();
 });
+
 // 開場動畫模組化
 function initOpeningAnimation() {
     const catBubble = document.querySelector('#cat-bubble');
@@ -184,3 +189,41 @@ function cloneMarquee(track) {
     track.dataset.marqueeReady = 'true';
 }
 
+// 預約彈窗初始化模組 
+function initBookingModal() {
+    const reserveBtn = document.getElementById('reserve-btn');
+    const bookingModal = document.getElementById('booking-modal');
+    const closeBtn = document.getElementById('modal-close-btn');
+    const confirmBtn = document.getElementById('modal-confirm-btn');
+
+    if (!reserveBtn || !bookingModal) return;
+
+    const openModal = () => {
+        bookingModal.classList.add('is-active');
+    };
+
+    const closeModal = () => {
+        bookingModal.classList.remove('is-active');
+    };
+
+    // 點擊卡片背面的預約按鈕
+    reserveBtn.addEventListener('click', (e) => {
+        // e.stopPropagation() 很關鍵！
+        // 它可以防止點擊事件往上傳導，避免點了按鈕後卡片又傻傻翻回正面。
+        e.stopPropagation(); 
+        openModal();
+    });
+
+    // 點擊關閉 X 按鈕
+    closeBtn?.addEventListener('click', closeModal);
+    
+    // 點擊確認「好耶！一定準時到」按鈕
+    confirmBtn?.addEventListener('click', closeModal);
+
+    // 點擊灰色半透明背景遮罩區域，直接關閉
+    bookingModal.addEventListener('click', (e) => {
+        if (e.target === bookingModal) {
+            closeModal();
+        }
+    });
+}

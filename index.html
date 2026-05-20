@@ -40,7 +40,7 @@
         <section class="spot-container">
             <div data-reveal>
                 <h2 style="font-size: 3rem;">🏝️ 貓咪嚴選目的地</h2>
-                <p style="color: var(--text-secondary); margin-top: 1rem;">左側翻轉，右側浮起，完美體驗喵！</p>
+                <p style="color: var(--text-secondary); margin-top: 1rem;">左側翻轉，右側震動，完美體驗喵！</p>
             </div>
 
             <div class="grid-layout">
@@ -62,7 +62,7 @@
                             <div>
                                 <h3>🐱 貓咪悄悄話</h3>
                                 <p style="color: white; margin-top: 10px;">這裡的櫻花非常漂亮，要不要跟我一起去野餐？</p>
-                                <button style="margin-top: 20px; padding: 10px 20px; border-radius: 5px; border: none; cursor: pointer; background: white; color: var(--primary-color); font-weight: bold;">立即預約</button>
+                                <button id="reserve-btn" style="margin-top: 20px; padding: 10px 20px; border-radius: 5px; border: none; cursor: pointer; background: white; color: var(--primary-color); font-weight: bold;">立即預約</button>
                             </div>
                         </div>
                     </div>
@@ -79,20 +79,9 @@
                     </div>
                 </article>
 
-                <!-- 浮起卡片 -->
-                <article class="spot-card-float" data-reveal>
-                    <div class="image-box">
-                        <img src="https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?auto=format&fit=crop&w=600&q=60" alt="七星潭">
-                    </div>
-                    <div class="card-body">
-                        <h3 class="spot-name">花蓮七星潭</h3>
-                        <p>如同清晨的海風，帶來最順滑的互動體驗。</p>
-                    </div>
-                </article>
-            </div>
         </section>
         
-        // 跑馬燈區塊
+        <!-- 跑馬燈區塊 -->
         <section class="marquee" data-reveal>
             <div class="marquee-track" data-marquee-ready="true">
                 <!-- 第一組文字 -->
@@ -124,7 +113,7 @@
             </div>
         </section>
 
-        // 進度條區塊及說明
+        <!-- 進度條區塊及說明 -->
         <section class="spot-container" id="usage" data-reveal>
             <div class="progress-container">
                 <div class="progress-bar"></div>
@@ -139,6 +128,8 @@
                 </p>
             </div>
         </section>
+
+        <!-- 計數器區塊 -->
         <section class="count" data-reveal>
             <!-- 白色小方塊外殼 -->
             <div class="counter">
@@ -152,12 +143,29 @@
         </section>
     </main>
 
+    <div id="booking-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close" id="modal-close-btn" aria-label="關閉彈窗">&times;</button>
+            <div class="modal-body">
+                <span style="font-size: 3.5rem; animation: catFloat 2s ease-in-out infinite;">🌸</span>
+                <h2 style="margin: 15px 0 10px; font-weight: 800; color: var(--text-dark);">預約成功喵！</h2>
+                <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 25px; font-size: 1.05rem;">
+                    貓咪嚮導已經收到您的春季賞櫻預約！<br>
+                    我們即將在<b>新宿御苑的櫻花樹下</b>集合，<br>
+                    請準時攜帶好香噴噴的罐罐前來唷 🐾
+                </p>
+                <button id="modal-confirm-btn" style="padding: 12px 30px; border-radius: 25px; border: none; cursor: pointer; font-weight: bold; background: var(--primary-color); color: white; transition: transform 0.2s;">好耶！一定準時到</button>
+            </div>
+        </div>
+    </div>
+
+
     <footer class="footer">
         <p>動畫程式設計期末作品 | 專家建議實作 | 學生：黃欣怡</p>
     </footer>
 </div>
 
-    <!-- 引入外部 JS -->
-    <script src="assets/js/main.js"></script>
-</body>
+        <!-- 引入外部 JS -->
+        <script src="assets/js/main.js"></script>
+    </body>
 </html>
