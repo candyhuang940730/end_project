@@ -37,13 +37,76 @@
 
     <!-- 2. 主網頁內容 -->
     <main id="main-content">
+        <!-- 導航欄與巨型菜單 -->
+        <header class="main-header" id="main-header">
+            <div class="nav-container">
+                <a href="#" class="nav-logo">🐾 喵之旅行社</a>
+                
+                <nav class="nav-menu">
+                    <ul class="nav-list">
+                        <li><a href="#" class="nav-link">首頁</a></li>
+                        
+                        <!-- 巨型菜單觸發項目 -->
+                        <li class="nav-item-has-mega" id="mega-trigger">
+                            <a href="#spot-section" class="nav-link">探索景點 <span class="arrow-indicator">▾</span></a>
+                            
+                            <!-- 巨型菜單 (Mega Menu) -->
+                            <div class="mega-menu" id="mega-menu">
+                                <div class="mega-menu-grid">
+                                    <!-- 左欄：精選賞櫻推薦卡片 -->
+                                    <div class="mega-column featured-spot">
+                                        <div class="featured-tag">季節推薦 🌸</div>
+                                        <h4>新宿賞櫻秘境</h4>
+                                        <p>粉嫩櫻花飛舞的春季街道，與貓咪嚮導一同在櫻花樹下野餐的絕美體驗。</p>
+                                        <button class="mega-action-btn" id="mega-reserve-shortcut">立即前往預約 🐾</button>
+                                    </div>
+                                    
+                                    <!-- 中欄：快捷目的地選單 -->
+                                    <div class="mega-column">
+                                        <h4>精選目的地</h4>
+                                        <ul class="mega-links">
+                                            <li><a href="#spot-section">🇯🇵 新宿之春（翻轉卡）</a></li>
+                                            <li><a href="#spot-section">🇨🇭 阿爾卑斯峰（震動卡）</a></li>
+                                            <li><a href="#stars-container">🌌 浩瀚星空（視差背景）</a></li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <!-- 右欄：動畫程式技術 -->
+                                    <div class="mega-column">
+                                        <h4>互動技術面板</h4>
+                                        <ul class="mega-links">
+                                            <li><a href="#usage">🚀 動畫技術說明</a></li>
+                                            <li><a href="#counterDisplay">🔢 幾何置中計數器</a></li>
+                                            <li><a href="#pie-chart">📊 技術佔比圓餅圖</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        
+                        <li><a href="#usage" class="nav-link">程式語言佔比</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
         <section class="hero-section">
             <div class="hero-content" data-reveal>
                 <h1 class="hero-title">你的下一趟完美旅程</h1>
             </div>
         </section>
 
+        <!-- 卡片區塊 -->
         <section class="spot-container">
+            <!-- 麵包屑導航 -->
+            <nav class="breadcrumbs" aria-label="breadcrumb" data-reveal>
+                <ol class="breadcrumb-list">
+                    <li class="breadcrumb-item"><a href="#">首頁</a></li>
+                    <li class="breadcrumb-item"><a href="#spot-section">景點探索</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">貓咪嚴選目的地</li>
+                </ol>
+            </nav>
+
             <div data-reveal>
                 <h2 style="font-size: 3rem;">🏝️ 貓咪嚴選目的地</h2>
                 <p style="color: var(--text-secondary); margin-top: 1rem;">左側翻轉，右側震動，完美體驗喵！</p>

@@ -27,8 +27,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // 8. 星星視差效果
     initStarParallax();
 
-    // 9. 技術佔比統計圖表初始化 (New!)
+    // 9. 技術佔比統計圖表初始化 
     initTechChart();
+
+    // 10. 導航欄滾動縮放與巨型菜單行動端點擊切換功能
+    initNavbarInteraction();
 });
 
 // 開場動畫模組化
@@ -329,9 +332,9 @@ function initTechChart() {
 
     // 定義技術佔比數據集 (與妳的主題色完美契合)
     const techData = [
-        { label: 'JavaScript', value: 45, color: 'var(--primary-color)' }, // 綠
-        { label: 'CSS Styles', value: 35, color: 'var(--accent-color)' },  // 黃
-        { label: 'HTML DOM', value: 20, color: 'var(--aurora-2)' }       // 青綠
+        { label: 'JavaScript', value: 44.7, color: 'var(--primary-color)' }, // 綠
+        { label: 'CSS Styles', value: 30.3, color: 'var(--accent-color)' },  // 黃
+        { label: 'HTML', value: 25.0, color: 'var(--aurora-2)' }       // 青綠
     ];
 
     let accumulatedPercent = 0;
@@ -442,4 +445,70 @@ function initTechChart() {
         legendItem.addEventListener('mouseenter', highlightSlice);
         legendItem.addEventListener('mouseleave', resetSlice);
     });
+}
+
+// 導航欄滾動縮放與巨型菜單行動端點擊切換模組
+function initNavbarInteraction() {
+    const header = document.getElementById('main-header');
+    const megaTrigger = document.getElementById('mega-trigger');
+    const megaMenu = document.getElementById('mega-menu');
+    const megaReserveShortcut = document.getElementById('mega-reserve-shortcut');
+
+    if (!header) return;
+
+    // A. 監聽滾動以調整導航欄透明度與高度
+    const checkScroll = () => {
+        if (window.scrollY > 40) {
+            header.classList.add('is-scrolled');
+        } else {
+            header.classList.remove('is-scrolled');
+        }
+    };
+
+    window.addEventListener('scroll', checkScroll, { passive: true });
+    checkScroll(); // 初始化量測
+
+    // B. 行動端點擊開關巨型選單（防止觸控螢幕上 hover 無效）
+    if (megaTrigger) {
+        megaTrigger.addEventListener('click', (e) => {
+            // 僅在寬度小於或等於 1024px (行動/平板裝置) 時啟用 click 切換
+            if (window.innerWidth <= 1024) {
+                // 如果點擊的是選單內部的連結，則不干擾
+                if (e.target.closest('.mega-menu')) return;
+                
+                e.preventDefault();
+                megaTrigger.classList.toggle('is-active');
+            }
+        });
+
+        // 點擊其他空白處自動關閉行動端巨型菜單
+        document.addEventListener('click', (e) => {
+            if (!megaTrigger.contains(e.target)) {
+                megaTrigger.classList.remove('is-active');
+            }
+        });
+    }
+
+    // C. 巨型菜單特色卡片中的按鈕，點擊時直接觸發新宿卡片的預約彈窗！
+    if (megaReserveShortcut) {
+        megaReserveShortcut.addEventListener('click', (e) => {
+            e.preventDefault();
+            // 先關閉巨型選單
+            if (megaTrigger) megaTrigger.classList.remove('is-active');
+            
+            // 平滑滾動到卡片區塊
+            const spotSection = document.getElementById('spot-section');
+            if (spotSection) {
+                spotSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+
+            // 直接觸發預約彈窗 (模擬點擊卡片背面的預約按鈕)
+            setTimeout(() => {
+                const reserveBtn = document.getElementById('reserve-btn');
+                if (reserveBtn) {
+                    reserveBtn.click();
+                }
+            }, 500); // 稍微等待滾動動畫完成
+        });
+    }
 }

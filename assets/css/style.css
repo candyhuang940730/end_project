@@ -147,6 +147,284 @@ body.main-reveal {
 }
 
 /* ==========================================================================
+   玻璃擬態導航欄與巨型菜單 (Header & Mega Menu)
+   ========================================================================== */
+.main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10000; /* 高於一切，但低於預約彈窗 (10002) */
+    background: transparent;
+    border-bottom: 1px solid transparent;
+    transition: background-color 0.4s ease, border-color 0.4s ease, padding 0.4s ease;
+    padding: 20px 0;
+}
+
+/* 當頁面滾動時，導航欄會收縮並啟動高斯模糊毛玻璃特效 */
+.main-header.is-scrolled {
+    padding: 12px 0;
+    background: rgba(244, 247, 246, 0.75); /* var(--bg-main) 的 75% 透明度 */
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
+
+[data-theme="dark"] .main-header.is-scrolled {
+    background: rgba(18, 18, 18, 0.75); /* var(--bg-main) 暗色版 75% 透明度 */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.nav-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: transform 0.3s;
+}
+.nav-logo:hover {
+    transform: scale(1.05);
+}
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+}
+
+.nav-list {
+    display: flex;
+    list-style: none;
+    gap: 2.5rem;
+    align-items: center;
+}
+
+.nav-link {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    text-decoration: none;
+    transition: color 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.nav-link:hover {
+    color: var(--primary-color);
+}
+
+.arrow-indicator {
+    font-size: 0.8rem;
+    transition: transform 0.3s ease;
+}
+
+/* 巨型菜單面板主體 */
+.nav-item-has-mega {
+    position: relative;
+}
+
+.mega-menu {
+    position: fixed;
+    top: 80px; /* 剛好黏貼在 header 底部 */
+    left: 5%;
+    right: 5%;
+    max-width: 1400px;
+    margin: 0 auto;
+    background: var(--card-bg);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 2.5rem;
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(15px) scale(0.98);
+    pointer-events: none;
+    transition: opacity 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), 
+                transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), 
+                visibility 0.4s, background-color 0.5s;
+}
+
+[data-theme="dark"] .mega-menu {
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.4);
+}
+
+/* 當懸停或啟用點擊狀態時展示巨型菜單 */
+.nav-item-has-mega:hover .mega-menu,
+.nav-item-has-mega.is-active .mega-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+}
+
+.nav-item-has-mega:hover .arrow-indicator,
+.nav-item-has-mega.is-active .arrow-indicator {
+    transform: rotate(180deg);
+    color: var(--primary-color);
+}
+
+.main-header.is-scrolled + .hero-section + #main-content .mega-menu,
+.main-header.is-scrolled .mega-menu {
+    top: 60px; /* 收縮時的貼合高度 */
+}
+
+/* 巨型菜單 Grid */
+.mega-menu-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 3rem;
+}
+
+@media (max-width: 768px) {
+    .mega-menu-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+}
+
+.mega-column h4 {
+    font-size: 1.15rem;
+    font-weight: 800;
+    margin-bottom: 1.2rem;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* 左側精選卡片特色 */
+.featured-spot {
+    background: linear-gradient(135deg, rgba(42, 157, 143, 0.08) 0%, rgba(233, 196, 106, 0.08) 100%);
+    padding: 1.5rem;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border: 1px dashed rgba(42, 157, 143, 0.2);
+}
+
+.featured-tag {
+    background: var(--accent-color);
+    color: #030607;
+    font-size: 0.75rem;
+    font-weight: 800;
+    padding: 3px 8px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+}
+
+.featured-spot h4 {
+    color: var(--text-dark);
+    margin-bottom: 8px;
+    font-size: 1.3rem;
+}
+
+.featured-spot p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.mega-action-btn {
+    border: none;
+    background: var(--primary-color);
+    color: white;
+    font-weight: bold;
+    padding: 8px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+}
+.mega-action-btn:hover {
+    background-color: #23857a;
+    transform: translateY(-2px);
+}
+
+/* 巨型菜單右側條目清單 */
+.mega-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.mega-links a {
+    text-decoration: none;
+    color: var(--text-dark);
+    font-size: 1rem;
+    font-weight: 700;
+    transition: color 0.2s, padding-left 0.2s;
+    display: inline-block;
+}
+
+.mega-links a:hover {
+    color: var(--aurora-2);
+    padding-left: 6px;
+}
+
+/* ==========================================================================
+   微光漸層麵包屑樣式 (Breadcrumbs)
+   ========================================================================== */
+.breadcrumbs {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 0 0 10px 0;
+}
+
+.breadcrumb-list {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    align-items: center;
+    gap: 12px;
+}
+
+.breadcrumb-item {
+    font-size: 0.95rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+}
+
+.breadcrumb-item a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+.breadcrumb-item a:hover {
+    color: var(--primary-color);
+}
+
+/* 貓腳印視覺分隔符 */
+.breadcrumb-item + .breadcrumb-item::before {
+    content: "🐾";
+    font-size: 0.8rem;
+    margin-right: 12px;
+    color: var(--primary-color);
+    opacity: 0.6;
+}
+
+/* 當前面包屑頁面 */
+.breadcrumb-item.active {
+    color: var(--aurora-2);
+    text-shadow: 0 0 8px rgba(0, 245, 212, 0.4);
+    pointer-events: none;
+}
+
+/* ==========================================================================
    3. 轉場效果：極光、貓咪（含對話框）與圓形閃光
    ========================================================================== */
 .landing-overlay {
