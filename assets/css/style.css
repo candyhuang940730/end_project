@@ -39,6 +39,53 @@ body.main-reveal {
 }
 
 /* ==========================================================================
+   全新！深色模式視差星空樣式 (Parallax Stars)
+   ========================================================================== */
+.stars-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    pointer-events: none;
+    z-index: -2; /* 位於卡片與極光之下 */
+    opacity: 0;
+    transition: opacity 1s ease;
+    overflow: hidden;
+}
+
+/* 僅在深色模式啟用時，星空容器才顯現 */
+[data-theme="dark"] .stars-container {
+    opacity: 1;
+}
+
+.stars-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 300%; /* 長度加長至 3 倍以適應滾動延伸 */
+    will-change: transform;
+}
+
+.star {
+    position: absolute;
+    background-color: #ffffff;
+    border-radius: 50%;
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.6);
+}
+
+/* 隨機星星閃爍動畫 */
+.star-blink {
+    animation: starTwinkle 3s infinite ease-in-out;
+}
+
+@keyframes starTwinkle {
+    0%, 100% { opacity: 0.3; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* ==========================================================================
    2. 互動：深色模式按鈕
    ========================================================================== */
 .theme-toggle {
@@ -53,6 +100,51 @@ body.main-reveal {
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .theme-toggle:hover { transform: scale(1.15) rotate(15deg); }
+
+.theme-tooltip {
+    position: fixed;
+    bottom: 105px; /* 正好定位在切換鈕上方 */
+    right: 30px;
+    background-color: var(--accent-color);
+    color: #030607;
+    padding: 10px 18px;
+    border-radius: 14px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+    z-index: 10001;
+    display: none; /* 預設不顯示，由 JS 決定時機 */
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    pointer-events: none; /* 防止遮蓋下方內容點擊 */
+}
+
+/* 對話氣泡的小箭頭 */
+.theme-tooltip::after {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    right: 22px;
+    border-width: 8px 8px 0;
+    border-style: solid;
+    border-color: var(--accent-color) transparent;
+    display: block;
+    width: 0;
+}
+
+/* 提示框漂浮起動畫 */
+@keyframes floatBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+}
+
+.theme-tooltip.is-visible {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+    animation: floatBounce 2s infinite ease-in-out;
+}
 
 /* ==========================================================================
    3. 轉場效果：極光、貓咪（含對話框）與圓形閃光
@@ -175,7 +267,6 @@ body.main-reveal {
     align-items: center; padding: 30px; text-align: center;
 }
 
-
 .image-box { height: 280px; overflow: hidden; flex-shrink: 0; }
 .image-box img { width: 100%; height: 100%; object-fit: cover; }
 
@@ -269,6 +360,7 @@ body.main-reveal {
     0% { transform: translateX(0); }
     100% { transform: translateX(-50%); }
 }
+
 /* ==========================================================================
    6. 進度條效果
 ========================================================================== */
@@ -299,6 +391,7 @@ body.main-reveal {
        width: 0;
    }
 }
+
 /* ==========================================================================
    7. 計數器效果  
 ========================================================================== */
@@ -335,7 +428,6 @@ body.main-reveal {
     justify-content: space-between;
     align-items: center;
     gap: 1.5rem;
-    
 }
 
 .button {
@@ -350,7 +442,6 @@ body.main-reveal {
     color: var(--text-dark);
     font-weight: bold;
     align-items: center;
-    
 }
 
 .button:hover {
@@ -432,4 +523,134 @@ body.main-reveal {
     background: #23857a !important;
 }
 
+/* ==========================================================================
+   💡 9. 統計圖表效果 (Interactive Pie/Donut Chart)
+========================================================================== */
+.chart-section {
+    margin: 40px auto;
+}
 
+.chart-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 5rem;
+    background: var(--card-bg);
+    padding: 3.5rem;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 10px 40px var(--shadow);
+    transition: background-color 0.5s, box-shadow 0.5s;
+}
+
+@media (max-width: 768px) {
+    .chart-wrapper {
+        flex-direction: column;
+        gap: 3rem;
+        padding: 2.5rem 1.5rem;
+    }
+}
+
+.chart-container {
+    position: relative;
+    width: 240px;
+    height: 240px;
+    flex-shrink: 0;
+}
+
+#pie-chart {
+    width: 100%;
+    height: 100%;
+    overflow: visible; /* 確保懸浮彈出時不會被裁切 */
+}
+
+/* 扇形區段轉場與游標 */
+#pie-chart path {
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.4s;
+    cursor: pointer;
+}
+
+/* 甜甜圈圓心標籤 */
+.chart-center-info {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.chart-center-label {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transition: color 0.3s;
+}
+
+.chart-center-value {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--text-dark);
+    line-height: 1.1;
+    margin-top: 2px;
+    transition: color 0.3s;
+}
+
+/* 圖例排版 */
+.chart-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    flex-grow: 1;
+    max-width: 320px;
+    width: 100%;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--text-dark);
+    padding: 0.8rem 1.2rem;
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.02);
+    transition: background-color 0.3s, transform 0.3s;
+    cursor: pointer;
+}
+
+[data-theme="dark"] .legend-item {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.legend-item:hover, .legend-item.is-active {
+    background: rgba(0, 0, 0, 0.05);
+    transform: translateX(6px);
+}
+
+[data-theme="dark"] .legend-item:hover, [data-theme="dark"] .legend-item.is-active {
+    background: rgba(255, 255, 255, 0.07);
+}
+
+.legend-color {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+.legend-label {
+    flex-grow: 1;
+}
+
+.legend-percent {
+    font-weight: 800;
+    color: var(--text-secondary);
+}

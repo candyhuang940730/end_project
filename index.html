@@ -9,8 +9,14 @@
 </head>
 <body>
 
+<!-- 視差星空背景容器 (New!) -->
+<div id="stars-container" class="stars-container"></div>
+
 <!-- 深色模式切換鈕 -->
 <button class="theme-toggle" id="theme-toggle">🌙</button>
+
+<!-- 深色模式提示工具提示 -->
+<div class="theme-tooltip" id="theme-tooltip">點擊深色模式有驚喜喵！</div>
 
 <div class="home-page">
     <!-- 圓形放射閃光 -->
@@ -78,7 +84,7 @@
                         <p>滑鼠移到這張卡片上。</p>
                     </div>
                 </article>
-
+            </div>
         </section>
         
         <!-- 跑馬燈區塊 -->
@@ -97,7 +103,7 @@
                 <span data-marquee-clone="true">Ruby</span>
                 <span data-marquee-clone="true">MySQL</span>
                 <span data-marquee-clone="true">NodeJS</span>
-                <!-- 第二組（完全重複，達成無縫銜接） -->
+                <!-- 第二組 -->
                 <span aria-hidden="true" data-marquee-clone="true">HTML</span>
                 <span aria-hidden="true" data-marquee-clone="true">CSS</span>
                 <span aria-hidden="true" data-marquee-clone="true">JavaScript</span>
@@ -110,6 +116,33 @@
                 <span aria-hidden="true" data-marquee-clone="true">Ruby</span>
                 <span aria-hidden="true" data-marquee-clone="true">MySQL</span>
                 <span aria-hidden="true" data-marquee-clone="true">NodeJS</span>
+            </div>
+        </section>
+
+        <!-- 圓餅圖區塊 -->
+        <section class="chart-section spot-container" data-reveal>
+            <div data-reveal>
+                <h2 style="font-size: 3rem;">📊 技術佔比統計</h2>
+                <p style="color: var(--text-secondary); margin-top: 1rem; margin-bottom: 3rem;">本網頁底層所應用的程式語言與核心樣式比例（互動式 SVG 圓餅圖）</p>
+            </div>
+            
+            <div class="chart-wrapper">
+                <!-- 圓餅圖/甜甜圈圖容器 -->
+                <div class="chart-container">
+                    <svg id="pie-chart" viewBox="-120 -120 240 240">
+                        <!-- JS 依照幾何公式動態繪製 Arc Paths -->
+                    </svg>
+                    <!-- 中央資訊顯示區 -->
+                    <div class="chart-center-info">
+                        <span class="chart-center-label" id="chart-center-label">總計</span>
+                        <span class="chart-center-value" id="chart-center-value">100%</span>
+                    </div>
+                </div>
+                
+                <!-- 雙向綁定圖例清單 -->
+                <div class="chart-legend" id="chart-legend">
+                    <!-- JS 動態生成圖例 -->
+                </div>
             </div>
         </section>
 
@@ -143,6 +176,7 @@
         </section>
     </main>
 
+    <!-- 預約彈窗 -->
     <div id="booking-modal" class="modal-overlay">
         <div class="modal-content">
             <button class="modal-close" id="modal-close-btn" aria-label="關閉彈窗">&times;</button>
@@ -159,13 +193,12 @@
         </div>
     </div>
 
-
     <footer class="footer">
         <p>動畫程式設計期末作品 | 專家建議實作 | 學生：黃欣怡</p>
     </footer>
 </div>
 
-        <!-- 引入外部 JS -->
-        <script src="assets/js/main.js"></script>
-    </body>
+<!-- 引入外部 JS -->
+<script src="assets/js/main.js"></script>
+</body>
 </html>

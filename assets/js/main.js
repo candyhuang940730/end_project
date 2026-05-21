@@ -22,6 +22,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 7. 預約彈窗功能
     initBookingModal();
+
+
+    // 8. 星星視差效果
+    initStarParallax();
+
+    // 9. 技術佔比統計圖表初始化 (New!)
+    initTechChart();
 });
 
 // 開場動畫模組化
@@ -52,6 +59,7 @@ function initEnterTransition() {
     const circleFlash = document.querySelector('#circle-flash');
     const catBubble = document.querySelector('#cat-bubble');
     const catNavigator = document.querySelector('#cat-navigator');
+    const themeTooltip = document.querySelector('#theme-tooltip');
 
     if (!enterBtn) return;
 
@@ -65,6 +73,7 @@ function initEnterTransition() {
             if (landingPage) landingPage.classList.add('warp-exit');
             if (mainContent) mainContent.style.display = 'block';
             if (themeToggle) themeToggle.style.display = 'flex';
+            if (themeTooltip) themeTooltip.classList.add('is-visible');
             
             setTimeout(() => { 
                 if (mainContent) mainContent.style.opacity = '1'; 
@@ -81,9 +90,17 @@ function initEnterTransition() {
 // 深色模式切換模組化
 function initDarkMode() {
     const themeToggle = document.querySelector('#theme-toggle');
+    const themeTooltip = document.querySelector('#theme-tooltip');
     if (!themeToggle) return;
 
     themeToggle.addEventListener('click', () => {
+        if (themeTooltip) {
+            themeTooltip.style.animation = 'none'; // 停止漂浮動畫
+            themeTooltip.style.opacity = '0';
+            themeTooltip.style.transform = 'translateY(15px)';
+            setTimeout(() => themeTooltip.remove(), 400); // 400ms 後從 DOM 移除
+        }
+
         const currentTheme = document.documentElement.getAttribute('data-theme');
         if (currentTheme === 'dark') {
             document.documentElement.setAttribute('data-theme', 'light');
@@ -225,5 +242,204 @@ function initBookingModal() {
         if (e.target === bookingModal) {
             closeModal();
         }
+    });
+}
+
+// 星星視差模組化
+function initStarParallax() {
+    const container = document.getElementById('stars-container');
+    if (!container) return;
+
+    // 定義 3 個圖層：[圖層樣式, 滾動速度比率, 星星數量, 尺寸範圍]
+    const layers = [
+        { class: 'stars-layer-slow', speed: 0.08, count: 160, sizeRange: [0.8, 1.6] }, // 遠景
+        { class: 'stars-layer-med', speed: 0.22, count: 85, sizeRange: [1.6, 2.6] },  // 中景
+        { class: 'stars-layer-fast', speed: 0.42, count: 35, sizeRange: [2.6, 4.2] }  // 近景
+    ];
+
+    const layerElements = [];
+
+    layers.forEach(layerCfg => {
+        const layerDiv = document.createElement('div');
+        layerDiv.className = `stars-layer ${layerCfg.class}`;
+        
+        for (let i = 0; i < layerCfg.count; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            
+            // 隨機讓大約 60% 的星星帶有閃爍動畫，且隨機延遲使閃爍不規律
+            if (Math.random() > 0.4) {
+                star.classList.add('star-blink');
+                star.style.animationDelay = `${Math.random() * 4}s`;
+                star.style.animationDuration = `${2 + Math.random() * 3}s`;
+            }
+
+            // 星星的位置分佈在 300% 的高度範圍（適應滾動長度）
+            star.style.left = `${Math.random() * 100}%`;
+            star.style.top = `${Math.random() * 300}%`;
+
+            // 設定隨機大小
+            const size = Math.random() * (layerCfg.sizeRange[1] - layerCfg.sizeRange[0]) + layerCfg.sizeRange[0];
+            star.style.width = `${size}px`;
+            star.style.height = `${size}px`;
+            
+            // 星星的顏色隨機（大部分白，偶爾帶有綠極光色、黃色微光）
+            const randColor = Math.random();
+            if (randColor > 0.9) {
+                star.style.backgroundColor = 'var(--accent-color)'; // 溫暖星光色
+            } else if (randColor > 0.78) {
+                star.style.backgroundColor = 'var(--aurora-2)'; // 極光亮綠色
+                star.style.boxShadow = '0 0 8px rgba(0, 245, 212, 0.8)';
+            } else {
+                star.style.backgroundColor = '#ffffff';
+                star.style.boxShadow = `0 0 ${size * 1.5}px rgba(255, 255, 255, 0.5)`;
+            }
+
+            layerDiv.appendChild(star);
+        }
+
+        container.appendChild(layerDiv);
+        layerElements.push({ el: layerDiv, speed: layerCfg.speed });
+    });
+
+    // 視差滾動事件
+    const handleScroll = () => {
+        // 優化：只在深色模式下計算，不浪費淺色模式的運算效能
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        if (!isDark) return;
+
+        const scrollY = window.scrollY;
+        layerElements.forEach(item => {
+            // 利用 translateY 創造與滾動速度相反的位移比率，實現超完美 3D 視差
+            item.el.style.transform = `translateY(${-scrollY * item.speed}px)`;
+        });
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+}
+
+// 技術佔比統計圖表模組化
+function initTechChart() {
+    const chartSvg = document.getElementById('pie-chart');
+    const legendContainer = document.getElementById('chart-legend');
+    const centerLabel = document.getElementById('chart-center-label');
+    const centerValue = document.getElementById('chart-center-value');
+
+    if (!chartSvg || !legendContainer) return;
+
+    // 定義技術佔比數據集 (與妳的主題色完美契合)
+    const techData = [
+        { label: 'JavaScript', value: 45, color: 'var(--primary-color)' }, // 綠
+        { label: 'CSS Styles', value: 35, color: 'var(--accent-color)' },  // 黃
+        { label: 'HTML DOM', value: 20, color: 'var(--aurora-2)' }       // 青綠
+    ];
+
+    let accumulatedPercent = 0;
+    const paths = [];
+
+    // 1. 動態繪製 SVG 甜甜圈扇形區段
+    techData.forEach((slice, index) => {
+        const startPercent = accumulatedPercent;
+        accumulatedPercent += slice.value / 100;
+        const endPercent = accumulatedPercent;
+
+        // 計算弧線起點與終點角度 (將起點減去 0.25 即 -90度，讓它從正上方12點鐘方向開始繪製)
+        const startAngle = (startPercent - 0.25) * 2 * Math.PI;
+        const endAngle = (endPercent - 0.25) * 2 * Math.PI;
+
+        // 設定甜甜圈內徑與外徑
+        const rIn = 65;
+        const rOut = 95;
+
+        // 計算四個端點的幾何坐標
+        const x1_in = Math.cos(startAngle) * rIn;
+        const y1_in = Math.sin(startAngle) * rIn;
+        const x1_out = Math.cos(startAngle) * rOut;
+        const y1_out = Math.sin(startAngle) * rOut;
+
+        const x2_in = Math.cos(endAngle) * rIn;
+        const y2_in = Math.sin(endAngle) * rIn;
+        const x2_out = Math.cos(endAngle) * rOut;
+        const y2_out = Math.sin(endAngle) * rOut;
+
+        // 當單一佔比大於 50% 時，大弧標記 (large-arc-flag) 設為 1，否則為 0
+        const largeArcFlag = (slice.value > 50) ? 1 : 0;
+
+        // 拼接 SVG Path 幾何軌跡
+        const pathData = [
+            `M ${x1_in} ${y1_in}`,                     // 移至內圈起點
+            `L ${x1_out} ${y1_out}`,                   // 畫直線至外圈起點
+            `A ${rOut} ${rOut} 0 ${largeArcFlag} 1 ${x2_out} ${y2_out}`, // 順時針畫外圈圓弧
+            `L ${x2_in} ${y2_in}`,                     // 畫直線至內圈終點
+            `A ${rIn} ${rIn} 0 ${largeArcFlag} 0 ${x1_in} ${y1_in}`,   // 逆時針畫內圈圓弧
+            `Z`                                        // 封閉路徑
+        ].join(' ');
+
+        // 建立 SVG Path 元素
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        path.setAttribute('d', pathData);
+        path.setAttribute('fill', slice.color);
+        path.setAttribute('id', `chart-slice-${index}`);
+        chartSvg.appendChild(path);
+        paths.push(path);
+
+        // 2. 建立右側對應圖例項目
+        const legendItem = document.createElement('div');
+        legendItem.className = 'legend-item';
+        legendItem.id = `legend-item-${index}`;
+        legendItem.innerHTML = `
+            <span class="legend-color" style="background-color: ${slice.color}"></span>
+            <span class="legend-label">${slice.label}</span>
+            <span class="legend-percent">${slice.value}%</span>
+        `;
+        legendContainer.appendChild(legendItem);
+
+        // 3. 雙向綁定互動事件 (滑鼠移入、移出、點擊)
+        const highlightSlice = () => {
+            // 💡 懸停動態效果：向扇形平分角方向彈出 8px，並加上發光陰影
+            const midAngle = (startAngle + endAngle) / 2;
+            const dx = Math.cos(midAngle) * 8;
+            const dy = Math.sin(midAngle) * 8;
+            
+            path.style.transform = `translate(${dx}px, ${dy}px)`;
+            path.style.filter = 'drop-shadow(0 8px 16px rgba(0,0,0,0.25))';
+            
+            // 更新甜甜圈中央提示字樣
+            if (centerLabel) {
+                centerLabel.textContent = slice.label;
+                centerLabel.style.color = slice.color;
+            }
+            if (centerValue) {
+                centerValue.textContent = `${slice.value}%`;
+                centerValue.style.color = slice.color;
+            }
+
+            legendItem.classList.add('is-active');
+        };
+
+        const resetSlice = () => {
+            // 還原狀態
+            path.style.transform = 'none';
+            path.style.filter = 'none';
+
+            if (centerLabel) {
+                centerLabel.textContent = '總計';
+                centerLabel.style.color = 'var(--text-secondary)';
+            }
+            if (centerValue) {
+                centerValue.textContent = '100%';
+                centerValue.style.color = 'var(--text-dark)';
+            }
+
+            legendItem.classList.remove('is-active');
+        };
+
+        // 綁定圓餅圖扇區事件
+        path.addEventListener('mouseenter', highlightSlice);
+        path.addEventListener('mouseleave', resetSlice);
+
+        // 綁定圖例清單事件
+        legendItem.addEventListener('mouseenter', highlightSlice);
+        legendItem.addEventListener('mouseleave', resetSlice);
     });
 }
