@@ -335,9 +335,9 @@ function initTechChart() {
 
     // 定義技術佔比數據集 (與妳的主題色完美契合)
     const techData = [
-        { label: 'JavaScript', value: 44.7, color: 'var(--primary-color)' }, // 綠
-        { label: 'CSS Styles', value: 30.3, color: 'var(--accent-color)' },  // 黃
-        { label: 'HTML', value: 25.0, color: 'var(--aurora-2)' }       // 青綠
+        { label: 'JavaScript', value: 31.9, color: 'var(--primary-color)' }, // 綠
+        { label: 'CSS Styles', value: 40.4, color: 'var(--accent-color)' },  // 黃
+        { label: 'HTML', value: 27.7, color: 'var(--aurora-2)' }       // 青綠
     ];
 
     let accumulatedPercent = 0;
