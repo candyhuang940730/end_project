@@ -32,6 +32,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 10. 導航欄滾動縮放與巨型菜單行動端點擊切換功能
     initNavbarInteraction();
+
+    // 11. 拖曳排序瀑布流功能
+    initDraggableMasonry();
 });
 
 // 開場動畫模組化
@@ -511,4 +514,55 @@ function initNavbarInteraction() {
             }, 500); // 稍微等待滾動動畫完成
         });
     }
+}
+
+// 拖曳排序瀑布流模組化
+function initDraggableMasonry() {
+    const grid = document.getElementById('draggable-masonry');
+    if (!grid) return;
+
+    // 監聽拖曳開始事件
+    grid.addEventListener('dragstart', (e) => {
+        const targetCard = e.target.closest('.masonry-item');
+        if (targetCard) {
+            targetCard.classList.add('dragging');
+            // 設定拖曳時的游標與特效
+            e.dataTransfer.effectAllowed = 'move';
+            // 💡 為了在某些瀏覽器上完美支援，設定一個空資料以啟用拖曳
+            e.dataTransfer.setData('text/plain', '');
+        }
+    });
+
+    // 監聽拖曳結束事件
+    grid.addEventListener('dragend', (e) => {
+        const targetCard = e.target.closest('.masonry-item');
+        if (targetCard) {
+            targetCard.classList.remove('dragging');
+        }
+    });
+
+    // 監聽拖曳經過事件（計算放置位置）
+    grid.addEventListener('dragover', (e) => {
+        e.preventDefault(); // 必須 preventDefault 才能觸發 drop
+        
+        const draggingItem = grid.querySelector('.dragging');
+        if (!draggingItem) return;
+
+        // 取得網格內除當前拖曳項目的所有卡片
+        const siblings = Array.from(grid.querySelectorAll('.masonry-item:not(.dragging)'));
+
+        // 利用幾何學中點距離演算法，找出滑鼠游標最靠近的明信片兄弟節點
+        const nextSibling = siblings.find(sibling => {
+            const box = sibling.getBoundingClientRect();
+            // 💡 在瀑布流中，我們以卡片的中軸線高度作為判定標準，滑鼠 Y 軸小於卡片中點就插在前方
+            return e.clientY <= box.top + box.height / 2;
+        });
+
+        // 動態將卡片插到新位置，實現極度流暢的物理磁力滑入感
+        if (nextSibling) {
+            grid.insertBefore(draggingItem, nextSibling);
+        } else {
+            grid.appendChild(draggingItem);
+        }
+    });
 }

@@ -932,3 +932,85 @@ body.main-reveal {
     font-weight: 800;
     color: var(--text-secondary);
 }
+
+/* ==========================================================================
+   💡 10. 貓咪相簿拖曳瀑布流網格效果 (Draggable Masonry Grid)
+   ========================================================================== */
+.masonry-grid {
+    column-count: 3;
+    column-gap: 30px;
+    width: 100%;
+}
+
+@media (max-width: 992px) {
+    .masonry-grid {
+        column-count: 2;
+        column-gap: 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    .masonry-grid {
+        column-count: 1;
+    }
+}
+
+.masonry-item {
+    break-inside: avoid;
+    background: var(--card-bg);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: 0 10px 25px var(--shadow);
+    margin-bottom: 30px;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                box-shadow 0.3s, 
+                background-color 0.5s, 
+                border-color 0.3s;
+    cursor: grab;
+    position: relative;
+    user-select: none;
+    border: 1px solid transparent;
+}
+
+.masonry-item:active {
+    cursor: grabbing;
+}
+
+.masonry-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    pointer-events: none; /* 💡 關鍵：禁用圖片預設瀏覽器拖曳，防止干擾自訂卡片拖曳 */
+}
+
+.masonry-content {
+    padding: 20px;
+}
+
+.masonry-content h3 {
+    font-size: 1.2rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+    color: var(--text-dark);
+}
+
+.masonry-content p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* 拖曳時卡片的半透明與旋轉視覺效果 */
+.masonry-item.dragging {
+    opacity: 0.4;
+    transform: scale(0.95) rotate(-2deg);
+    border: 2px dashed var(--primary-color) !important;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* 懸停非拖曳卡片時優雅向上浮起並產生發光外框 */
+.masonry-item:hover:not(.dragging) {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px var(--shadow);
+    border: 1px solid rgba(42, 157, 143, 0.2);
+}
