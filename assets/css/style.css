@@ -39,7 +39,7 @@ body.main-reveal {
 }
 
 /* ==========================================================================
-   全新！深色模式視差星空樣式 (Parallax Stars)
+   2. 全新！280顆密鋪深色模式視差星空樣式 (Parallax Stars)
    ========================================================================== */
 .stars-container {
     position: fixed;
@@ -48,23 +48,20 @@ body.main-reveal {
     width: 100%;
     height: 100vh;
     pointer-events: none;
-    z-index: -2; /* 位於卡片與極光之下 */
+    z-index: -2;
     opacity: 0;
     transition: opacity 1s ease;
     overflow: hidden;
 }
 
-/* 僅在深色模式啟用時，星空容器才顯現 */
-[data-theme="dark"] .stars-container {
-    opacity: 1;
-}
+[data-theme="dark"] .stars-container { opacity: 1; }
 
 .stars-layer {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 300%; /* 長度加長至 3 倍以適應滾動延伸 */
+    height: 300%;
     will-change: transform;
 }
 
@@ -72,13 +69,9 @@ body.main-reveal {
     position: absolute;
     background-color: #ffffff;
     border-radius: 50%;
-    box-shadow: 0 0 6px rgba(255, 255, 255, 0.6);
 }
 
-/* 隨機星星閃爍動畫 */
-.star-blink {
-    animation: starTwinkle 3s infinite ease-in-out;
-}
+.star-blink { animation: starTwinkle 3s infinite ease-in-out; }
 
 @keyframes starTwinkle {
     0%, 100% { opacity: 0.3; transform: scale(0.8); }
@@ -86,7 +79,7 @@ body.main-reveal {
 }
 
 /* ==========================================================================
-   2. 互動：深色模式按鈕
+   3. 互動：深色模式按鈕 & 驚喜提示框
    ========================================================================== */
 .theme-toggle {
     position: fixed;
@@ -103,7 +96,7 @@ body.main-reveal {
 
 .theme-tooltip {
     position: fixed;
-    bottom: 105px; /* 正好定位在切換鈕上方 */
+    bottom: 105px;
     right: 30px;
     background-color: var(--accent-color);
     color: #030607;
@@ -113,14 +106,13 @@ body.main-reveal {
     font-weight: bold;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
     z-index: 10001;
-    display: none; /* 預設不顯示，由 JS 決定時機 */
+    display: none;
     opacity: 0;
     transform: translateY(10px);
     transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    pointer-events: none; /* 防止遮蓋下方內容點擊 */
+    pointer-events: none;
 }
 
-/* 對話氣泡的小箭頭 */
 .theme-tooltip::after {
     content: "";
     position: absolute;
@@ -129,11 +121,8 @@ body.main-reveal {
     border-width: 8px 8px 0;
     border-style: solid;
     border-color: var(--accent-color) transparent;
-    display: block;
-    width: 0;
 }
 
-/* 提示框漂浮起動畫 */
 @keyframes floatBounce {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-6px); }
@@ -147,24 +136,21 @@ body.main-reveal {
 }
 
 /* ==========================================================================
-   玻璃擬態導航欄與巨型菜單 (Header & Mega Menu)
+   4. 玻璃擬態導航欄與巨型菜單 (Header & Mega Menu)
    ========================================================================== */
 .main-header {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 10000; /* 高於一切，但低於預約彈窗 (10002) */
+    top: 0; left: 0; width: 100%;
+    z-index: 10000;
     background: transparent;
     border-bottom: 1px solid transparent;
     transition: background-color 0.4s ease, border-color 0.4s ease, padding 0.4s ease;
     padding: 20px 0;
 }
 
-/* 當頁面滾動時，導航欄會收縮並啟動高斯模糊毛玻璃特效 */
 .main-header.is-scrolled {
     padding: 12px 0;
-    background: rgba(244, 247, 246, 0.75); /* var(--bg-main) 的 75% 透明度 */
+    background: rgba(244, 247, 246, 0.75);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
@@ -172,7 +158,7 @@ body.main-reveal {
 }
 
 [data-theme="dark"] .main-header.is-scrolled {
-    background: rgba(18, 18, 18, 0.75); /* var(--bg-main) 暗色版 75% 透明度 */
+    background: rgba(18, 18, 18, 0.75);
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
@@ -193,14 +179,7 @@ body.main-reveal {
     text-decoration: none;
     transition: transform 0.3s;
 }
-.nav-logo:hover {
-    transform: scale(1.05);
-}
-
-.nav-menu {
-    display: flex;
-    align-items: center;
-}
+.nav-logo:hover { transform: scale(1.05); }
 
 .nav-list {
     display: flex;
@@ -219,25 +198,14 @@ body.main-reveal {
     align-items: center;
     gap: 4px;
 }
-.nav-link:hover {
-    color: var(--primary-color);
-}
+.nav-link:hover { color: var(--primary-color); }
+.arrow-indicator { font-size: 0.8rem; transition: transform 0.3s ease; }
 
-.arrow-indicator {
-    font-size: 0.8rem;
-    transition: transform 0.3s ease;
-}
-
-/* 巨型菜單面板主體 */
-.nav-item-has-mega {
-    position: relative;
-}
+.nav-item-has-mega { position: relative; }
 
 .mega-menu {
     position: fixed;
-    top: 80px; /* 剛好黏貼在 header 底部 */
-    left: 5%;
-    right: 5%;
+    top: 80px; left: 5%; right: 5%;
     max-width: 1400px;
     margin: 0 auto;
     background: var(--card-bg);
@@ -250,9 +218,7 @@ body.main-reveal {
     visibility: hidden;
     transform: translateY(15px) scale(0.98);
     pointer-events: none;
-    transition: opacity 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), 
-                transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), 
-                visibility 0.4s, background-color 0.5s;
+    transition: opacity 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), visibility 0.4s, background-color 0.5s;
 }
 
 [data-theme="dark"] .mega-menu {
@@ -260,7 +226,6 @@ body.main-reveal {
     box-shadow: 0 15px 45px rgba(0, 0, 0, 0.4);
 }
 
-/* 當懸停或啟用點擊狀態時展示巨型菜單 */
 .nav-item-has-mega:hover .mega-menu,
 .nav-item-has-mega.is-active .mega-menu {
     opacity: 1;
@@ -275,12 +240,8 @@ body.main-reveal {
     color: var(--primary-color);
 }
 
-.main-header.is-scrolled + .hero-section + #main-content .mega-menu,
-.main-header.is-scrolled .mega-menu {
-    top: 60px; /* 收縮時的貼合高度 */
-}
+.main-header.is-scrolled .mega-menu { top: 60px; }
 
-/* 巨型菜單 Grid */
 .mega-menu-grid {
     display: grid;
     grid-template-columns: 1.5fr 1fr 1fr;
@@ -288,10 +249,7 @@ body.main-reveal {
 }
 
 @media (max-width: 768px) {
-    .mega-menu-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
+    .mega-menu-grid { grid-template-columns: 1fr; gap: 1.5rem; }
 }
 
 .mega-column h4 {
@@ -303,7 +261,6 @@ body.main-reveal {
     letter-spacing: 0.05em;
 }
 
-/* 左側精選卡片特色 */
 .featured-spot {
     background: linear-gradient(135deg, rgba(42, 157, 143, 0.08) 0%, rgba(233, 196, 106, 0.08) 100%);
     padding: 1.5rem;
@@ -324,18 +281,11 @@ body.main-reveal {
     margin-bottom: 10px;
 }
 
-.featured-spot h4 {
-    color: var(--text-dark);
-    margin-bottom: 8px;
-    font-size: 1.3rem;
-}
-
 .featured-spot p {
     font-size: 0.95rem;
     line-height: 1.6;
     color: var(--text-secondary);
     margin-bottom: 15px;
-    text-align: left;
 }
 
 .mega-action-btn {
@@ -346,86 +296,27 @@ body.main-reveal {
     padding: 8px 18px;
     border-radius: 6px;
     cursor: pointer;
-    transition: background-color 0.2s, transform 0.2s;
+    transition: all 0.2s;
 }
-.mega-action-btn:hover {
-    background-color: #23857a;
-    transform: translateY(-2px);
-}
+.mega-action-btn:hover { background-color: #23857a; transform: translateY(-2px); }
 
-/* 巨型菜單右側條目清單 */
-.mega-links {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
-}
-
-.mega-links a {
-    text-decoration: none;
-    color: var(--text-dark);
-    font-size: 1rem;
-    font-weight: 700;
-    transition: color 0.2s, padding-left 0.2s;
-    display: inline-block;
-}
-
-.mega-links a:hover {
-    color: var(--aurora-2);
-    padding-left: 6px;
-}
+.mega-links { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; }
+.mega-links a { text-decoration: none; color: var(--text-dark); font-size: 1rem; font-weight: 700; transition: all 0.2s; display: inline-block; }
+.mega-links a:hover { color: var(--aurora-2); padding-left: 6px; }
 
 /* ==========================================================================
-   微光漸層麵包屑樣式 (Breadcrumbs)
+   5. 微光漸層麵包屑樣式 (Breadcrumbs)
    ========================================================================== */
-.breadcrumbs {
-    width: 100%;
-    margin-bottom: 15px;
-    padding: 0 0 10px 0;
-}
-
-.breadcrumb-list {
-    display: flex;
-    flex-wrap: wrap;
-    list-style: none;
-    align-items: center;
-    gap: 12px;
-}
-
-.breadcrumb-item {
-    font-size: 0.95rem;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-}
-
-.breadcrumb-item a {
-    color: var(--text-secondary);
-    text-decoration: none;
-    transition: color 0.3s;
-}
-.breadcrumb-item a:hover {
-    color: var(--primary-color);
-}
-
-/* 貓腳印視覺分隔符 */
-.breadcrumb-item + .breadcrumb-item::before {
-    content: "🐾";
-    font-size: 0.8rem;
-    margin-right: 12px;
-    color: var(--primary-color);
-    opacity: 0.6;
-}
-
-/* 當前面包屑頁面 */
-.breadcrumb-item.active {
-    color: var(--aurora-2);
-    text-shadow: 0 0 8px rgba(0, 245, 212, 0.4);
-    pointer-events: none;
-}
+.breadcrumbs { width: 100%; margin-bottom: 15px; padding: 0 0 10px 0; }
+.breadcrumb-list { display: flex; flex-wrap: wrap; list-style: none; align-items: center; gap: 12px; }
+.breadcrumb-item { font-size: 0.95rem; font-weight: 700; display: flex; align-items: center; }
+.breadcrumb-item a { color: var(--text-secondary); text-decoration: none; transition: color 0.3s; }
+.breadcrumb-item a:hover { color: var(--primary-color); }
+.breadcrumb-item + .breadcrumb-item::before { content: "🐾"; font-size: 0.8rem; margin-right: 12px; color: var(--primary-color); opacity: 0.6; }
+.breadcrumb-item.active { color: var(--aurora-2); text-shadow: 0 0 8px rgba(0, 245, 212, 0.4); pointer-events: none; }
 
 /* ==========================================================================
-   3. 轉場效果：極光、貓咪（含對話框）與圓形閃光
+   6. 轉場效果：極光、貓咪與圓形閃光
    ========================================================================== */
 .landing-overlay {
     position: fixed;
@@ -470,17 +361,8 @@ body.main-reveal {
 }
 
 .landing-content { position: relative; z-index: 10; text-align: center; display: flex; flex-direction: column; align-items: center; }
-
-/* 貓咪嚮導與對話框樣式 */
 .cat-navigator { font-size: 5.5rem; margin-bottom: 20px; animation: catFloat 3s ease-in-out infinite; display: flex; flex-direction: column; align-items: center; }
-.cat-bubble {
-    background: white; color: var(--text-dark);
-    padding: 10px 22px; border-radius: 25px;
-    font-size: 1.1rem; font-weight: bold;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
-    margin-top: 15px; transition: opacity 0.3s ease;
-}
-
+.cat-bubble { background: white; color: var(--text-dark); padding: 10px 22px; border-radius: 25px; font-size: 1.1rem; font-weight: bold; box-shadow: 0 8px 25px rgba(0,0,0,0.4); margin-top: 15px; transition: opacity 0.3s ease; }
 .cat-dash { animation: catIntoCircle 0.9s cubic-bezier(0.7, 0, 0.3, 1) forwards !important; }
 
 @keyframes catIntoCircle {
@@ -495,26 +377,18 @@ body.main-reveal {
 }
 
 .typewriter {
-    color: var(--white); font-size: 2.8rem; overflow: hidden; 
-    border-right: .15em solid var(--accent-color);
-    white-space: nowrap; letter-spacing: .15em; 
-    width: 0; margin: 35px 0;
-    text-shadow: 0 0 20px var(--aurora-2);
+    color: var(--white); font-size: 2.8rem; overflow: hidden; border-right: .15em solid var(--accent-color); white-space: nowrap; letter-spacing: .15em; width: 0; margin: 35px 0; text-shadow: 0 0 20px var(--aurora-2);
 }
 .start-typing { animation: typing 3s steps(30, end) forwards; }
 @keyframes typing { from { width: 0 } to { width: 100% } }
-
 .landing-overlay.warp-exit { transform: scale(4); opacity: 0; filter: blur(30px); pointer-events: none; }
 
 /* ==========================================================================
-   4. 主網頁模組：翻轉卡片與網格
+   7. 主網頁模組：8國 3D 翻轉卡片與網格
    ========================================================================== */
-#main-content { display: none; opacity: 0; transition: opacity 1.5s ease; }
-
 .hero-section {
     height: 100vh;
-    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
-                url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1920&q=80');
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1920&q=80');
     background-size: cover; background-position: center;
     display: flex; justify-content: center; align-items: center; text-align: center;
 }
@@ -522,495 +396,101 @@ body.main-reveal {
 .hero-title { color: white; font-size: 4.8rem; font-weight: 900; text-shadow: 0 10px 40px rgba(0,0,0,0.8); }
 
 .spot-container { padding: 100px 5%; max-width: 1400px; margin: 0 auto; }
-.grid-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 40px; margin-top: 50px; }
+.grid-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; margin-top: 40px; }
 
-/* --- 左邊卡片：3D 翻轉 --- */
-.spot-card-container { perspective: 1000px; height: 480px; }
-.spot-card-inner {
-    position: relative; width: 100%; height: 100%;
-    transition: transform 0.8s; transform-style: preserve-3d;
-}
+.spot-card-container { perspective: 1000px; height: 440px; }
+.spot-card-inner { position: relative; width: 100%; height: 100%; transition: transform 0.8s; transform-style: preserve-3d; }
 .spot-card-container:hover .spot-card-inner { transform: rotateY(180deg); }
 
 .card-face {
-    position: absolute; width: 100%; height: 100%;
-    -webkit-backface-visibility: hidden; backface-visibility: hidden;
-    border-radius: var(--radius-lg); overflow: hidden;
-    background: var(--card-bg); box-shadow: 0 10px 20px var(--shadow);
-    display: flex; flex-direction: column;
+    position: absolute; width: 100%; height: 100%; -webkit-backface-visibility: hidden; backface-visibility: hidden; border-radius: var(--radius-lg); overflow: hidden; background: var(--card-bg); box-shadow: 0 10px 20px var(--shadow); display: flex; flex-direction: column; transition: background-color 0.5s;
 }
-.card-face-back {
-    background: var(--primary-color); color: white;
-    transform: rotateY(180deg); display: flex; justify-content: center;
-    align-items: center; padding: 30px; text-align: center;
-}
+.card-face-back { background: var(--primary-color); color: white; transform: rotateY(180deg); display: flex; justify-content: center; align-items: center; padding: 25px; text-align: center; }
 
-.image-box { height: 280px; overflow: hidden; flex-shrink: 0; }
+.card-face-back button { transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+.card-face-back button:hover { transform: scale(1.08) translateY(-2px); box-shadow: 0 8px 20px rgba(255, 255, 255, 0.3); }
+
+.image-box { height: 240px; overflow: hidden; flex-shrink: 0; }
 .image-box img { width: 100%; height: 100%; object-fit: cover; }
-
-.card-body { padding: 25px 25px 35px 25px; flex-grow: 1; }
-.spot-name { font-size: 1.5rem; font-weight: 800; margin-bottom: 12px; }
-.card-body p { color: var(--text-secondary); line-height: 1.8; font-size: 1.1rem; }
-
-.spot-card {
-    background: var(--card-bg); 
-    border-radius: var(--radius-lg);
-    overflow: hidden; 
-    box-shadow: 0 10px 20px var(--shadow);
-    transition: transform 0.4s, background-color 0.5s;
-    display: flex; 
-    flex-direction: column; 
-    min-height: 480px;
-}
-
-/* 震動卡片專用：當滑鼠移入時觸發動畫 */
-.card-shake:hover {
-    animation: shake-animation 0.5s infinite; /* 無限循環震動 */
-}
-
-/* 定義震動動畫軌跡 */
-@keyframes shake-animation {
-    0% { transform: translate(1px, 1px) rotate(0deg); }
-    10% { transform: translate(-1px, -2px) rotate(-1deg); }
-    20% { transform: translate(-3px, 0px) rotate(1deg); }
-    30% { transform: translate(3px, 2px) rotate(0deg); }
-    40% { transform: translate(1px, -1px) rotate(1deg); }
-    50% { transform: translate(-1px, 2px) rotate(-1deg); }
-    60% { transform: translate(-3px, 1px) rotate(0deg); }
-    70% { transform: translate(3px, 1px) rotate(-1deg); }
-    80% { transform: translate(-1px, -1px) rotate(1deg); }
-    90% { transform: translate(1px, 2px) rotate(0deg); }
-    100% { transform: translate(1px, -2px) rotate(-1deg); }
-}
-
-.footer { background: #1a1a1a; color: white; text-align: center; padding: 60px; margin-top: 100px; }
-
-[data-reveal] { opacity: 0; transform: translateY(60px); transition: all 1s ease; }
-[data-reveal].visible { opacity: 1; transform: translateY(0); }
+.card-body { padding: 20px; flex-grow: 1; text-align: left; }
+.spot-name { font-size: 1.35rem; font-weight: 800; margin-bottom: 8px; color: var(--text-dark); }
+.card-body p { color: var(--text-secondary); line-height: 1.6; font-size: 0.95rem; }
 
 /* ==========================================================================
-   5. 跑馬燈效果
-========================================================================== */
-.marquee {
-    overflow: hidden;
-    border-radius: 999px;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    margin: 4rem 0;
-    position: relative;
-    background: linear-gradient(120deg, rgba(0, 245, 212, 0.14), rgba(255, 60, 125, 0.14));
-    margin: auto;
-    max-width: 1400px;
-}
-
-.marquee::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(90deg, transparent, rgba(5, 6, 11, 0.5), transparent);
-    animation: sweep 5s linear infinite;
-}
-
-@keyframes sweep {
-    0% {
-        transform: translateX(-100%);
-    }
-    100% {
-        transform: translateX(100%);
-    }
-}
-
-.marquee-track {
-    display: flex;
-    gap: 4rem;
-    padding: 1rem 2rem;
-    width: max-content;
-    white-space: nowrap;
-    animation: scroll 20s linear infinite;
-    font-size: 0.95rem;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-}
-.marquee-track > * {
-    flex: 0 0 auto;
-}
-
-@keyframes scroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-}
+   8. 跑馬燈效果
+   ========================================================================== */
+.marquee { overflow: hidden; border-radius: 999px; border: 1px solid rgba(255, 255, 255, 0.12); margin: auto; max-width: 1400px; position: relative; background: linear-gradient(120deg, rgba(0, 245, 212, 0.14), rgba(255, 60, 125, 0.14)); }
+.marquee::before { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(5, 6, 11, 0.5), transparent); animation: sweep 5s linear infinite; }
+@keyframes sweep { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+.marquee-track { display: flex; gap: 4rem; padding: 1rem 2rem; width: max-content; white-space: nowrap; animation: scroll 20s linear infinite; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.2em; }
+.marquee-track > * { flex: 0 0 auto; }
+@keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
 /* ==========================================================================
-   6. 進度條效果
-========================================================================== */
-.progress-container {
-  width: 100%;
-  background-color: #e0e0e0;
-  border-radius: 10px;
-}
-.progress-bar {
-  width: 0;
-  height: 20px;
-  background-color: #4CAF50;
-  text-align: center;
-  color: white;
-  overflow: hidden;
-  border-radius: 10px;
-  animation: load 5s ease-in-out infinite;
-}
-
-@keyframes load {
-   0% {
-       width: 0;
-   }
-   50% {
-       width: 100%;
-   }
-   100% {
-       width: 0;
-   }
-}
+   9. 進度條效果
+   ========================================================================== */
+.progress-container { width: 100%; background-color: #e0e0e0; border-radius: 10px; }
+.progress-bar { width: 0; height: 20px; background-color: #4CAF50; text-align: center; color: white; overflow: hidden; border-radius: 10px; animation: load 5s ease-in-out infinite; }
+@keyframes load { 0% { width: 0; } 50% { width: 100%; } 100% { width: 0; } }
 
 /* ==========================================================================
-   7. 計數器效果  
-========================================================================== */
-.count {
-    min-height: 80vh; /* 調整高度，不用到 100vh 以免太長 */
-    display: contents;
-    justify-content: center;
-    align-items: center;
-    margin: 50px 0;
-    border-radius: 20px; /* 邊緣也給它一點圓角 */
-    width: 60vh;
-}
+   10. 自訂深度探索彈窗效果 (Explore Modal)
+   ========================================================================== */
+.modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.6); backdrop-filter: blur(5px); display: flex; justify-content: center; align-items: center; z-index: 10002; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; }
+.modal-overlay.is-active { opacity: 1; pointer-events: auto; }
+.modal-content { background-color: var(--card-bg); border-radius: var(--radius-lg); padding: 40px; max-width: 500px; width: 90%; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3); position: relative; transform: scale(0.8); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.5s; text-align: center; }
+.modal-overlay.is-active .modal-content { transform: scale(1); }
+.modal-close { position: absolute; top: 15px; right: 20px; background: none; border: none; font-size: 2rem; color: var(--text-secondary); cursor: pointer; transition: color 0.2s; line-height: 1; }
+.modal-close:hover { color: var(--text-dark); }
+.modal-body { display: flex; flex-direction: column; align-items: center; }
 
-.counter {
-    border-radius: 1.5rem; /* 更圓潤的角 */
-    padding: 3rem 5rem;
-    text-align: center;
-    box-shadow: 0 10px 30px var(--shadow);
-    background-color: var(--bg-main); /* 白色方塊 */
-    width: 350px;
-    margin: auto;
-}
+/* 彈窗內部私房推薦清單排版 */
+.modal-city-list { width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 20px 0; text-align: left; }
+.modal-city-item { background: rgba(42, 157, 143, 0.06); padding: 10px 14px; border-radius: 8px; font-weight: bold; font-size: 0.95rem; color: var(--text-dark); border: 1px solid rgba(42, 157, 143, 0.1); display: flex; align-items: center; }
+[data-theme="dark"] .modal-city-item { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05); }
 
-.counter__display {
-    font-size: 6rem; /* 數字大一點 */
-    font-weight: 900;
-    color: var(--text-dark);
-    margin-bottom: 2rem;
-}
-
-.buttonGroup {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    justify-content: space-between;
-    align-items: center;
-    gap: 1.5rem;
-}
-
-.button {
-    cursor: pointer;
-    border: none;
-    background: none;
-    font-size: 2.5rem;
-    padding: 10px 0px;
-    width: 100%;
-    border-radius: 0.8rem;
-    transition: all 0.2s;
-    color: var(--text-dark);
-    font-weight: bold;
-    align-items: center;
-}
-
-.button:hover {
-    background-color: var(--bg-secondary);
-    transform: translateY(-2px);
-}
-
-.button:active {
-    transform: scale(0.9); 
-}
+#modal-confirm-btn { padding: 12px 30px; border-radius: 25px; border: none; cursor: pointer; font-weight: bold; background: var(--primary-color); color: white; transition: transform 0.2s; margin-top: 10px; }
+#modal-confirm-btn:hover { transform: translateY(-2px); background: #23857a !important; }
 
 /* ==========================================================================
-   8. 自訂預約彈窗效果 (Booking Modal)
-========================================================================== */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(5px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 10002; /* 必須大於 theme-toggle (10001) */
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.4s ease;
-}
-
-.modal-overlay.is-active {
-    opacity: 1;
-    pointer-events: auto;
-}
-
-.modal-content {
-    background-color: var(--card-bg);
-    border-radius: var(--radius-lg);
-    padding: 40px;
-    max-width: 450px;
-    width: 90%;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
-    position: relative;
-    transform: scale(0.8);
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.5s;
-    text-align: center;
-}
-
-.modal-overlay.is-active .modal-content {
-    transform: scale(1);
-}
-
-.modal-close {
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    background: none;
-    border: none;
-    font-size: 2rem;
-    color: var(--text-secondary);
-    cursor: pointer;
-    transition: color 0.2s;
-    line-height: 1;
-}
-
-.modal-close:hover {
-    color: var(--text-dark);
-}
-
-.modal-body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-#modal-confirm-btn:hover {
-    transform: translateY(-2px);
-    background: #23857a !important;
-}
-
-/* ==========================================================================
-   💡 9. 統計圖表效果 (Interactive Pie/Donut Chart)
-========================================================================== */
-.chart-section {
-    margin: 40px auto;
-}
-
-.chart-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    gap: 5rem;
-    background: var(--card-bg);
-    padding: 3.5rem;
-    border-radius: var(--radius-lg);
-    box-shadow: 0 10px 40px var(--shadow);
-    transition: background-color 0.5s, box-shadow 0.5s;
-}
+   11. 統計圖表效果 (Interactive Pie/Donut Chart)
+   ========================================================================== */
+.chart-section { margin: 40px auto; }
+.chart-wrapper { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 5rem; background: var(--card-bg); padding: 3.5rem; border-radius: var(--radius-lg); box-shadow: 0 10px 40px var(--shadow); transition: background-color 0.5s, box-shadow 0.5s; }
 
 @media (max-width: 768px) {
-    .chart-wrapper {
-        flex-direction: column;
-        gap: 3rem;
-        padding: 2.5rem 1.5rem;
-    }
+    .chart-wrapper { flex-direction: column; gap: 3rem; padding: 2.5rem 1.5rem; }
 }
 
-.chart-container {
-    position: relative;
-    width: 240px;
-    height: 240px;
-    flex-shrink: 0;
-}
+.chart-container { position: relative; width: 240px; height: 240px; flex-shrink: 0; }
+#pie-chart { width: 100%; height: 100%; overflow: visible; }
+#pie-chart path { transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.4s; cursor: pointer; }
 
-#pie-chart {
-    width: 100%;
-    height: 100%;
-    overflow: visible; /* 確保懸浮彈出時不會被裁切 */
-}
+.chart-center-info { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; pointer-events: none; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+.chart-center-label { font-size: 0.95rem; color: var(--text-secondary); font-weight: bold; text-transform: uppercase; letter-spacing: 0.1em; transition: color 0.3s; }
+.chart-center-value { font-size: 2.2rem; font-weight: 800; color: var(--text-dark); line-height: 1.1; margin-top: 2px; transition: color 0.3s; }
 
-/* 扇形區段轉場與游標 */
-#pie-chart path {
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.4s;
-    cursor: pointer;
-}
-
-/* 甜甜圈圓心標籤 */
-.chart-center-info {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    pointer-events: none;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.chart-center-label {
-    font-size: 0.95rem;
-    color: var(--text-secondary);
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    transition: color 0.3s;
-}
-
-.chart-center-value {
-    font-size: 2.2rem;
-    font-weight: 800;
-    color: var(--text-dark);
-    line-height: 1.1;
-    margin-top: 2px;
-    transition: color 0.3s;
-}
-
-/* 圖例排版 */
-.chart-legend {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    flex-grow: 1;
-    max-width: 320px;
-    width: 100%;
-}
-
-.legend-item {
-    display: flex;
-    align-items: center;
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: var(--text-dark);
-    padding: 0.8rem 1.2rem;
-    border-radius: 12px;
-    background: rgba(0, 0, 0, 0.02);
-    transition: background-color 0.3s, transform 0.3s;
-    cursor: pointer;
-}
-
-[data-theme="dark"] .legend-item {
-    background: rgba(255, 255, 255, 0.03);
-}
-
-.legend-item:hover, .legend-item.is-active {
-    background: rgba(0, 0, 0, 0.05);
-    transform: translateX(6px);
-}
-
-[data-theme="dark"] .legend-item:hover, [data-theme="dark"] .legend-item.is-active {
-    background: rgba(255, 255, 255, 0.07);
-}
-
-.legend-color {
-    width: 15px;
-    height: 15px;
-    border-radius: 50%;
-    margin-right: 15px;
-    flex-shrink: 0;
-}
-
-.legend-label {
-    flex-grow: 1;
-}
-
-.legend-percent {
-    font-weight: 800;
-    color: var(--text-secondary);
-}
+.chart-legend { display: flex; flex-direction: column; gap: 1rem; flex-grow: 1; max-width: 320px; width: 100%; }
+.legend-item { display: flex; align-items: center; font-size: 1.1rem; font-weight: bold; color: var(--text-dark); padding: 0.8rem 1.2rem; border-radius: 12px; background: rgba(0, 0, 0, 0.02); transition: all 0.3s; cursor: pointer; }
+[data-theme="dark"] .legend-item { background: rgba(255, 255, 255, 0.03); }
+.legend-item:hover, .legend-item.is-active { background: rgba(0, 0, 0, 0.05); transform: translateX(6px); }
+[data-theme="dark"] .legend-item:hover, [data-theme="dark"] .legend-item.is-active { background: rgba(255, 255, 255, 0.07); }
+.legend-color { width: 15px; height: 15px; border-radius: 50%; margin-right: 15px; flex-shrink: 0; }
+.legend-label { flex-grow: 1; text-align: left; }
+.legend-percent { font-weight: 800; color: var(--text-secondary); }
 
 /* ==========================================================================
-   💡 10. 貓咪相簿拖曳瀑布流網格效果 (Draggable Masonry Grid)
+   12. 貓咪相簿拖曳瀑布流網格效果 (Draggable Masonry Grid)
    ========================================================================== */
-.masonry-grid {
-    column-count: 3;
-    column-gap: 30px;
-    width: 100%;
-}
+.masonry-grid { column-count: 3; column-gap: 30px; width: 100%; }
+@media (max-width: 992px) { .masonry-grid { column-count: 2; column-gap: 20px; } }
+@media (max-width: 576px) { .masonry-grid { column-count: 1; } }
 
-@media (max-width: 992px) {
-    .masonry-grid {
-        column-count: 2;
-        column-gap: 20px;
-    }
-}
-
-@media (max-width: 576px) {
-    .masonry-grid {
-        column-count: 1;
-    }
-}
-
-.masonry-item {
-    break-inside: avoid;
-    background: var(--card-bg);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    box-shadow: 0 10px 25px var(--shadow);
-    margin-bottom: 30px;
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
-                box-shadow 0.3s, 
-                background-color 0.5s, 
-                border-color 0.3s;
-    cursor: grab;
-    position: relative;
-    user-select: none;
-    border: 1px solid transparent;
-}
-
-.masonry-item:active {
-    cursor: grabbing;
-}
-
-.masonry-item img {
-    width: 100%;
-    height: auto;
-    display: block;
-    pointer-events: none; /* 💡 關鍵：禁用圖片預設瀏覽器拖曳，防止干擾自訂卡片拖曳 */
-}
-
-.masonry-content {
-    padding: 20px;
-}
-
-.masonry-content h3 {
-    font-size: 1.2rem;
-    font-weight: 800;
-    margin-bottom: 8px;
-    color: var(--text-dark);
-}
-
-.masonry-content p {
-    font-size: 0.95rem;
-    color: var(--text-secondary);
-    line-height: 1.6;
-}
-
-/* 拖曳時卡片的半透明與旋轉視覺效果 */
-.masonry-item.dragging {
-    opacity: 0.4;
-    transform: scale(0.95) rotate(-2deg);
-    border: 2px dashed var(--primary-color) !important;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-/* 懸停非拖曳卡片時優雅向上浮起並產生發光外框 */
-.masonry-item:hover:not(.dragging) {
-    transform: translateY(-8px);
-    box-shadow: 0 15px 35px var(--shadow);
-    border: 1px solid rgba(42, 157, 143, 0.2);
-}
+.masonry-item { break-inside: avoid; background: var(--card-bg); border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 10px 25px var(--shadow); margin-bottom: 30px; transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s, background-color 0.5s, border-color 0.3s; cursor: grab; position: relative; user-select: none; border: 1px solid transparent; }
+.masonry-item:active { cursor: grabbing; }
+.masonry-item img { width: 100%; height: auto; display: block; pointer-events: none; }
+.masonry-content { padding: 20px; text-align: left; }
+.masonry-content h3 { font-size: 1.2rem; font-weight: 800; margin-bottom: 8px; color: var(--text-dark); }
+.masonry-content p { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; }
+.masonry-item.dragging { opacity: 0.4; transform: scale(0.95) rotate(-2deg); border: 2px dashed var(--primary-color) !important; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); }
+.masonry-item:hover:not(.dragging) { transform: translateY(-8px); box-shadow: 0 15px 35px var(--shadow); border: 1px solid rgba(42, 157, 143, 0.2); }

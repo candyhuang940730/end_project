@@ -4,25 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>探索旅程 | 動畫程式設計期末作品</title>
-    <!-- 引入外部 CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 
-<!-- 視差星空背景容器 (New!) -->
 <div id="stars-container" class="stars-container"></div>
 
-<!-- 深色模式切換鈕 -->
 <button class="theme-toggle" id="theme-toggle">🌙</button>
 
-<!-- 深色模式提示工具提示 -->
 <div class="theme-tooltip" id="theme-tooltip">點擊深色模式有驚喜喵！</div>
 
 <div class="home-page">
-    <!-- 圓形放射閃光 -->
     <div class="circle-flash" id="circle-flash"></div>
 
-    <!-- 1. 開場遮罩 -->
     <div id="landing-page" class="landing-overlay">
         <div class="aurora-bg"></div>
         <div class="landing-content">
@@ -35,9 +29,7 @@
         </div>
     </div>
 
-    <!-- 2. 主網頁內容 -->
     <main id="main-content">
-        <!-- 導航欄與巨型菜單 -->
         <header class="main-header" id="main-header">
             <div class="nav-container">
                 <a href="#" class="nav-logo">🐾 喵之旅行社</a>
@@ -46,37 +38,31 @@
                     <ul class="nav-list">
                         <li><a href="#" class="nav-link">首頁</a></li>
                         
-                        <!-- 巨型菜單觸發項目 -->
                         <li class="nav-item-has-mega" id="mega-trigger">
                             <a href="#spot-section" class="nav-link">探索景點 <span class="arrow-indicator">▾</span></a>
                             
-                            <!-- 巨型菜單 (Mega Menu) -->
                             <div class="mega-menu" id="mega-menu">
                                 <div class="mega-menu-grid">
-                                    <!-- 左欄：精選賞櫻推薦卡片 -->
                                     <div class="mega-column featured-spot">
                                         <div class="featured-tag">季節推薦 🌸</div>
-                                        <h4>新宿賞櫻秘境</h4>
-                                        <p>粉嫩櫻花飛舞的春季街道，與貓咪嚮導一同在櫻花樹下野餐的絕美體驗。</p>
-                                        <button class="mega-action-btn" id="mega-reserve-shortcut">立即前往預約 🐾</button>
+                                        <h4>各國旅遊深度探索</h4>
+                                        <p>點擊景點卡片的「了解更多」，即可解鎖動態渲染的 6 - 8 個私房嚴選城市清單喵！</p>
+                                        <button class="mega-action-btn" id="mega-reserve-shortcut">立即前往探索 🐾</button>
                                     </div>
                                     
-                                    <!-- 中欄：快捷目的地選單 -->
                                     <div class="mega-column">
                                         <h4>精選目的地</h4>
                                         <ul class="mega-links">
-                                            <li><a href="#spot-section">🇯🇵 新宿之春（翻轉卡）</a></li>
-                                            <li><a href="#spot-section">🇨🇭 阿爾卑斯峰（震動卡）</a></li>
+                                            <li><a href="#spot-section">🌍 各國景點（3D 翻轉卡組）</a></li>
+                                            <li><a href="#draggable-section">📸 貓咪明信片（拖曳瀑布流）</a></li>
                                             <li><a href="#stars-container">🌌 浩瀚星空（視差背景）</a></li>
                                         </ul>
                                     </div>
                                     
-                                    <!-- 右欄：動畫程式技術 -->
                                     <div class="mega-column">
                                         <h4>互動技術面板</h4>
                                         <ul class="mega-links">
                                             <li><a href="#usage">🚀 動畫技術說明</a></li>
-                                            <li><a href="#counterDisplay">🔢 幾何置中計數器</a></li>
                                             <li><a href="#pie-chart">📊 技術佔比圓餅圖</a></li>
                                         </ul>
                                     </div>
@@ -96,9 +82,7 @@
             </div>
         </section>
 
-        <!-- 卡片區塊 -->
-        <section class="spot-container">
-            <!-- 麵包屑導航 -->
+        <section class="spot-container" id="spot-section">
             <nav class="breadcrumbs" aria-label="breadcrumb" data-reveal>
                 <ol class="breadcrumb-list">
                     <li class="breadcrumb-item"><a href="#">首頁</a></li>
@@ -108,50 +92,184 @@
             </nav>
 
             <div data-reveal>
-                <h2 style="font-size: 3rem;">🏝️ 貓咪嚴選目的地</h2>
-                <p style="color: var(--text-secondary); margin-top: 1rem;">左側翻轉，右側震動，完美體驗喵！</p>
+                <h2 style="font-size: 3rem;">🏝_ 各國景點推薦</h2>
+                <p style="color: var(--text-secondary); margin-top: 1rem;">滑鼠懸停 3D 空間翻轉，點擊「了解更多」解鎖深度隱藏城市清單喵！</p>
             </div>
 
             <div class="grid-layout">
-                <!-- 翻轉卡片 -->
+                
                 <div class="spot-card-container" data-reveal>
                     <div class="spot-card-inner">
-                        <!-- 正面 -->
                         <div class="card-face card-face-front">
                             <div class="image-box">
-                                <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=600&q=60" alt="新宿">
+                                <img src="https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=600&q=60" alt="台灣">
                             </div>
                             <div class="card-body">
-                                <h3 class="spot-name">旋轉不會有魔法降臨</h3>
-                                <p>這是一張旋轉卡片。</p>
+                                <h3 class="spot-name">🇹🇼 台灣 (Taiwan)</h3>
+                                <p>充滿人情味的美食寶島，結合璀璨夜景與高山壯麗風光。</p>
                             </div>
                         </div>
-                        <!-- 背面 -->
                         <div class="card-face card-face-back">
                             <div>
-                                <h3>🐱 貓咪悄悄話</h3>
-                                <p style="color: white; margin-top: 10px;">這裡的櫻花非常漂亮，要不要跟我一起去野餐？</p>
-                                <button id="reserve-btn" style="margin-top: 20px; padding: 10px 20px; border-radius: 5px; border: none; cursor: pointer; background: white; color: var(--primary-color); font-weight: bold;">立即預約</button>
+                                <h3>城市特選</h3>
+                                <p style="color: white; margin-top: 10px; font-weight: bold;">📍 台北 ・ 高雄 ・ 花蓮</p>
+                                <button class="reserve-btn" data-country="台灣" data-emoji="🇹🇼" data-cities="台北 ・ 高雄 ・ 花蓮" data-more="["台北市 101 大樓 🏙️", "高雄市 駁二特區 🎨", "花蓮縣 太魯閣峽谷 ⛰️", "台中市 逢甲夜市 🍿", "台南市 古蹟安平古堡 ⛩️", "台東縣 鹿野高台熱氣球 🎈", "宜蘭縣 礁溪溫泉 ♨️", "南投縣 日月潭 🏞️"]" style="margin-top: 25px; padding: 10px 22px; border-radius: 6px; border: none; cursor: pointer; background: white; color: var(--primary-color); font-weight: bold;">了解更多</button>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- 震動卡片 -->
-                <article class="spot-card card-shake" data-reveal>
-                    <div class="image-box">
-                        <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=600&q=60" alt="阿爾卑斯">
+                <div class="spot-card-container" data-reveal>
+                    <div class="spot-card-inner">
+                        <div class="card-face card-face-front">
+                            <div class="image-box">
+                                <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=600&q=60" alt="法國">
+                            </div>
+                            <div class="card-body">
+                                <h3 class="spot-name">🇫🇷 法國 (France)</h3>
+                                <p>浪漫與藝術的交織殿堂，散發古典歷史與時尚奢華的極致魅力。</p>
+                            </div>
+                        </div>
+                        <div class="card-face card-face-back">
+                            <div>
+                                <h3>城市特選</h3>
+                                <p style="color: white; margin-top: 10px; font-weight: bold;">📍 巴黎 ・ 尼斯 ・ 里昂</p>
+                                <button class="reserve-btn" data-country="法國" data-emoji="🇫🇷" data-cities="巴黎 ・ 尼斯 ・ 里昂" data-more="["巴黎 艾菲爾鐵塔 🗼", "尼斯 蔚藍海岸 🏖️", "里昂 美食之都 🍷", "馬賽 浪漫老港 ⚓", "波爾多 紅酒莊園 🍇", "坎城 國際電影節 🎬", "斯特拉斯堡 聖誕小鎮 🎄"]" style="margin-top: 25px; padding: 10px 22px; border-radius: 6px; border: none; cursor: pointer; background: white; color: var(--primary-color); font-weight: bold;">了解更多</button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <h3 class="spot-name">神奇的卡片</h3>
-                        <p>滑鼠移到這張卡片上。</p>
+                </div>
+
+                <div class="spot-card-container" data-reveal>
+                    <div class="spot-card-inner">
+                        <div class="card-face card-face-front">
+                            <div class="image-box">
+                                <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=600&q=60" alt="日本">
+                            </div>
+                            <div class="card-body">
+                                <h3 class="spot-name">🇯🇵 日本 (Japan)</h3>
+                                <p>現代科技與傳統御苑御守完美融合，充滿四季風情的旅行首選。</p>
+                            </div>
+                        </div>
+                        <div class="card-face card-face-back">
+                            <div>
+                                <h3>城市特選</h3>
+                                <p style="color: white; margin-top: 10px; font-weight: bold;">📍 東京 ・ 京都 ・ 大阪</p>
+                                <button class="reserve-btn" data-country="日本" data-emoji="🇯🇵" data-cities="東京 ・ 京都 ・ 大阪" data-more="["東京 新宿御苑賞櫻 🌸", "京都 金閣寺與古街 ⛩️", "大阪 心齋橋與環球影城 🎢", "北海道 札幌雪祭 ❄️", "沖繩 琉球海灘 🌊", "福岡 博多拉麵屋台 🍜", "奈良 萌鹿公園 🦌", "箱根 富士山溫泉 🗻"]" style="margin-top: 25px; padding: 10px 22px; border-radius: 6px; border: none; cursor: pointer; background: white; color: var(--primary-color); font-weight: bold;">了解更多</button>
+                            </div>
+                        </div>
                     </div>
-                </article>
+                </div>
+
+                <div class="spot-card-container" data-reveal>
+                    <div class="spot-card-inner">
+                        <div class="card-face card-face-front">
+                            <div class="image-box">
+                                <img src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=600&q=60" alt="美國">
+                            </div>
+                            <div class="card-body">
+                                <h3 class="spot-name">🇺🇸 美國 (USA)</h3>
+                                <p>大熔爐文化的代名詞，擁有世界級大都市與壯麗的大峽谷景觀。</p>
+                            </div>
+                        </div>
+                        <div class="card-face card-face-back">
+                            <div>
+                                <h3>城市特選</h3>
+                                <p style="color: white; margin-top: 10px; font-weight: bold;">📍 紐約 ・ 洛杉磯 ・ 三藩市</p>
+                                <button class="reserve-btn" data-country="美國" data-emoji="🇺🇸" data-cities="紐約 ・ 洛杉磯 ・ 三藩市" data-more="["紐約 時代廣場 🏙️", "洛杉磯 好萊塢星光大道 🎬", "三藩市 金門大橋 🌁", "拉斯維加斯 不夜城賭督 🎲", "芝加哥 千禧公園大豆子 🫘", "西雅圖 太空針塔 ☕", "奧蘭多 迪士尼世界 🏰"]" style="margin-top: 25px; padding: 10px 22px; border-radius: 6px; border: none; cursor: pointer; background: white; color: var(--primary-color); font-weight: bold;">了解更多</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="spot-card-container" data-reveal>
+                    <div class="spot-card-inner">
+                        <div class="card-face card-face-front">
+                            <div class="image-box">
+                                <img src="https://images.unsplash.com/photo-1513635269975-59663e0ca1ad?auto=format&fit=crop&w=600&q=60" alt="英國">
+                            </div>
+                            <div class="card-body">
+                                <h3 class="spot-name">🇬🇧 英國 (UK)</h3>
+                                <p>尊貴英倫紳士文化的發源地，古老城堡與現代潮流交織。</p>
+                            </div>
+                        </div>
+                        <div class="card-face card-face-back">
+                            <div>
+                                <h3>城市特選</h3>
+                                <p style="color: white; margin-top: 10px; font-weight: bold;">📍 倫敦 ・ 愛丁堡 ・ 曼徹斯特</p>
+                                <button class="reserve-btn" data-country="英國" data-emoji="🇬🇧" data-cities="倫敦 ・ 愛丁堡 ・ 曼徹斯特" data-more="["倫敦 大笨鐘與倫敦眼 🎡", "愛丁堡 古老城堡 🏰", "曼徹斯特 足球聖地老特拉福 ⚽", "利物浦 披頭四紀念館 🎸", "牛津 大學城書香 🎓", "劍橋 康河撐船 🛶"]" style="margin-top: 25px; padding: 10px 22px; border-radius: 6px; border: none; cursor: pointer; background: white; color: var(--primary-color); font-weight: bold;">了解更多</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="spot-card-container" data-reveal>
+                    <div class="spot-card-inner">
+                        <div class="card-face card-face-front">
+                            <div class="image-box">
+                                <img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=600&q=60" alt="義大利">
+                            </div>
+                            <div class="card-body">
+                                <h3 class="spot-name">🇮🇹 義大利 (Italy)</h3>
+                                <p>文藝復興的搖籃，滿載輝煌羅馬古蹟與頂級義式料理的饕客聖地。</p>
+                            </div>
+                        </div>
+                        <div class="card-face card-face-back">
+                            <div>
+                                <h3>城市特選</h3>
+                                <p style="color: white; margin-top: 10px; font-weight: bold;">📍 羅馬 ・ 威尼斯 ・ 佛羅倫斯</p>
+                                <button class="reserve-btn" data-country="義大利" data-emoji="🇮🇹" data-cities="羅馬 ・ 威尼斯 ・ 佛羅倫斯" data-more="["羅馬 競技場與許願池 🏛️", "威尼斯 水上貢多拉 🛶", "佛羅倫斯 聖母百花大教堂 ⛪", "米蘭 時尚米蘭大教堂 🛍️", "比薩 比薩斜塔 📐", "拿坡里 正宗披薩發源地 🍕"]" style="margin-top: 25px; padding: 10px 22px; border-radius: 6px; border: none; cursor: pointer; background: white; color: var(--primary-color); font-weight: bold;">了解更多</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="spot-card-container" data-reveal>
+                    <div class="spot-card-inner">
+                        <div class="card-face card-face-front">
+                            <div class="image-box">
+                                <img src="https://images.unsplash.com/photo-1527004013197-933c4bb611b3?auto=format&fit=crop&w=600&q=60" alt="挪威">
+                            </div>
+                            <div class="card-body">
+                                <h3 class="spot-name">🇳🇴 挪威 (Norway)</h3>
+                                <p>北歐神話的奇幻國度，擁有鬼斧神工的峽灣自然遺產與絕美極光。</p>
+                            </div>
+                        </div>
+                        <div class="card-face card-face-back">
+                            <div>
+                                <h3>城市特選</h3>
+                                <p style="color: white; margin-top: 10px; font-weight: bold;">📍 奧斯陸 ・ 卑爾根 ・ 特羅姆瑟</p>
+                                <button class="reserve-btn" data-country="挪威" data-emoji="🇳🇴" data-cities="奧斯陸 ・ 卑爾根 ・ 特羅姆瑟" data-more="["奧斯陸 維京海盜船博物館 ⚓", "卑爾根 彩色木屋老街 🏡", "特羅姆瑟 北極圈追極光 🌌", "蓋朗厄爾峽灣 絕美巨壁 ⛰️", "羅弗敦群島 仙境漁村 🎣", "斯塔萬格 聖壇岩攀登 🧗"]" style="margin-top: 25px; padding: 10px 22px; border-radius: 6px; border: none; cursor: pointer; background: white; color: var(--primary-color); font-weight: bold;">了解更多</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="spot-card-container" data-reveal>
+                    <div class="spot-card-inner">
+                        <div class="card-face card-face-front">
+                            <div class="image-box">
+                                <img src="https://images.unsplash.com/photo-1543783207-ec64e4d95325?auto=format&fit=crop&w=600&q=60" alt="西班牙">
+                            </div>
+                            <div class="card-body">
+                                <h3 class="spot-name">🇪🇸 西班牙 (Spain)</h3>
+                                <p>陽光奔放的熱情國度，高第奇幻建築藝術與佛朗明哥舞的盛宴。</p>
+                            </div>
+                        </div>
+                        <div class="card-face card-face-back">
+                            <div>
+                                <h3>城市特選</h3>
+                                <p style="color: white; margin-top: 10px; font-weight: bold;">📍 巴塞隆納 ・ 馬德里 ・ 塞維亞</p>
+                                <button class="reserve-btn" data-country="西班牙" data-emoji="🇪🇸" data-cities="巴塞隆納 ・ 馬德里 ・ 塞維亞" data-more="["巴塞隆納 聖家堂建築 ⛪", "馬德里 普拉多美術館 🎨", "塞維亞 佛朗明哥舞劇院 💃", "瓦倫西亞 科學藝術城 🧪", "格拉納達 阿爾罕布拉宮 🏰", "馬拉加 畢卡索故鄉 🖌️"]" style="margin-top: 25px; padding: 10px 22px; border-radius: 6px; border: none; cursor: pointer; background: white; color: var(--primary-color); font-weight: bold;">了解更多</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </section>
         
-         <section class="spot-container" id="draggable-section" data-reveal>
-            <!-- 麵包屑 -->
+        <section class="spot-container" id="draggable-section" data-reveal>
             <nav class="breadcrumbs" aria-label="breadcrumb">
                 <ol class="breadcrumb-list">
                     <li class="breadcrumb-item"><a href="#">首頁</a></li>
@@ -166,7 +284,6 @@
             </p>
 
             <div class="masonry-grid" id="draggable-masonry">
-                <!-- 卡片 1 (高型) -->
                 <div class="masonry-item" draggable="true" data-reveal>
                     <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=600&h=800&q=60" alt="可愛橘貓">
                     <div class="masonry-content">
@@ -174,17 +291,13 @@
                         <p>在暖洋洋的午後，慵懶地趴在陽台上看落葉發呆。</p>
                     </div>
                 </div>
-
-                <!-- 卡片 2 (扁平型) -->
                 <div class="masonry-item" draggable="true" data-reveal>
                     <img src="https://images.unsplash.com/photo-1533738363-b7f9aef128ce?auto=format&fit=crop&w=600&h=420&q=60" alt="墨鏡酷貓">
                     <div class="masonry-content">
-                        <h3>極客酷貓 🕶️</h3>
+                        <h3>極客酷貓 🕶_</h3>
                         <p>戴上最帥氣的墨鏡，今晚我就是這條街最靚的貓！</p>
                     </div>
                 </div>
-
-                <!-- 卡片 3 (中等型) -->
                 <div class="masonry-item" draggable="true" data-reveal>
                     <img src="https://images.unsplash.com/photo-1495360010541-f48722b34f7d?auto=format&fit=crop&w=600&h=600&q=60" alt="探頭好奇貓">
                     <div class="masonry-content">
@@ -192,8 +305,6 @@
                         <p>不管多小的紙箱，都阻擋不了小貓咪鑽進去的決心。</p>
                     </div>
                 </div>
-
-                <!-- 卡片 4 (高型) -->
                 <div class="masonry-item" draggable="true" data-reveal>
                     <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=600&h=750&q=60" alt="探險柴犬">
                     <div class="masonry-content">
@@ -201,8 +312,6 @@
                         <p>雖然我是隻柴柴，但也想加入貓咪嚮導的冒險大軍！</p>
                     </div>
                 </div>
-
-                <!-- 卡片 5 (扁平型) -->
                 <div class="masonry-item" draggable="true" data-reveal>
                     <img src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=600&h=450&q=60" alt="神秘黑貓">
                     <div class="masonry-content">
@@ -210,8 +319,6 @@
                         <p>在午夜的極光中悄悄出沒，散發著優雅神祕的氣息。</p>
                     </div>
                 </div>
-
-                <!-- 卡片 6 (中等型) -->
                 <div class="masonry-item" draggable="true" data-reveal>
                     <img src="https://images.unsplash.com/photo-1519052537078-e6302a4968d4?auto=format&fit=crop&w=600&h=550&q=60" alt="熟睡小貓">
                     <div class="masonry-content">
@@ -222,118 +329,73 @@
             </div>
         </section>
 
-        <!-- 跑馬燈區塊 -->
         <section class="marquee" data-reveal>
             <div class="marquee-track" data-marquee-ready="true">
-                <!-- 第一組文字 -->
-                <span data-marquee-clone="true">HTML</span>
-                <span data-marquee-clone="true">CSS</span>
-                <span data-marquee-clone="true">JavaScript</span>
-                <span data-marquee-clone="true">React</span>
-                <span data-marquee-clone="true">PHP</span>
-                <span data-marquee-clone="true">C</span>
-                <span data-marquee-clone="true">C++</span>
-                <span data-marquee-clone="true">C#</span>
-                <span data-marquee-clone="true">Java</span>
-                <span data-marquee-clone="true">Ruby</span>
-                <span data-marquee-clone="true">MySQL</span>
-                <span data-marquee-clone="true">NodeJS</span>
-                <!-- 第二組 -->
-                <span aria-hidden="true" data-marquee-clone="true">HTML</span>
-                <span aria-hidden="true" data-marquee-clone="true">CSS</span>
-                <span aria-hidden="true" data-marquee-clone="true">JavaScript</span>
-                <span aria-hidden="true" data-marquee-clone="true">React</span>
-                <span aria-hidden="true" data-marquee-clone="true">PHP</span>
-                <span aria-hidden="true" data-marquee-clone="true">C</span>
-                <span aria-hidden="true" data-marquee-clone="true">C++</span>
-                <span aria-hidden="true" data-marquee-clone="true">C#</span>
-                <span aria-hidden="true" data-marquee-clone="true">Java</span>
-                <span aria-hidden="true" data-marquee-clone="true">Ruby</span>
-                <span aria-hidden="true" data-marquee-clone="true">MySQL</span>
-                <span aria-hidden="true" data-marquee-clone="true">NodeJS</span>
+                <span data-marquee-clone="true">台灣</span>
+                <span data-marquee-clone="true">法國</span>
+                <span data-marquee-clone="true">日本</span>
+                <span data-marquee-clone="true">美國</span>
+                <span data-marquee-clone="true">英國</span>
+                <span data-marquee-clone="true">義大利</span>
+                <span data-marquee-clone="true">挪威</span>
+                <span data-marquee-clone="true">西班牙</span>
+                
+                <span aria-hidden="true" data-marquee-clone="true">台灣</span>
+                <span aria-hidden="true" data-marquee-clone="true">法國</span>
+                <span aria-hidden="true" data-marquee-clone="true">日本</span>
+                <span aria-hidden="true" data-marquee-clone="true">美國</span>
+                <span aria-hidden="true" data-marquee-clone="true">英國</span>
+                <span aria-hidden="true" data-marquee-clone="true">義大利</span>
+                <span aria-hidden="true" data-marquee-clone="true">挪威</span>
+                <span aria-hidden="true" data-marquee-clone="true">西班牙</span>
             </div>
         </section>
 
-        <!-- 圓餅圖區塊 -->
         <section class="chart-section spot-container" data-reveal>
             <div data-reveal>
                 <h2 style="font-size: 3rem;">📊 技術佔比統計</h2>
                 <p style="color: var(--text-secondary); margin-top: 1rem; margin-bottom: 3rem;">本網頁底層所應用的程式語言與核心樣式比例（互動式 SVG 圓餅圖）</p>
             </div>
-            
             <div class="chart-wrapper">
-                <!-- 圓餅圖/甜甜圈圖容器 -->
                 <div class="chart-container">
-                    <svg id="pie-chart" viewBox="-120 -120 240 240">
-                        <!-- JS 依照幾何公式動態繪製 Arc Paths -->
-                    </svg>
-                    <!-- 中央資訊顯示區 -->
+                    <svg id="pie-chart" viewBox="-120 -120 240 240"></svg>
                     <div class="chart-center-info">
                         <span class="chart-center-label" id="chart-center-label">總計</span>
                         <span class="chart-center-value" id="chart-center-value">100%</span>
                     </div>
                 </div>
-                
-                <!-- 雙向綁定圖例清單 -->
-                <div class="chart-legend" id="chart-legend">
-                    <!-- JS 動態生成圖例 -->
-                </div>
+                <div class="chart-legend" id="chart-legend"></div>
             </div>
         </section>
 
-        <!-- 進度條區塊及說明 -->
         <section class="spot-container" id="usage" data-reveal>
             <div class="progress-container">
                 <div class="progress-bar"></div>
             </div>
-            
             <h2 style="margin-bottom: 20px;">🚀 動畫技術完整實作說明</h2>
             <div style="background: var(--card-bg); padding: 40px; border-radius: 20px; box-shadow: 0 10px 40px var(--shadow);">
                 <p style="font-size: 1.1rem; line-height: 1.8;">
                     <strong>1. 3D 翻轉模組 (Card Flip)：</strong> 透過 <code>perspective</code> 與 <code>preserve-3d</code>，實現流暢的空間旋轉效果，增加 UI 的層次感。<br>
                     <strong>2. 全螢幕互動：</strong> 整合了深色模式切換與 <code>Intersection Observer</code> 的滾動進場，展現全方位的動畫控制力。<br>
-                    <strong>3. 故事性轉場：</strong> 貓咪嚮導引領使用者透過「圓形放射閃光」進入主頁面，建立強烈的情感連結。
+                    <strong>3. 故事性轉場：</strong> 透過「圓形放射閃光」進入主頁面，建立強烈的情感連結。
                 </p>
-            </div>
-        </section>
-
-        <!-- 計數器區塊 -->
-        <section class="count" data-reveal>
-            <!-- 白色小方塊外殼 -->
-            <div class="counter">
-                <div id="counterDisplay" class="counter__display">0</div>
-                <div id="buttonGroup" class="buttonGroup">
-                    <button class="button" id="decrease">-</button>
-                    <button class="button" id="reset">Reset</button>
-                    <button class="button" id="increase">+</button>
-                </div>
             </div>
         </section>
     </main>
 
-    <!-- 預約彈窗 -->
     <div id="booking-modal" class="modal-overlay">
         <div class="modal-content">
             <button class="modal-close" id="modal-close-btn" aria-label="關閉彈窗">&times;</button>
-            <div class="modal-body">
-                <span style="font-size: 3.5rem; animation: catFloat 2s ease-in-out infinite;">🌸</span>
-                <h2 style="margin: 15px 0 10px; font-weight: 800; color: var(--text-dark);">預約成功喵！</h2>
-                <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 25px; font-size: 1.05rem;">
-                    已經收到您的春季賞櫻預約！<br>
-                    我們即將在<b>新宿御苑的櫻花樹下</b>集合，<br>
-                    請準時前來唷 🐾
-                </p>
-                <button id="modal-confirm-btn" style="padding: 12px 30px; border-radius: 25px; border: none; cursor: pointer; font-weight: bold; background: var(--primary-color); color: white; transition: transform 0.2s;">好耶！一定準時到</button>
-            </div>
+            <div class="modal-body" id="modal-dynamic-body">
+                </div>
         </div>
     </div>
 
     <footer class="footer">
-        <p>動畫程式設計期末作品 | 專家建議實作 | 學生：黃欣怡</p>
+        <p>動畫程式設計期末作品 | C112151130 | 學生：黃欣怡</p>
     </footer>
 </div>
 
-<!-- 引入外部 JS -->
 <script src="assets/js/main.js"></script>
 </body>
 </html>
