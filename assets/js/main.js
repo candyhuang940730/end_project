@@ -28,9 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 9. 導航欄滾動縮放與巨型菜單行動端點擊切換功能
     initNavbarInteraction();
-
-    // 10. 拖曳排序瀑布流功能
-    initDraggableMasonry();
 });
 
 // 開場動畫模組化
@@ -174,7 +171,7 @@ function initMarquee(track) {
     track.dataset.marqueeReady = 'true';
 }
 
-// 💡 深度探索動態渲染彈窗功能 
+// 深度探索動態渲染彈窗功能 
 function initExploreModal() {
     const bookingModal = document.getElementById('booking-modal');
     const modalBody = document.getElementById('modal-dynamic-body');
@@ -413,7 +410,7 @@ function initTechChart() {
     });
 }
 
-// 導航欄與巨型菜單聯動
+// 導導欄與巨型菜單聯動
 function initNavbarInteraction() {
     const header = document.getElementById('main-header');
     const megaTrigger = document.getElementById('mega-trigger');
@@ -459,44 +456,4 @@ function initNavbarInteraction() {
             }
         });
     }
-}
-
-// 拖曳排序瀑布流模組化
-function initDraggableMasonry() {
-    const grid = document.getElementById('draggable-masonry');
-    if (!grid) return;
-
-    grid.addEventListener('dragstart', (e) => {
-        const targetCard = e.target.closest('.masonry-item');
-        if (targetCard) {
-            targetCard.classList.add('dragging');
-            e.dataTransfer.effectAllowed = 'move';
-            e.dataTransfer.setData('text/plain', '');
-        }
-    });
-
-    grid.addEventListener('dragend', (e) => {
-        const targetCard = e.target.closest('.masonry-item');
-        if (targetCard) {
-            targetCard.classList.remove('dragging');
-        }
-    });
-
-    grid.addEventListener('dragover', (e) => {
-        e.preventDefault(); 
-        const draggingItem = grid.querySelector('.dragging');
-        if (!draggingItem) return;
-
-        const siblings = Array.from(grid.querySelectorAll('.masonry-item:not(.dragging)'));
-        const nextSibling = siblings.find(sibling => {
-            const box = sibling.getBoundingClientRect();
-            return e.clientY <= box.top + box.height / 2;
-        });
-
-        if (nextSibling) {
-            grid.insertBefore(draggingItem, nextSibling);
-        } else {
-            grid.appendChild(draggingItem);
-        }
-    });
 }

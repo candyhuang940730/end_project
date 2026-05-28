@@ -140,12 +140,22 @@ body.main-reveal {
    ========================================================================== */
 .main-header {
     position: fixed;
-    top: 0; left: 0; width: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
     z-index: 10000;
     background: transparent;
     border-bottom: 1px solid transparent;
-    transition: background-color 0.4s ease, border-color 0.4s ease, padding 0.4s ease;
+    opacity: 0; /* 💡 預設不顯示，避免在開場遮罩中透出 */
+    pointer-events: none; /* 💡 隱藏時不可點擊 */
+    transition: opacity 0.8s ease 0.4s, background-color 0.4s ease, border-color 0.4s ease, padding 0.4s ease; /* 💡 點擊「開啟旅程」後與主畫面一起優雅淡入 */
     padding: 20px 0;
+}
+
+/* 點擊進入主畫面後，導航欄才開始顯示並淡入 */
+body.main-reveal .main-header {
+    opacity: 1;
+    pointer-events: auto;
 }
 
 .main-header.is-scrolled {
@@ -434,7 +444,7 @@ body.main-reveal {
 @keyframes load { 0% { width: 0; } 50% { width: 100%; } 100% { width: 0; } }
 
 /* ==========================================================================
-   10. 自訂深度探索彈窗效果 (Explore Modal)
+   10. 自訂探索彈窗效果 (Explore Modal)
    ========================================================================== */
 .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.6); backdrop-filter: blur(5px); display: flex; justify-content: center; align-items: center; z-index: 10002; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; }
 .modal-overlay.is-active { opacity: 1; pointer-events: auto; }
@@ -478,19 +488,3 @@ body.main-reveal {
 .legend-color { width: 15px; height: 15px; border-radius: 50%; margin-right: 15px; flex-shrink: 0; }
 .legend-label { flex-grow: 1; text-align: left; }
 .legend-percent { font-weight: 800; color: var(--text-secondary); }
-
-/* ==========================================================================
-   12. 貓咪相簿拖曳瀑布流網格效果 (Draggable Masonry Grid)
-   ========================================================================== */
-.masonry-grid { column-count: 3; column-gap: 30px; width: 100%; }
-@media (max-width: 992px) { .masonry-grid { column-count: 2; column-gap: 20px; } }
-@media (max-width: 576px) { .masonry-grid { column-count: 1; } }
-
-.masonry-item { break-inside: avoid; background: var(--card-bg); border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 10px 25px var(--shadow); margin-bottom: 30px; transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s, background-color 0.5s, border-color 0.3s; cursor: grab; position: relative; user-select: none; border: 1px solid transparent; }
-.masonry-item:active { cursor: grabbing; }
-.masonry-item img { width: 100%; height: auto; display: block; pointer-events: none; }
-.masonry-content { padding: 20px; text-align: left; }
-.masonry-content h3 { font-size: 1.2rem; font-weight: 800; margin-bottom: 8px; color: var(--text-dark); }
-.masonry-content p { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; }
-.masonry-item.dragging { opacity: 0.4; transform: scale(0.95) rotate(-2deg); border: 2px dashed var(--primary-color) !important; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); }
-.masonry-item:hover:not(.dragging) { transform: translateY(-8px); box-shadow: 0 15px 35px var(--shadow); border: 1px solid rgba(42, 157, 143, 0.2); }
