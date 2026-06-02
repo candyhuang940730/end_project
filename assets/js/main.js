@@ -103,10 +103,10 @@ function initDarkMode() {
         const currentTheme = document.documentElement.getAttribute('data-theme');
         if (currentTheme === 'dark') {
             document.documentElement.setAttribute('data-theme', 'light');
-            themeToggle.textContent = '🌙';
+            themeToggle.innerHTML = '<i class="fa-solid fa-moon"></i>';
         } else {
             document.documentElement.setAttribute('data-theme', 'dark');
-            themeToggle.textContent = '☀️';
+            themeToggle.innerHTML = '<i class="fa-solid fa-sun"></i>';
         }
     });
 }
@@ -192,7 +192,7 @@ function initExploreModal() {
 
         // 讀取按鈕內封裝的各國旅遊大數據
         const country = btn.getAttribute('data-country');
-        const emoji = btn.getAttribute('data-emoji');
+        const iconClass = btn.getAttribute('data-icon'); // 讀取圖示 Class
         const cities = btn.getAttribute('data-cities');
         
         // 將隱藏版 6-8 個城市字串還原為 JS 陣列
@@ -203,15 +203,17 @@ function initExploreModal() {
             moreCities = [];
         }
 
-        // 動態拼裝私房推薦列表 DOM
+        // 動態拼裝私房推薦列表 DOM (使用一致的 Font Awesome Location Dot)
         let cityItemsHtml = '';
         moreCities.forEach(city => {
-            cityItemsHtml += `<div class="modal-city-item">📍 ${city}</div>`;
+            cityItemsHtml += `<div class="modal-city-item"><i class="fa-solid fa-location-dot" style="margin-right: 8px; color: var(--primary-color);"></i> ${city}</div>`;
         });
 
-        // 注入彈窗主體
+        // 注入彈窗主體 (以 Font Awesome 圖示替換原 Emoji)
         modalBody.innerHTML = `
-            <span style="font-size: 3.5rem; animation: catFloat 2s infinite ease-in-out; display: inline-block;">${emoji}</span>
+            <span style="font-size: 3.5rem; animation: catFloat 2s infinite ease-in-out; display: inline-block; color: var(--primary-color);">
+                <i class="${iconClass}"></i>
+            </span>
             <h2 style="margin: 15px 0 10px; font-weight: 800; color: var(--text-dark);">${country}深度探險牆</h2>
             <p style="color: var(--text-secondary); line-height: 1.6; font-size: 1.05rem; max-width: 400px;">
                 除了背面的 <b>${cities}</b> 之外，貓咪嚮導還為您特別挑選了以下幾處一生必去深度名勝：
