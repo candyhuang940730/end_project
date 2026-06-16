@@ -14,7 +14,7 @@
 <!-- 視差星空背景容器 -->
 <div id="stars-container" class="stars-container"></div>
 
-<!-- 深色模式切換鈕 (由 JS 動態注入 Font Awesome 圖示) -->
+<!-- 深色模式切換鈕 -->
 <button class="theme-toggle" id="theme-toggle"><i class="fa-solid fa-moon"></i></button>
 
 <!-- 深色模式提示工具提示 -->
@@ -68,6 +68,7 @@
                                         <h4>精選目的地</h4>
                                         <ul class="mega-links">
                                             <li><a href="#spot-section"><i class="fa-solid fa-earth-asia"></i> 各國景點（3D 翻轉卡組）</a></li>
+                                            <li><a href="#itinerary-section"><i class="fa-solid fa-route"></i> 行程規劃表（動態清單）</a></li>
                                             <li><a href="#stars-container"><i class="fa-solid fa-star-and-crescent"></i> 浩瀚星空（視差背景）</a></li>
                                         </ul>
                                     </div>
@@ -291,6 +292,23 @@
                     </div>
                 </div>
 
+            </div>
+        </section>
+
+        <!-- 💡 全新！我的專屬行程規劃牆 -->
+        <section class="spot-container" id="itinerary-section" data-reveal>
+            <div class="itinerary-header">
+                <h2 style="font-size: 3rem;"><i class="fa-solid fa-route"></i> 我的專屬行程</h2>
+                <p style="color: var(--text-secondary); margin-top: 1rem;">
+                    在上方景點卡片點擊「了解更多」，將推薦的私房景點「加入行程」，在此規劃您的專屬夢幻行程表喵！🐾
+                </p>
+            </div>
+            <div id="itinerary-empty" class="itinerary-empty">
+                <i class="fa-solid fa-map-location-dot" style="font-size: 3.5rem; color: var(--primary-color); margin-bottom: 15px; display: block;"></i>
+                目前行程表空空如也，快去上方點選國家卡片的「了解更多」並新增行程吧！
+            </div>
+            <div id="itinerary-grid" class="itinerary-grid" style="display: none;">
+                <!-- 由 JS 動態生成行程卡片 -->
             </div>
         </section>
 
