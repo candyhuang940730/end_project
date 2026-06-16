@@ -384,8 +384,18 @@ body.main-reveal .main-header {
 }
 
 .landing-content { position: relative; z-index: 10; text-align: center; display: flex; flex-direction: column; align-items: center; }
-.cat-navigator { font-size: 5.5rem; margin-bottom: 20px; animation: catFloat 3s ease-in-out infinite; display: flex; flex-direction: column; align-items: center; }
-.cat-sprite { color: var(--primary-color); filter: drop-shadow(0 0 15px rgba(42, 157, 143, 0.4)); }
+.cat-navigator {
+font-size: 5.5rem;
+margin-bottom: 20px;
+animation: catFloat 3s ease-in-out infinite;
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+.cat-sprite {
+color: #ffffff; / 💡 貓咪本體改為高質感純白 /
+filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.7)); / 💡 發光效果改為白色珍珠微光，仙氣拉滿 */
+}
 .cat-bubble { background: white; color: var(--text-dark); padding: 10px 22px; border-radius: 25px; font-size: 1.1rem; font-weight: bold; box-shadow: 0 8px 25px rgba(0,0,0,0.4); margin-top: 15px; transition: opacity 0.3s ease; }
 .cat-dash { animation: catIntoCircle 0.9s cubic-bezier(0.7, 0, 0.3, 1) forwards !important; }
 
