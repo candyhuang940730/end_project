@@ -1,3 +1,6 @@
+// 宣告全域行程表陣列
+let itineraryList = [];
+
 document.addEventListener('DOMContentLoaded', () => {
     // 1. 開場動畫時序
     initOpeningAnimation();
@@ -17,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
         initMarquee(marqueeTrack);  
     }
 
-    // 6. 各國深度探索彈窗功能
+    // 6. 各國深度探索彈窗功能 (內建行程聯動按鈕機制)
     initExploreModal();
 
     // 7. 星星視差效果
@@ -171,7 +174,7 @@ function initMarquee(track) {
     track.dataset.marqueeReady = 'true';
 }
 
-// 深度探索動態渲染彈窗功能 
+// 💡 深度探索動態渲染彈窗功能 (含行程添加聯動)
 function initExploreModal() {
     const bookingModal = document.getElementById('booking-modal');
     const modalBody = document.getElementById('modal-dynamic-body');
@@ -183,19 +186,35 @@ function initExploreModal() {
         bookingModal.classList.remove('is-active');
     };
 
-    // 事件代理：監聽整個網頁中 .reserve-btn 按鈕的點擊
+    // 監聽彈窗內部「加入行程」按鈕的點擊事件
+    modalBody.addEventListener('click', (e) => {
+        const addBtn = e.target.closest('.modal-add-city-btn');
+        if (addBtn) {
+            const country = addBtn.getAttribute('data-country');
+            const city = addBtn.getAttribute('data-city');
+            const iconClass = addBtn.getAttribute('data-icon');
+
+            addCityToItinerary(country, city, iconClass);
+
+            // 更新按鈕當前狀態為「已加入」
+            addBtn.classList.add('added');
+            addBtn.setAttribute('disabled', 'true');
+            addBtn.innerHTML = '<i class="fa-solid fa-check"></i> 已加入';
+        }
+    });
+
+    // 監聽景點「了解更多」開啟彈窗的點擊
     document.addEventListener('click', (e) => {
         const btn = e.target.closest('.reserve-btn');
         if (!btn) return;
 
         e.stopPropagation(); // 阻斷事件冒泡，防止 3D 卡片翻轉干擾
 
-        // 讀取按鈕內封裝的各國旅遊大數據
+        // 讀取各國大數據屬性
         const country = btn.getAttribute('data-country');
-        const iconClass = btn.getAttribute('data-icon'); // 讀取圖示 Class
+        const iconClass = btn.getAttribute('data-icon');
         const cities = btn.getAttribute('data-cities');
         
-        // 將隱藏版 6-8 個城市字串還原為 JS 陣列
         let moreCities = [];
         try {
             moreCities = JSON.parse(btn.getAttribute('data-more'));
@@ -203,31 +222,42 @@ function initExploreModal() {
             moreCities = [];
         }
 
-        // 動態拼裝私房推薦列表 DOM (使用一致的 Font Awesome Location Dot)
+        // 動態拼裝帶有「加入行程」互動按鈕的清單 DOM
         let cityItemsHtml = '';
         moreCities.forEach(city => {
-            cityItemsHtml += `<div class="modal-city-item"><i class="fa-solid fa-location-dot" style="margin-right: 8px; color: var(--primary-color);"></i> ${city}</div>`;
+            // 檢查該城市是否已被規劃在行程表中
+            const isAdded = itineraryList.some(item => item.city === city && item.country === country);
+            const btnText = isAdded ? '<i class="fa-solid fa-check"></i> 已加入' : '<i class="fa-solid fa-plus"></i> 加入行程';
+            const btnClass = isAdded ? 'modal-add-city-btn added' : 'modal-add-city-btn';
+            const btnDisabled = isAdded ? 'disabled="true"' : '';
+
+            cityItemsHtml += `
+                <div class="modal-city-item">
+                    <span><i class="fa-solid fa-location-dot" style="margin-right: 8px; color: var(--primary-color);"></i> ${city}</span>
+                    <button class="${btnClass}" data-country="${country}" data-city="${city}" data-icon="${iconClass}" ${btnDisabled}>${btnText}</button>
+                </div>
+            `;
         });
 
-        // 注入彈窗主體 (以 Font Awesome 圖示替換原 Emoji)
+        // 注入彈窗主體
         modalBody.innerHTML = `
             <span style="font-size: 3.5rem; animation: catFloat 2s infinite ease-in-out; display: inline-block; color: var(--primary-color);">
                 <i class="${iconClass}"></i>
             </span>
             <h2 style="margin: 15px 0 10px; font-weight: 800; color: var(--text-dark);">${country}深度探險牆</h2>
             <p style="color: var(--text-secondary); line-height: 1.6; font-size: 1.05rem; max-width: 400px;">
-                除了背面的 <b>${cities}</b> 之外，貓咪嚮導還為您特別挑選了以下幾處一生必去深度名勝：
+                除了背面的 <b>${cities}</b> 之外，特別為您準備了以下私房景點，您可以直接點擊「加入行程」來規劃：
             </p>
             <div class="modal-city-list">
                 ${cityItemsHtml}
             </div>
-            <button id="modal-confirm-btn">好耶！立刻出發</button>
+            <button id="modal-confirm-btn">完成探索喵！</button>
         `;
 
         // 顯示彈窗
         bookingModal.classList.add('is-active');
 
-        // 綁定彈窗內部新生成「立刻出發」按鈕的關閉事件
+        // 綁定彈窗內部新生成「完成探索喵！」按鈕的關閉事件
         document.getElementById('modal-confirm-btn')?.addEventListener('click', closeModal);
     });
 
@@ -235,6 +265,68 @@ function initExploreModal() {
     bookingModal.addEventListener('click', (e) => {
         if (e.target === bookingModal) closeModal();
     });
+}
+
+// 💡 增加城市到行程表
+function addCityToItinerary(country, city, iconClass) {
+    if (itineraryList.some(item => item.city === city && item.country === country)) return;
+    itineraryList.push({ country, city, iconClass });
+    updateItineraryUI();
+}
+
+// 💡 從行程表中移除城市
+function removeCityFromItinerary(country, city) {
+    itineraryList = itineraryList.filter(item => !(item.city === city && item.country === country));
+    updateItineraryUI();
+
+    // 如果目前彈窗依然開啟著，動態將對應的按鈕恢復為可點選狀態
+    const activeBtn = document.querySelector(`.modal-add-city-btn[data-country="${country}"][data-city="${city}"]`);
+    if (activeBtn) {
+        activeBtn.classList.remove('added');
+        activeBtn.removeAttribute('disabled');
+        activeBtn.innerHTML = '<i class="fa-solid fa-plus"></i> 加入行程';
+    }
+}
+
+// 💡 更新我的專屬行程規劃牆 UI
+function updateItineraryUI() {
+    const emptyEl = document.getElementById('itinerary-empty');
+    const gridEl = document.getElementById('itinerary-grid');
+    if (!emptyEl || !gridEl) return;
+
+    if (itineraryList.length === 0) {
+        emptyEl.style.display = 'block';
+        gridEl.style.display = 'none';
+        gridEl.innerHTML = '';
+    } else {
+        emptyEl.style.display = 'none';
+        gridEl.style.display = 'grid';
+
+        let cardsHtml = '';
+        itineraryList.forEach(item => {
+            cardsHtml += `
+                <div class="itinerary-card">
+                    <div class="itinerary-card-info">
+                        <span class="itinerary-card-tag"><i class="${item.iconClass}"></i> ${item.country}</span>
+                        <span class="itinerary-card-title">${item.city}</span>
+                    </div>
+                    <button class="itinerary-card-remove" data-country="${item.country}" data-city="${item.city}">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                </div>
+            `;
+        });
+        gridEl.innerHTML = cardsHtml;
+
+        // 重新為垃圾桶按鈕綁定移除事件
+        gridEl.querySelectorAll('.itinerary-card-remove').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const country = btn.getAttribute('data-country');
+                const city = btn.getAttribute('data-city');
+                removeCityFromItinerary(country, city);
+            });
+        });
+    }
 }
 
 // 星星視差效果
