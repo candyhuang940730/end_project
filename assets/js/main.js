@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
         initMarquee(marqueeTrack);  
     }
 
-    // 6. 各國深度探索彈窗功能 (內建行程聯動按鈕機制)
+    // 6. 各國深度探索彈窗功能 (內建行程聯動與拖拽綁定機制)
     initExploreModal();
 
     // 7. 星星視差效果
@@ -31,6 +31,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 9. 導航欄滾動縮放與巨型菜單行動端點擊切換功能
     initNavbarInteraction();
+
+    // 💡 10. 初始化行程規劃牆的拖拽事件監聽 (動態資料庫雙向綁定引擎)
+    initItineraryDragAndDrop();
 });
 
 // 開場動畫模組化
@@ -174,7 +177,7 @@ function initMarquee(track) {
     track.dataset.marqueeReady = 'true';
 }
 
-// 💡 深度探索動態渲染彈窗功能 (含行程添加聯動)
+// 深度探索動態渲染彈窗功能 (含行程添加聯動)
 function initExploreModal() {
     const bookingModal = document.getElementById('booking-modal');
     const modalBody = document.getElementById('modal-dynamic-body');
@@ -267,14 +270,14 @@ function initExploreModal() {
     });
 }
 
-// 💡 增加城市到行程表
+// 增加城市到行程表
 function addCityToItinerary(country, city, iconClass) {
     if (itineraryList.some(item => item.city === city && item.country === country)) return;
     itineraryList.push({ country, city, iconClass });
     updateItineraryUI();
 }
 
-// 💡 從行程表中移除城市
+// 從行程表中移除城市
 function removeCityFromItinerary(country, city) {
     itineraryList = itineraryList.filter(item => !(item.city === city && item.country === country));
     updateItineraryUI();
@@ -288,7 +291,7 @@ function removeCityFromItinerary(country, city) {
     }
 }
 
-// 💡 更新我的專屬行程規劃牆 UI
+// 更新我的專屬行程規劃牆 UI
 function updateItineraryUI() {
     const emptyEl = document.getElementById('itinerary-empty');
     const gridEl = document.getElementById('itinerary-grid');
@@ -305,7 +308,7 @@ function updateItineraryUI() {
         let cardsHtml = '';
         itineraryList.forEach(item => {
             cardsHtml += `
-                <div class="itinerary-card">
+                <div class="itinerary-card" draggable="true" data-country="${item.country}" data-city="${item.city}" data-icon="${item.iconClass}">
                     <div class="itinerary-card-info">
                         <span class="itinerary-card-tag"><i class="${item.iconClass}"></i> ${item.country}</span>
                         <span class="itinerary-card-title">${item.city}</span>
@@ -327,6 +330,70 @@ function updateItineraryUI() {
             });
         });
     }
+}
+
+// 💡 全新！我的專屬行程拖曳排序與記憶體資料庫雙向綁定引擎 (Itinerary Drag & Drop Engine)
+function initItineraryDragAndDrop() {
+    const gridEl = document.getElementById('itinerary-grid');
+    if (!gridEl) return;
+
+    // A. 監聽拖曳開始事件
+    gridEl.addEventListener('dragstart', (e) => {
+        const card = e.target.closest('.itinerary-card');
+        if (!card) return;
+        card.classList.add('dragging');
+        e.dataTransfer.effectAllowed = 'move';
+        e.dataTransfer.setData('text/plain', ''); // 相容部分瀏覽器
+    });
+
+    // B. 監聽拖曳結束事件
+    gridEl.addEventListener('dragend', (e) => {
+        const card = e.target.closest('.itinerary-card');
+        if (card) {
+            card.classList.remove('dragging');
+        }
+        // 💡 核心：當使用者放開滑鼠完成排序，立刻重新讀取 DOM 結構，更新 JS 記憶體中的陣列順序！
+        syncItineraryArrayFromDOM();
+    });
+
+    // C. 監聽拖曳經過事件 (在 Grid 佈局中進行流暢的磁力座標插入運算)
+    gridEl.addEventListener('dragover', (e) => {
+        e.preventDefault(); // 必須防預設才能觸發 drop
+        const draggingItem = gridEl.querySelector('.itinerary-card.dragging');
+        if (!draggingItem) return;
+
+        const siblings = Array.from(gridEl.querySelectorAll('.itinerary-card:not(.dragging)'));
+        
+        // 幾何中軸距離演算法：在 Grid 網格中計算最適滑入位置
+        const nextSibling = siblings.find(sibling => {
+            const box = sibling.getBoundingClientRect();
+            // 當滑鼠 Y 座標小於卡片中心高度，或是 X 座標小於卡片中心寬度時，判定插入在其前方
+            const isMouseBeforeSiblingCenter = e.clientY < box.top + box.height / 2 || 
+                                              (e.clientY < box.bottom && e.clientX < box.left + box.width / 2);
+            return isMouseBeforeSiblingCenter;
+        });
+
+        if (nextSibling) {
+            gridEl.insertBefore(draggingItem, nextSibling);
+        } else {
+            gridEl.appendChild(draggingItem);
+        }
+    });
+}
+
+// 💡 重新抓取網格中卡片的順序，將全新的 DOM 結構順序同步寫回 itineraryList 陣列中！
+function syncItineraryArrayFromDOM() {
+    const gridEl = document.getElementById('itinerary-grid');
+    if (!gridEl) return;
+    
+    const cards = gridEl.querySelectorAll('.itinerary-card');
+    itineraryList = Array.from(cards).map(card => {
+        return {
+            country: card.getAttribute('data-country'),
+            city: card.getAttribute('data-city'),
+            iconClass: card.getAttribute('data-icon')
+        };
+    });
 }
 
 // 星星視差效果
