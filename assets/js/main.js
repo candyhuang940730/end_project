@@ -52,8 +52,12 @@ function initOpeningAnimation() {
         // 💡 當打字動畫快結束時（約再過 1.5 秒），讓「進入旅程」的按鈕優雅浮現
         setTimeout(() => {
             if (enterBtn) {
-                enterBtn.style.display = 'inline-block';
-                setTimeout(() => enterBtn.classList.add('is-visible'), 50);
+                enterBtn.style.setProperty('display', 'inline-block', 'important'); // 確保覆蓋原本的 display: none
+                
+                // 再稍微延遲 50ms 加上類別，確保不影響 CSS opacity 的淡入動畫效果
+                setTimeout(() => {
+                    enterBtn.classList.add('is-visible');
+                }, 50);
             }
         }, 1500);
 

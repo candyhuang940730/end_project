@@ -819,3 +819,28 @@ body.main-reveal .main-header {
     0% { left: 500px; }      /* 起點：畫面最右側 */
     100% { left: -500px; }  /* 終點：向左移動 500px */
 }
+
+#enter-btn {
+    display: none; /* 預設先隱藏，等 JS 去打開它 */
+    opacity: 0;
+    transform: translateY(20px); /* 預設往下移一點，做出往上浮現的效果 */
+    transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    
+    /* 以下為按鈕的高質感設計，可保留你原本的按鈕外觀 */
+    padding: 15px 35px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--white);
+    background: var(--primary-color);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(42, 157, 143, 0.4);
+    margin-top: 20px;
+}
+
+/* 💡 關鍵：當 JS 加入 .is-visible 類別時，完全顯示透明度並回歸正常位置 */
+#enter-btn.is-visible {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
