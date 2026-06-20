@@ -10,7 +10,9 @@
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-
+<div class="progress-container global-progress">
+        <div class="progress-bar"></div>
+    </div>
 <!-- 視差星空背景容器 -->
 <div id="stars-container" class="stars-container"></div>
 
@@ -29,14 +31,14 @@
         <div class="aurora-bg"></div>
         <div class="landing-content">
             <div id="cat-navigator" class="cat-navigator">
-                <div class="cat-sprite"><i class="fa-solid fa-cat"></i></div>
+                <div ><img class="moving-gif" src="assets/STRIPES.gif" alt="貓咪角色"></div>
                 <div class="cat-bubble" id="cat-bubble">喵！跟緊我的腳步！</div>
             </div>
             <h1 class="typewriter" id="typewriter-text">準備好進入旅程了嗎？</h1>
             <button id="enter-btn" class="button--primary" style="opacity: 0; padding: 15px 35px; border-radius: 10px; border:none; cursor:pointer; font-weight: bold; background: var(--primary-color); color: white;">開啟旅程</button>
         </div>
     </div>
-
+    
     <!-- 2. 主網頁內容 -->
     <main id="main-content">
         <!-- 導航欄與巨型菜單 -->
@@ -91,17 +93,40 @@
             </div>
         </header>
 
-        <section class="hero-section">
+        <section class="hero-section" >
             <div class="hero-content" data-reveal>
                 <h1 class="hero-title">你的下一趟完美旅程</h1>
             </div>
         </section>
 
+        <!-- 跑馬燈區塊 -->
+        <section class="marquee" data-reveal>
+            <div class="marquee-track" data-marquee-ready="true">
+                <span data-marquee-clone="true">台灣</span>
+                <span data-marquee-clone="true">法國</span>
+                <span data-marquee-clone="true">日本</span>
+                <span data-marquee-clone="true">美國</span>
+                <span data-marquee-clone="true">英國</span>
+                <span data-marquee-clone="true">義大利</span>
+                <span data-marquee-clone="true">挪威</span>
+                <span data-marquee-clone="true">西班牙</span>
+                
+                <span aria-hidden="true" data-marquee-clone="true">台灣</span>
+                <span aria-hidden="true" data-marquee-clone="true">法國</span>
+                <span aria-hidden="true" data-marquee-clone="true">日本</span>
+                <span aria-hidden="true" data-marquee-clone="true">美國</span>
+                <span aria-hidden="true" data-marquee-clone="true">英國</span>
+                <span aria-hidden="true" data-marquee-clone="true">義大利</span>
+                <span aria-hidden="true" data-marquee-clone="true">挪威</span>
+                <span aria-hidden="true" data-marquee-clone="true">西班牙</span>
+            </div>
+        </section>
+
         <!-- 卡片區塊 -->
-        <section class="spot-container" id="spot-section">
+        <section class="spot-container" id="spot-section" >
             <!-- 麵包屑導航 -->
-            <nav class="breadcrumbs" aria-label="breadcrumb" data-reveal>
-                <ol class="breadcrumb-list">
+            <nav class="breadcrumbs" aria-label="breadcrumb">
+                <ol class="breadcrumb-list" data-reveal>
                     <li class="breadcrumb-item"><a href="#">首頁</a></li>
                     <li class="breadcrumb-item"><a href="#spot-section">景點探索</a></li>
                     <li class="breadcrumb-item active" aria-current="page">貓咪嚴選目的地</li>
@@ -109,7 +134,7 @@
             </nav>
 
             <div data-reveal>
-                <h2 style="font-size: 3rem;"><i class="fa-solid fa-globe"></i> 各國景點推薦</h2>
+                <h2 style="font-size: 3rem;"><i class="fa-solid fa-globe" data-reveal></i> 各國景點推薦</h2>
                 <p style="color: var(--text-secondary); margin-top: 1rem;">滑鼠懸停 3D 空間翻轉，點擊「了解更多」解鎖深度隱藏城市清單喵！</p>
             </div>
 
@@ -312,29 +337,6 @@
             </div>
         </section>
 
-        <!-- 跑馬燈區塊 -->
-        <section class="marquee" data-reveal>
-            <div class="marquee-track" data-marquee-ready="true">
-                <span data-marquee-clone="true">台灣</span>
-                <span data-marquee-clone="true">法國</span>
-                <span data-marquee-clone="true">日本</span>
-                <span data-marquee-clone="true">美國</span>
-                <span data-marquee-clone="true">英國</span>
-                <span data-marquee-clone="true">義大利</span>
-                <span data-marquee-clone="true">挪威</span>
-                <span data-marquee-clone="true">西班牙</span>
-                
-                <span aria-hidden="true" data-marquee-clone="true">台灣</span>
-                <span aria-hidden="true" data-marquee-clone="true">法國</span>
-                <span aria-hidden="true" data-marquee-clone="true">日本</span>
-                <span aria-hidden="true" data-marquee-clone="true">美國</span>
-                <span aria-hidden="true" data-marquee-clone="true">英國</span>
-                <span aria-hidden="true" data-marquee-clone="true">義大利</span>
-                <span aria-hidden="true" data-marquee-clone="true">挪威</span>
-                <span aria-hidden="true" data-marquee-clone="true">西班牙</span>
-            </div>
-        </section>
-
         <!-- 圓餅圖區塊 -->
         <section class="chart-section spot-container" data-reveal>
             <div data-reveal>
@@ -370,7 +372,7 @@
     </main>
 
     <!-- 動態探索彈窗主體 -->
-    <div id="booking-modal" class="modal-overlay">
+    <div id="booking-modal" class="modal-overlay" >
         <div class="modal-content">
             <button class="modal-close" id="modal-close-btn" aria-label="關閉彈窗">&times;</button>
             <div class="modal-body" id="modal-dynamic-body">
@@ -379,7 +381,7 @@
         </div>
     </div>
 
-    <footer class="footer">
+    <footer class="footer" data-reveal>
         <p>動畫程式設計期末作品 | C112151130 | 學生：黃欣怡</p>
     </footer>
 </div>

@@ -34,6 +34,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 💡 10. 初始化行程規劃牆的拖拽事件監聽 (動態資料庫雙向綁定引擎)
     initItineraryDragAndDrop();
+
+    initScrollProgressBar();
 });
 
 // 開場動畫模組化
@@ -119,12 +121,13 @@ function initDarkMode() {
 
 // 滾動揭示模組化
 function initScrollReveal() {
+    const revealElements = document.querySelectorAll('[data-reveal]');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) entry.target.classList.add('visible');
         });
     }, { threshold: 0.1 });
-    document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
+    revealElements.forEach(el => observer.observe(el));
 }
 
 // 跑馬燈模組化
@@ -571,7 +574,7 @@ function initTechChart() {
     });
 }
 
-// 導導欄與巨型菜單聯動
+// 導航欄與巨型菜單聯動
 function initNavbarInteraction() {
     const header = document.getElementById('main-header');
     const megaTrigger = document.getElementById('mega-trigger');
@@ -617,4 +620,23 @@ function initNavbarInteraction() {
             }
         });
     }
+}
+
+function initScrollProgressBar() {
+    const progressBar = document.querySelector('.progress-bar');
+    if (!progressBar) return;
+
+    // 監聽網頁滾動事件
+    window.addEventListener('scroll', () => {
+        // 獲取當前滾動距離
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        // 獲取網頁可滾動的總高度（總高度 - 視窗高度）
+        const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        
+        // 計算滾動百分比 (0 ~ 100)
+        const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        
+        // 動態改變進度條的寬度
+        progressBar.style.width = scrollPercent + '%';
+    }, { passive: true });
 }
