@@ -44,17 +44,20 @@ function initOpeningAnimation() {
     const typewriter = document.querySelector('#typewriter-text');
     const enterBtn = document.querySelector('#enter-btn');
 
+    // 💡 配合貓咪 3.5 秒走到中間的節奏，在 3.2 秒時打字與更新泡泡
     setTimeout(() => {
         if (catBubble) catBubble.textContent = "喵！準備好冒險了嗎？";
         if (typewriter) typewriter.classList.add('start-typing');
         
-        setTimeout(() => { 
+        // 💡 當打字動畫快結束時（約再過 1.5 秒），讓「進入旅程」的按鈕優雅浮現
+        setTimeout(() => {
             if (enterBtn) {
-                enterBtn.style.opacity = '1';
-                enterBtn.style.transition = 'opacity 0.5s ease';
+                enterBtn.style.display = 'inline-block';
+                setTimeout(() => enterBtn.classList.add('is-visible'), 50);
             }
-        }, 3200);
-    }, 1000);
+        }, 1500);
+
+    }, 3200); // 3200 毫秒完美銜接貓咪抵達終點的時間
 }
 
 // 點擊進入模組化

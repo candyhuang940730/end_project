@@ -397,31 +397,69 @@ body.main-reveal .main-header {
 
 .landing-content { position: relative; z-index: 10; text-align: center; display: flex; flex-direction: column; align-items: center; }
 .cat-navigator {
-font-size: 5.5rem;
-margin-bottom: 20px;
-animation: catFloat 3s ease-in-out infinite;
-display: flex;
-flex-direction: column;
-align-items: center;
+    font-size: 5.5rem;
+    margin-bottom: 20px;
+    animation: catFloat 3s ease-in-out infinite;
+    display: flex;
+    flex-direction: column;
+    animation: catWalkDiagonal 4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    align-items: center;
 }
-.cat-sprite {
-    color: #ffffff; /* 💡 貓咪本體改為高質感純白 */
-    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.7)); /* 💡 發光效果改為白色珍珠微光，仙氣拉滿 */
+
+.cat-sprite-gif {
+    width: 160px; /* 可根據實際 gif 大小微調調整 */
+    height: auto;
+    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.6));
 }
-.cat-bubble { background: white; color: var(--text-dark); padding: 10px 22px; border-radius: 25px; font-size: 1.1rem; font-weight: bold; box-shadow: 0 8px 25px rgba(0,0,0,0.4); margin-top: 15px; transition: opacity 0.3s ease; }
-.cat-dash { animation: catIntoCircle 0.9s cubic-bezier(0.7, 0, 0.3, 1) forwards !important; }
+.cat-bubble { 
+    background: white; 
+    color: var(--text-dark); 
+    padding: 10px 22px; 
+    border-radius: 25px; 
+    font-size: 1.1rem; 
+    font-weight: bold; 
+    box-shadow: 0 8px 25px rgba(0,0,0,0.4); 
+    margin-top: 15px; 
+    opacity: 0;
+    transform: scale(0.8);
+    animation: bubblePopIn 0.5s ease 3.2s forwards; /* 💡 在第 3.2 秒（快走到中間時）彈出泡泡 */
+}
+.cat-dash { 
+    animation: catIntoCircle 0.9s cubic-bezier(0.7, 0, 0.3, 1) forwards !important; 
+}
+@keyframes bubblePopIn {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes catWalkDiagonal {
+    0% {
+        transform: translate(65vw, -10vh) scale(1);
+    }
+    100% {
+        /* 終點：畫面正中間偏上的極光前方，體積縮小至 1 倍 */
+        transform: translate(0, 0) scale(1);
+    }
+}
 
 @keyframes catIntoCircle {
-    0% { transform: scale(1); opacity: 1; }
-    30% { transform: scale(1.4) translateY(20px); }
-    100% { transform: scale(0) translateY(-200px); opacity: 0; filter: blur(15px); }
+    0% { transform: scale(1) translateY(0); opacity: 1; }
+    30% { transform: scale(1.3) translateY(20px); }
+    100% { transform: scale(0) translateY(-100px); opacity: 0; filter: blur(10px); }
 }
 
 @keyframes catFloat {
     0%, 100% { transform: translateY(0) rotate(-4deg); }
     50% { transform: translateY(-20px) rotate(4deg); }
 }
-
+@keyframes bubblePopIn {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
 .typewriter {
     color: var(--white); font-size: 2.8rem; overflow: hidden; border-right: .15em solid var(--accent-color); white-space: nowrap; letter-spacing: .15em; width: 0; margin: 35px 0; text-shadow: 0 0 20px var(--aurora-2);
 }
@@ -465,7 +503,16 @@ align-items: center;
 /* ==========================================================================
    8. 跑馬燈效果
    ========================================================================== */
-.marquee { overflow: hidden; border-radius: 999px; border: 1px solid rgba(255, 255, 255, 0.12); margin: auto; max-width: 1400px; position: relative; background: linear-gradient(120deg, rgba(0, 245, 212, 0.14), rgba(255, 60, 125, 0.14)); }
+.marquee { 
+    overflow: hidden; 
+    border-radius: 999px; 
+    border: 1px solid rgba(255, 255, 255, 0.12); 
+    margin: auto; 
+    margin-top: 100px !important;
+    max-width: 1400px; 
+    position: relative; 
+    background: linear-gradient(120deg, rgba(0, 245, 212, 0.14), rgba(255, 60, 125, 0.14)); 
+}
 .marquee::before { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(5, 6, 11, 0.5), transparent); animation: sweep 5s linear infinite; }
 @keyframes sweep { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
 .marquee-track { display: flex; gap: 4rem; padding: 1rem 2rem; width: max-content; white-space: nowrap; animation: scroll 20s linear infinite; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.2em; }
