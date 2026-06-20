@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>探索旅程 | 動畫程式設計期末作品</title>
+    <!-- 引入 Font Awesome 6 向量圖示庫 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- 引入外部 CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
@@ -13,10 +15,10 @@
 <div id="stars-container" class="stars-container"></div>
 
 <!-- 深色模式切換鈕 -->
-<button class="theme-toggle" id="theme-toggle">🌙</button>
+<button class="theme-toggle" id="theme-toggle"><i class="fa-solid fa-moon"></i></button>
 
 <!-- 深色模式提示工具提示 -->
-<div class="theme-tooltip" id="theme-tooltip">點擊深色模式有驚喜喵！</div>
+<div class="theme-tooltip" id="theme-tooltip">點擊深色模式有驚喜喵！ <i class="fa-solid fa-wand-magic-sparkles"></i></div>
 
 <div class="home-page">
     <!-- 圓形放射閃光 -->
@@ -27,7 +29,7 @@
         <div class="aurora-bg"></div>
         <div class="landing-content">
             <div id="cat-navigator" class="cat-navigator">
-                <div class="cat-sprite">🐱</div>
+                <div class="cat-sprite"><i class="fa-solid fa-cat"></i></div>
                 <div class="cat-bubble" id="cat-bubble">喵！跟緊我的腳步！</div>
             </div>
             <h1 class="typewriter" id="typewriter-text">準備好進入旅程了嗎？</h1>
@@ -40,7 +42,7 @@
         <!-- 導航欄與巨型菜單 -->
         <header class="main-header" id="main-header">
             <div class="nav-container">
-                <a href="#" class="nav-logo">🐾 喵之旅行社</a>
+                <a href="#" class="nav-logo"><i class="fa-solid fa-paw"></i> 喵之旅行社</a>
                 
                 <nav class="nav-menu">
                     <ul class="nav-list">
@@ -48,25 +50,26 @@
                         
                         <!-- 巨型菜單觸發項目 -->
                         <li class="nav-item-has-mega" id="mega-trigger">
-                            <a href="#spot-section" class="nav-link">探索景點 <span class="arrow-indicator">▾</span></a>
+                            <a href="#spot-section" class="nav-link">探索景點 <i class="fa-solid fa-chevron-down arrow-indicator"></i></a>
                             
                             <!-- 巨型菜單 (Mega Menu) -->
                             <div class="mega-menu" id="mega-menu">
                                 <div class="mega-menu-grid">
                                     <!-- 左欄：精選賞櫻推薦卡片 -->
                                     <div class="mega-column featured-spot">
-                                        <div class="featured-tag">季節推薦 🌸</div>
+                                        <div class="featured-tag">季節推薦 <i class="fa-solid fa-star"></i></div>
                                         <h4>各國旅遊深度探索</h4>
                                         <p>點擊景點卡片的「了解更多」，即可解鎖動態渲染的 6 - 8 個私房嚴選城市清單喵！</p>
-                                        <button class="mega-action-btn" id="mega-reserve-shortcut">立即前往探索 🐾</button>
+                                        <button class="mega-action-btn" id="mega-reserve-shortcut">立即前往探索 <i class="fa-solid fa-paw"></i></button>
                                     </div>
                                     
                                     <!-- 中欄：快捷目的地選單 -->
                                     <div class="mega-column">
                                         <h4>精選目的地</h4>
                                         <ul class="mega-links">
-                                            <li><a href="#spot-section">🌍 各國景點（3D 翻轉卡組）</a></li>
-                                            <li><a href="#stars-container">🌌 浩瀚星空（視差背景）</a></li>
+                                            <li><a href="#spot-section"><i class="fa-solid fa-earth-asia"></i> 各國景點（3D 翻轉卡組）</a></li>
+                                            <li><a href="#itinerary-section"><i class="fa-solid fa-route"></i> 行程規劃表（動態清單）</a></li>
+                                            <li><a href="#stars-container"><i class="fa-solid fa-star-and-crescent"></i> 浩瀚星空（視差背景）</a></li>
                                         </ul>
                                     </div>
                                     
@@ -74,8 +77,8 @@
                                     <div class="mega-column">
                                         <h4>互動技術面板</h4>
                                         <ul class="mega-links">
-                                            <li><a href="#usage">🚀 動畫技術說明</a></li>
-                                            <li><a href="#pie-chart">📊 技術佔比圓餅圖</a></li>
+                                            <li><a href="#usage"><i class="fa-solid fa-rocket"></i> 動畫技術說明</a></li>
+                                            <li><a href="#pie-chart"><i class="fa-solid fa-chart-pie"></i> 技術佔比圓餅圖</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -106,7 +109,7 @@
             </nav>
 
             <div data-reveal>
-                <h2 style="font-size: 3rem;">🏝️ 各國景點推薦</h2>
+                <h2 style="font-size: 3rem;"><i class="fa-solid fa-globe"></i> 各國景點推薦</h2>
                 <p style="color: var(--text-secondary); margin-top: 1rem;">滑鼠懸停 3D 空間翻轉，點擊「了解更多」解鎖深度隱藏城市清單喵！</p>
             </div>
 
@@ -121,15 +124,15 @@
                                 <img src="https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=600&q=60" alt="台灣" onerror="this.onerror=null; this.src='https://placehold.co/600x440/1a2238/ffffff?text=Taiwan+Discovery';">
                             </div>
                             <div class="card-body">
-                                <h3 class="spot-name">🇹🇼 台灣 (Taiwan)</h3>
+                                <h3 class="spot-name"><i class="fa-solid fa-mountain-sun" style="color: var(--primary-color); margin-right: 5px;"></i> 台灣 (Taiwan)</h3>
                                 <p>充滿人情味的美食寶島，結合璀璨夜景與高山壯麗風光。</p>
                             </div>
                         </div>
                         <div class="card-face card-face-back">
                             <div>
                                 <h3>城市特選</h3>
-                                <p style="color: white; margin-top: 10px; font-weight: bold;">📍 台北 ・ 高雄 ・ 花蓮</p>
-                                <button class="reserve-btn" data-country="台灣" data-emoji="🇹🇼" data-cities="台北 ・ 高雄 ・ 花蓮" data-more='["台北市 101 大樓 🏙️", "高雄市 駁二特區 🎨", "花蓮縣 太魯閣峽谷 ⛰️", "台中市 逢甲夜市 🍿", "台南市 古蹟安平古堡 ⛩️", "台東縣 鹿野高台熱氣球 🎈", "宜蘭縣 礁溪溫泉 ♨️", "南投縣 日月潭 🏞️"]' style="margin-top: 25px; padding: 10px 22px; border-radius: 6px; border: none; cursor: pointer; background: white; color: var(--primary-color); font-weight: bold;">了解更多</button>
+                                <p style="color: white; margin-top: 10px; font-weight: bold;"><i class="fa-solid fa-map-pin"></i> 台北 ・ 高雄 ・ 花蓮</p>
+                                <button class="reserve-btn" data-country="台灣" data-icon="fa-solid fa-mountain-sun" data-cities="台北 ・ 高雄 ・ 花蓮" data-more='["台北市 信義商圈", "高雄市 駁二藝術特區", "花蓮縣 太魯閣國家公園", "台中市 逢甲夜市", "台南市 安平古堡", "台東縣 鹿野高台", "宜蘭縣 礁溪溫泉", "南投縣 日月潭"]' style="margin-top: 25px; padding: 10px 22px; border-radius: 6px; border: none; cursor: pointer; background: white; color: var(--primary-color); font-weight: bold;">了解更多</button>
                             </div>
                         </div>
                     </div>
@@ -143,15 +146,15 @@
                                 <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=600&q=60" alt="法國" onerror="this.onerror=null; this.src='https://placehold.co/600x440/1a2238/ffffff?text=France+Discovery';">
                             </div>
                             <div class="card-body">
-                                <h3 class="spot-name">🇫🇷 法國 (France)</h3>
+                                <h3 class="spot-name"><i class="fa-solid fa-landmark" style="color: var(--primary-color); margin-right: 5px;"></i> 法國 (France)</h3>
                                 <p>浪漫與藝術的交織殿堂，散發古典歷史與時尚奢華的極致魅力。</p>
                             </div>
                         </div>
                         <div class="card-face card-face-back">
                             <div>
                                 <h3>城市特選</h3>
-                                <p style="color: white; margin-top: 10px; font-weight: bold;">📍 巴黎 ・ 尼斯 ・ 里昂</p>
-                                <button class="reserve-btn" data-country="法國" data-emoji="🇫🇷" data-cities="巴黎 ・ 尼斯 ・ 里昂" data-more='["巴黎 艾菲爾鐵塔 🗼", "尼斯 蔚藍海岸 🏖️", "里昂 美食之都 🍷", "馬賽 浪漫老港 ⚓", "波爾多 紅酒莊園 🍇", "坎城 國際電影節 🎬", "斯特拉斯堡 聖誕小鎮 🎄"]' style="margin-top: 25px; padding: 10px 22px; border-radius: 6px; border: none; cursor: pointer; background: white; color: var(--primary-color); font-weight: bold;">了解更多</button>
+                                <p style="color: white; margin-top: 10px; font-weight: bold;"><i class="fa-solid fa-map-pin"></i> 巴黎 ・ 尼斯 ・ 里昂</p>
+                                <button class="reserve-btn" data-country="法國" data-icon="fa-solid fa-landmark" data-cities="巴黎 ・ 尼斯 ・ 里昂" data-more='["巴黎 艾菲爾鐵塔", "尼斯 蔚藍海岸", "里昂 古典老城區", "馬賽 聖母加德大教堂", "波爾多 葡萄酒莊園", "坎城 節慶宮", "斯特拉斯堡 小法國區"]' style="margin-top: 25px; padding: 10px 22px; border-radius: 6px; border: none; cursor: pointer; background: white; color: var(--primary-color); font-weight: bold;">了解更多</button>
                             </div>
                         </div>
                     </div>
@@ -165,15 +168,15 @@
                                 <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=600&q=60" alt="日本" onerror="this.onerror=null; this.src='https://placehold.co/600x440/1a2238/ffffff?text=Japan+Discovery';">
                             </div>
                             <div class="card-body">
-                                <h3 class="spot-name">🇯🇵 日本 (Japan)</h3>
+                                <h3 class="spot-name"><i class="fa-solid fa-archway" style="color: var(--primary-color); margin-right: 5px;"></i> 日本 (Japan)</h3>
                                 <p>現代科技與傳統御苑御守完美融合，充滿四季風情的旅行首選。</p>
                             </div>
                         </div>
                         <div class="card-face card-face-back">
                             <div>
                                 <h3>城市特選</h3>
-                                <p style="color: white; margin-top: 10px; font-weight: bold;">📍 東京 ・ 京都 ・ 大阪</p>
-                                <button class="reserve-btn" data-country="日本" data-emoji="🇯🇵" data-cities="東京 ・ 京都 ・ 大阪" data-more='["東京 新宿御苑賞櫻 🌸", "京都 金閣寺與古街 ⛩️", "大阪 心齋橋與環球影城 🎢", "北海道 札幌雪祭 ❄️", "沖繩 琉球海灘 🌊", "福岡 博多拉麵屋台 🍜", "奈良 萌鹿公園 🦌", "箱根 富士山溫泉 🗻"]' style="margin-top: 25px; padding: 10px 22px; border-radius: 6px; border: none; cursor: pointer; background: white; color: var(--primary-color); font-weight: bold;">了解更多</button>
+                                <p style="color: white; margin-top: 10px; font-weight: bold;"><i class="fa-solid fa-map-pin"></i> 東京 ・ 京都 ・ 大阪</p>
+                                <button class="reserve-btn" data-country="日本" data-icon="fa-solid fa-archway" data-cities="東京 ・ 京都 ・ 大阪" data-more='["東京 新宿御苑賞櫻", "京都 清水寺與二年坂", "大阪 心齋橋與道頓堀", "北海道 富良野薰衣草田", "沖繩 美麗海水族館", "福岡 中洲川端屋台", "奈良 東大寺萌鹿", "箱根 蘆之湖溫泉"]' style="margin-top: 25px; padding: 10px 22px; border-radius: 6px; border: none; cursor: pointer; background: white; color: var(--primary-color); font-weight: bold;">了解更多</button>
                             </div>
                         </div>
                     </div>
@@ -187,15 +190,15 @@
                                 <img src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=600&q=60" alt="美國" onerror="this.onerror=null; this.src='https://placehold.co/600x440/1a2238/ffffff?text=USA+Discovery';">
                             </div>
                             <div class="card-body">
-                                <h3 class="spot-name">🇺🇸 美國 (USA)</h3>
+                                <h3 class="spot-name"><i class="fa-solid fa-monument" style="color: var(--primary-color); margin-right: 5px;"></i> 美國 (USA)</h3>
                                 <p>大熔爐文化的代名詞，擁有世界級大都市與壯麗的大峽谷景觀。</p>
                             </div>
                         </div>
                         <div class="card-face card-face-back">
                             <div>
                                 <h3>城市特選</h3>
-                                <p style="color: white; margin-top: 10px; font-weight: bold;">📍 紐約 ・ 洛杉磯 ・ 三藩市</p>
-                                <button class="reserve-btn" data-country="美國" data-emoji="🇺🇸" data-cities="紐約 ・ 洛杉磯 ・ 三藩市" data-more='["紐約 時代廣場 🏙️", "洛杉磯 好萊塢星光大道 🎬", "三藩市 金門大橋 🌁", "拉斯維加斯 不夜城賭城 🎲", "芝加哥 千禧公園大豆子 🫘", "西雅圖 太空針塔 ☕", "奧蘭多 迪士尼世界 🏰"]' style="margin-top: 25px; padding: 10px 22px; border-radius: 6px; border: none; cursor: pointer; background: white; color: var(--primary-color); font-weight: bold;">了解更多</button>
+                                <p style="color: white; margin-top: 10px; font-weight: bold;"><i class="fa-solid fa-map-pin"></i> 紐約 ・ 洛杉磯 ・ 三藩市</p>
+                                <button class="reserve-btn" data-country="美國" data-icon="fa-solid fa-monument" data-cities="紐約 ・ 洛杉磯 ・ 三藩市" data-more='["紐約 時代廣場與中央公園", "洛杉磯 好萊塢環球影城", "三藩市 金門大橋", "拉斯維加斯 頂級賭場大道", "芝加哥 千禧公園", "西雅圖 派克市場", "奧蘭多 迪士尼世界"]' style="margin-top: 25px; padding: 10px 22px; border-radius: 6px; border: none; cursor: pointer; background: white; color: var(--primary-color); font-weight: bold;">了解更多</button>
                             </div>
                         </div>
                     </div>
@@ -209,15 +212,15 @@
                                 <img src="https://images.unsplash.com/photo-1513635269975-59663e0ca1ad?auto=format&fit=crop&w=600&q=60" alt="英國" onerror="this.onerror=null; this.src='https://placehold.co/600x440/1a2238/ffffff?text=UK+Discovery';">
                             </div>
                             <div class="card-body">
-                                <h3 class="spot-name">🇬🇧 英國 (UK)</h3>
+                                <h3 class="spot-name"><i class="fa-solid fa-clock" style="color: var(--primary-color); margin-right: 5px;"></i> 英國 (UK)</h3>
                                 <p>尊貴英倫紳士文化的發源地，古老城堡與現代潮流交織。</p>
                             </div>
                         </div>
                         <div class="card-face card-face-back">
                             <div>
                                 <h3>城市特選</h3>
-                                <p style="color: white; margin-top: 10px; font-weight: bold;">📍 倫敦 ・ 愛丁堡 ・ 曼徹斯特</p>
-                                <button class="reserve-btn" data-country="英國" data-emoji="🇬🇧" data-cities="倫敦 ・ 愛丁堡 ・ 曼徹斯特" data-more='["倫敦 大笨鐘與倫敦眼 🎡", "愛丁堡 古老城堡 🏰", "曼徹斯特 足球聖地老特拉福 ⚽", "利物浦 披頭四紀念館 🎸", "牛津 大學城書香 🎓", "劍橋 康河撐船 🛶"]' style="margin-top: 25px; padding: 10px 22px; border-radius: 6px; border: none; cursor: pointer; background: white; color: var(--primary-color); font-weight: bold;">了解更多</button>
+                                <p style="color: white; margin-top: 10px; font-weight: bold;"><i class="fa-solid fa-map-pin"></i> 倫敦 ・ 愛丁堡 ・ 曼徹斯特</p>
+                                <button class="reserve-btn" data-country="英國" data-icon="fa-solid fa-clock" data-cities="倫敦 ・ 愛丁堡 ・ 曼徹斯特" data-more='["倫敦 大笨鐘與倫敦眼", "愛丁堡 古老城堡", "曼徹斯特 老特拉福德球場", "利物浦 皇家阿爾伯特碼頭", "牛津 大學城圖書館", "劍橋 康河撐船遊"]' style="margin-top: 25px; padding: 10px 22px; border-radius: 6px; border: none; cursor: pointer; background: white; color: var(--primary-color); font-weight: bold;">了解更多</button>
                             </div>
                         </div>
                     </div>
@@ -231,15 +234,15 @@
                                 <img src="https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=600&q=60" alt="義大利" onerror="this.onerror=null; this.src='https://placehold.co/600x440/1a2238/ffffff?text=Italy+Discovery';">
                             </div>
                             <div class="card-body">
-                                <h3 class="spot-name">🇮🇹 義大利 (Italy)</h3>
+                                <h3 class="spot-name"><i class="fa-solid fa-landmark-dome" style="color: var(--primary-color); margin-right: 5px;"></i> 義大利 (Italy)</h3>
                                 <p>文藝復興的搖籃，滿載輝煌羅馬古蹟與頂級義式料理的饕客聖地。</p>
                             </div>
                         </div>
                         <div class="card-face card-face-back">
                             <div>
                                 <h3>城市特選</h3>
-                                <p style="color: white; margin-top: 10px; font-weight: bold;">📍 羅馬 ・ 威尼斯 ・ 佛羅倫斯</p>
-                                <button class="reserve-btn" data-country="義大利" data-emoji="🇮🇹" data-cities="羅馬 ・ 威尼斯 ・ 佛羅倫斯" data-more='["羅馬 競技場與許願池 🏛️", "威尼斯 水上貢多拉 🛶", "佛羅倫斯 聖母百花大教堂 ⛪", "米蘭 時尚米蘭大教堂 🛍️", "比薩 比薩斜塔 📐", "拿坡里 正宗披薩發源地 🍕"]' style="margin-top: 25px; padding: 10px 22px; border-radius: 6px; border: none; cursor: pointer; background: white; color: var(--primary-color); font-weight: bold;">了解更多</button>
+                                <p style="color: white; margin-top: 10px; font-weight: bold;"><i class="fa-solid fa-map-pin"></i> 羅馬 ・ 威尼斯 ・ 佛羅倫斯</p>
+                                <button class="reserve-btn" data-country="義大利" data-icon="fa-solid fa-landmark-dome" data-cities="羅馬 ・ 威尼斯 ・ 佛羅倫斯" data-more='["羅馬 萬神殿與競技場", "威尼斯 聖馬可廣場", "佛羅倫斯 烏菲茲美術館", "米蘭 埃馬努埃萊二世拱廊", "比薩 比薩斜塔", "拿坡里 龐貝古城遺址"]' style="margin-top: 25px; padding: 10px 22px; border-radius: 6px; border: none; cursor: pointer; background: white; color: var(--primary-color); font-weight: bold;">了解更多</button>
                             </div>
                         </div>
                     </div>
@@ -253,15 +256,15 @@
                                 <img src="https://images.unsplash.com/photo-1527004013197-933c4bb611b3?auto=format&fit=crop&w=600&q=60" alt="挪威" onerror="this.onerror=null; this.src='https://placehold.co/600x440/1a2238/ffffff?text=Norway+Discovery';">
                             </div>
                             <div class="card-body">
-                                <h3 class="spot-name">🇳🇴 挪威 (Norway)</h3>
+                                <h3 class="spot-name"><i class="fa-solid fa-snowflake" style="color: var(--primary-color); margin-right: 5px;"></i> 挪威 (Norway)</h3>
                                 <p>北歐神話的奇幻國度，擁有鬼斧神工的峽灣自然遺產與絕美極光。</p>
                             </div>
                         </div>
                         <div class="card-face card-face-back">
                             <div>
                                 <h3>城市特選</h3>
-                                <p style="color: white; margin-top: 10px; font-weight: bold;">📍 奧斯陸 ・ 卑爾根 ・ 特羅姆瑟</p>
-                                <button class="reserve-btn" data-country="挪威" data-emoji="🇳🇴" data-cities="奧斯陸 ・ 卑爾根 ・ 特羅姆瑟" data-more='["奧斯陸 維京海盜船博物館 ⚓", "卑爾根 彩色木屋老街 🏡", "特羅姆瑟 北極圈追極光 🌌", "蓋朗厄爾峽灣 絕美巨壁 ⛰️", "羅弗敦群島 仙境漁村 🎣", "斯塔萬格 聖壇岩攀登 🧗"]' style="margin-top: 25px; padding: 10px 22px; border-radius: 6px; border: none; cursor: pointer; background: white; color: var(--primary-color); font-weight: bold;">了解更多</button>
+                                <p style="color: white; margin-top: 10px; font-weight: bold;"><i class="fa-solid fa-map-pin"></i> 奧斯陸 ・ 卑爾根 ・ 特羅姆瑟</p>
+                                <button class="reserve-btn" data-country="挪威" data-icon="fa-solid fa-snowflake" data-cities="奧斯陸 ・ 卑爾根 ・ 特羅姆瑟" data-more='["奧斯陸 奧斯陸歌劇院", "卑爾根 Bryggen 木造屋", "特羅姆瑟 極光觀測站", "蓋朗厄爾 峽灣峭壁遊船", "羅弗敦群島 仙境漁村", "斯塔萬格 聖壇岩攀登"]' style="margin-top: 25px; padding: 10px 22px; border-radius: 6px; border: none; cursor: pointer; background: white; color: var(--primary-color); font-weight: bold;">了解更多</button>
                             </div>
                         </div>
                     </div>
@@ -275,20 +278,37 @@
                                 <img src="https://images.unsplash.com/photo-1543783207-ec64e4d95325?auto=format&fit=crop&w=600&q=60" alt="西班牙" onerror="this.onerror=null; this.src='https://placehold.co/600x440/1a2238/ffffff?text=Spain+Discovery';">
                             </div>
                             <div class="card-body">
-                                <h3 class="spot-name">🇪🇸 西班牙 (Spain)</h3>
+                                <h3 class="spot-name"><i class="fa-solid fa-sun" style="color: var(--primary-color); margin-right: 5px;"></i> 西班牙 (Spain)</h3>
                                 <p>陽光奔放的熱情國度，高第奇幻建築藝術與佛朗明哥舞的盛宴。</p>
                             </div>
                         </div>
                         <div class="card-face card-face-back">
                             <div>
                                 <h3>城市特選</h3>
-                                <p style="color: white; margin-top: 10px; font-weight: bold;">📍 巴塞隆納 ・ 馬德里 ・ 塞維亞</p>
-                                <button class="reserve-btn" data-country="西班牙" data-emoji="🇪🇸" data-cities="巴塞隆納 ・ 馬德里 ・ 塞維亞" data-more='["巴塞隆納 聖家堂建築 ⛪", "馬德里 普拉多美術館 🎨", "塞維亞 佛朗明哥舞劇院 💃", "瓦倫西亞 科學藝術城 🧪", "格拉納達 阿爾罕布拉宮 🏰", "馬拉加 畢卡索故鄉 🖌️"]' style="margin-top: 25px; padding: 10px 22px; border-radius: 6px; border: none; cursor: pointer; background: white; color: var(--primary-color); font-weight: bold;">了解更多</button>
+                                <p style="color: white; margin-top: 10px; font-weight: bold;"><i class="fa-solid fa-map-pin"></i> 巴塞隆納 ・ 馬德里 ・ 塞維亞</p>
+                                <button class="reserve-btn" data-country="西班牙" data-icon="fa-solid fa-sun" data-cities="巴塞隆納 ・ 馬德里 ・ 塞維亞" data-more='["巴塞隆納 聖家堂與奎爾公園", "馬德里 普拉多博物館", "塞維亞 西班牙廣場", "瓦倫西亞 藝術科學城", "格拉納達 阿爾罕布拉宮", "馬拉加 畢卡索博物館"]' style="margin-top: 25px; padding: 10px 22px; border-radius: 6px; border: none; cursor: pointer; background: white; color: var(--primary-color); font-weight: bold;">了解更多</button>
                             </div>
                         </div>
                     </div>
                 </div>
 
+            </div>
+        </section>
+
+        <!-- 💡 全新！我的專屬行程規劃牆 -->
+        <section class="spot-container" id="itinerary-section" data-reveal>
+            <div class="itinerary-header">
+                <h2 style="font-size: 3rem;"><i class="fa-solid fa-route"></i> 我的專屬行程</h2>
+                <p style="color: var(--text-secondary); margin-top: 1rem;">
+                    在上方景點卡片點擊「了解更多」，將推薦的私房景點「加入行程」，在此規劃您的專屬夢幻行程表喵！🐾
+                </p>
+            </div>
+            <div id="itinerary-empty" class="itinerary-empty">
+                <i class="fa-solid fa-map-location-dot" style="font-size: 3.5rem; color: var(--primary-color); margin-bottom: 15px; display: block;"></i>
+                目前行程表空空如也，快去上方點選國家卡片的「了解更多」並新增行程吧！
+            </div>
+            <div id="itinerary-grid" class="itinerary-grid" style="display: none;">
+                <!-- 由 JS 動態生成行程卡片 -->
             </div>
         </section>
 
@@ -318,7 +338,7 @@
         <!-- 圓餅圖區塊 -->
         <section class="chart-section spot-container" data-reveal>
             <div data-reveal>
-                <h2 style="font-size: 3rem;">📊 技術佔比統計</h2>
+                <h2 style="font-size: 3rem;"><i class="fa-solid fa-chart-simple"></i> 技術佔比統計</h2>
                 <p style="color: var(--text-secondary); margin-top: 1rem; margin-bottom: 3rem;">本網頁底層所應用的程式語言與核心樣式比例（互動式 SVG 圓餅圖）</p>
             </div>
             <div class="chart-wrapper">
@@ -338,7 +358,7 @@
             <div class="progress-container">
                 <div class="progress-bar"></div>
             </div>
-            <h2 style="margin-bottom: 20px;">🚀 動畫技術完整實作說明</h2>
+            <h2 style="margin-bottom: 20px;"><i class="fa-solid fa-laptop-code"></i> 動畫技術完整實作說明</h2>
             <div style="background: var(--card-bg); padding: 40px; border-radius: 20px; box-shadow: 0 10px 40px var(--shadow);">
                 <p style="font-size: 1.1rem; line-height: 1.8;">
                     <strong>1. 3D 翻轉模組 (Card Flip)：</strong> 透過 <code>perspective</code> 與 <code>preserve-3d</code>，實現流暢的空間旋轉效果，增加 UI 的層次感。<br>
