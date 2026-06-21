@@ -6,14 +6,14 @@
     <title>探索旅程 | 動畫程式設計期末作品</title>
     <!-- 引入 Font Awesome 6 向量圖示庫 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icons@7.2.3/css/flag-icons.min.css">
+    <link class="flag-icon-cdn" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icons@7.2.3/css/flag-icons.min.css">
     <!-- 引入外部 CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 <div class="progress-container global-progress">
-        <div class="progress-bar"></div>
-    </div>
+    <div class="progress-bar"></div>
+</div>
 <!-- 視差星空背景容器 -->
 <div id="stars-container" class="stars-container"></div>
 
@@ -32,7 +32,7 @@
         <div class="aurora-bg"></div>
         <div class="landing-content">
             <div id="cat-navigator" class="cat-navigator">
-                <div ><img class="cat-sprite-gif" src="assets/STRIPES.gif" alt="貓咪角色"></div>
+                <div><img class="cat-sprite-gif" src="assets/STRIPES.gif" alt="貓咪角色"></div>
                 <div class="cat-bubble" id="cat-bubble">喵！跟緊我的腳步！</div>
             </div>
             <h1 class="typewriter" id="typewriter-text">準備好進入旅程了嗎？</h1>
@@ -94,7 +94,7 @@
             </div>
         </header>
 
-        <section class="hero-section" >
+        <section class="hero-section">
             <div class="hero-content" data-reveal>
                 <h1 class="hero-title">你的下一趟完美旅程</h1>
             </div>
@@ -124,7 +124,7 @@
         </section>
 
         <!-- 卡片區塊 -->
-        <section class="spot-container" id="spot-section" >
+        <section class="spot-container" id="spot-section">
             <!-- 麵包屑導航 -->
             <nav class="breadcrumbs" aria-label="breadcrumb">
                 <ol class="breadcrumb-list" data-reveal>
@@ -135,8 +135,8 @@
             </nav>
 
             <div data-reveal>
-                <h2 style="font-size: 3rem;"><i class="fa-solid fa-globe" data-reveal></i> 各國景點推薦</h2>
-                <p style="color: var(--text-secondary); margin-top: 1rem;">滑鼠懸停 3D 空間翻轉，點擊「了解更多」解鎖深度隱藏城市清單喵！</p>
+                <h2 style="font-size: 3rem;"><i class="fa-solid fa-globe"></i> 各國景點推薦</h2>
+                <p style="color: var(--text-secondary); margin-top: 1rem;">滑鼠懸停 3D 空間翻轉，點擊「了解更多」解鎖深度隱藏城市清單與行程加入系統喵！</p>
             </div>
 
             <!-- 8國景點 Grid 佈局 -->
@@ -158,7 +158,7 @@
                             <div>
                                 <h3>城市特選</h3>
                                 <p style="color: white; margin-top: 10px; font-weight: bold;"><i class="fa-solid fa-map-pin"></i> 台北 ・ 高雄 ・ 花蓮</p>
-                                <button class="reserve-btn" data-country="台灣" data-icon="fa-solid fa-mountain-sun" data-cities="台北 ・ 高雄 ・ 花蓮" data-more='["台北市 信義商圈", "高雄市 駁二藝術特區", "花蓮縣 太魯閣國家公園", "台中市 逢甲夜市", "台南市 安平古堡", "台東縣 鹿野高台", "宜蘭縣 礁溪溫泉", "南投縣 日月潭"]' style="margin-top: 25px; padding: 10px 22px; border-radius: 6px; border: none; cursor: pointer; background: white; color: var(--primary-color); font-weight: bold;">了解更多</button>
+                                <button class="reserve-btn" data-country="台灣" data-icon="fa-solid fa-mountain-sun" data-cities="台北 ・ 高雄 ・ 花蓮" data-more='[{"name":"台北市 信義商圈","desc":"台北精華地段，台北101所在地，購物娛樂聚集"},{"name":"高雄市 駁二藝術特區","desc":"高雄港邊倉庫改建的文創園區，展覽與裝置藝術豐富"},{"name":"花蓮縣 太魯閣國家公園","desc":"花蓮著名峽谷景觀，以大理石峭壁與步道聞名"},{"name":"台中市 逢甲夜市","desc":"台中規模最大夜市之一，小吃選擇多元"},{"name":"台南市 安平古堡","desc":"台南最早的城堡遺跡，荷蘭時期歷史建築"},{"name":"台東縣 鹿野高台","desc":"台東熱氣球與飛行傘勝地，視野遼闊"},{"name":"宜蘭縣 礁溪溫泉","desc":"宜蘭知名溫泉鄉，交通便利"},{"name":"南投縣 日月潭","desc":"南投高山湖泊，環潭步道與纜車著名"}]' style="margin-top: 25px; padding: 10px 22px; border-radius: 6px; border: none; cursor: pointer; background: white; color: var(--primary-color); font-weight: bold;">了解更多</button>
                             </div>
                         </div>
                     </div>
@@ -180,7 +180,7 @@
                             <div>
                                 <h3>城市特選</h3>
                                 <p style="color: white; margin-top: 10px; font-weight: bold;"><i class="fa-solid fa-map-pin"></i> 巴黎 ・ 尼斯 ・ 里昂</p>
-                                <button class="reserve-btn" data-country="法國" data-icon="fa-solid fa-landmark" data-cities="巴黎 ・ 尼斯 ・ 里昂" data-more='["巴黎 艾菲爾鐵塔", "尼斯 蔚藍海岸", "里昂 古典老城區", "馬賽 聖母加德大教堂", "波爾多 葡萄酒莊園", "坎城 節慶宮", "斯特拉斯堡 小法國區"]' style="margin-top: 25px; padding: 10px 22px; border-radius: 6px; border: none; cursor: pointer; background: white; color: var(--primary-color); font-weight: bold;">了解更多</button>
+                                <button class="reserve-btn" data-country="法國" data-icon="fa-solid fa-landmark" data-cities="巴黎 ・ 尼斯 ・ 里昂" data-more='[{"name":"巴黎 艾菲爾鐵塔","desc":"巴黎地標，鋼鐵結構建築典範"},{"name":"尼斯 蔚藍海岸","desc":"尼斯的地中海濱海風光，渡假勝地"},{"name":"里昂 古典老城區","desc":"保存完整的文藝復興建築群"},{"name":"馬賽 聖母加德大教堂","desc":"馬賽地標教堂，可俯瞰全城"},{"name":"波爾多 葡萄酒莊園","desc":"波爾多世界知名產區"},{"name":"坎城 節慶宮","desc":"坎城電影節主辦地"},{"name":"斯特拉斯堡 小法國區","desc":"史特拉斯堡運河與木骨建築老城"}]' style="margin-top: 25px; padding: 10px 22px; border-radius: 6px; border: none; cursor: pointer; background: white; color: var(--primary-color); font-weight: bold;">了解更多</button>
                             </div>
                         </div>
                     </div>
@@ -202,7 +202,7 @@
                             <div>
                                 <h3>城市特選</h3>
                                 <p style="color: white; margin-top: 10px; font-weight: bold;"><i class="fa-solid fa-map-pin"></i> 東京 ・ 京都 ・ 大阪</p>
-                                <button class="reserve-btn" data-country="日本" data-icon="fa-solid fa-archway" data-cities="東京 ・ 京都 ・ 大阪" data-more='["東京 新宿御苑賞櫻", "京都 清水寺與二年坂", "大阪 心齋橋與道頓堀", "北海道 富良野薰衣草田", "沖繩 美麗海水族館", "福岡 中洲川端屋台", "奈良 東大寺萌鹿", "箱根 蘆之湖溫泉"]' style="margin-top: 25px; padding: 10px 22px; border-radius: 6px; border: none; cursor: pointer; background: white; color: var(--primary-color); font-weight: bold;">了解更多</button>
+                                <button class="reserve-btn" data-country="日本" data-icon="fa-solid fa-archway" data-cities="東京 ・ 京都 ・ 大阪" data-more='[{"name":"東京 新宿御苑","desc":"東京賞櫻名所，庭園優美"},{"name":"京都 清水寺與二年坂","desc":"京都代表性古寺與石板老街"},{"name":"大阪 心齋橋與道頓堀","desc":"大阪繁華購物美食區"},{"name":"北海道 富良野薰衣草田","desc":"北海道夏季紫色花海"},{"name":"沖繩 美麗海水族館","desc":"沖繩大型海洋生物展館"},{"name":"福岡 中洲川端屋台","desc":"福岡特色路邊攤文化"},{"name":"奈良 東大寺萌鹿","desc":"奈良鹿群與古寺"},{"name":"箱根 蘆之湖溫泉","desc":"富士山景溫泉勝地"}]' style="margin-top: 25px; padding: 10px 22px; border-radius: 6px; border: none; cursor: pointer; background: white; color: var(--primary-color); font-weight: bold;">了解更多</button>
                             </div>
                         </div>
                     </div>
@@ -224,7 +224,7 @@
                             <div>
                                 <h3>城市特選</h3>
                                 <p style="color: white; margin-top: 10px; font-weight: bold;"><i class="fa-solid fa-map-pin"></i> 紐約 ・ 洛杉磯 ・ 三藩市</p>
-                                <button class="reserve-btn" data-country="美國" data-icon="fa-solid fa-monument" data-cities="紐約 ・ 洛杉磯 ・ 三藩市" data-more='["紐約 時代廣場與中央公園", "洛杉磯 好萊塢環球影城", "三藩市 金門大橋", "拉斯維加斯 頂級賭場大道", "芝加哥 千禧公園", "西雅圖 派克市場", "奧蘭多 迪士尼世界"]' style="margin-top: 25px; padding: 10px 22px; border-radius: 6px; border: none; cursor: pointer; background: white; color: var(--primary-color); font-weight: bold;">了解更多</button>
+                                <button class="reserve-btn" data-country="美國" data-icon="fa-solid fa-monument" data-cities="紐約 ・ 洛杉磯 ・ 三藩市" data-more='[{"name":"紐約 時代廣場與中央公園","desc":"紐約繁華地標與市區綠洲"},{"name":"洛杉磯 好萊塢環球影城","desc":"洛杉磯電影主題樂園"},{"name":"三藩市 金門大橋","desc":"三藩市經典紅色懸索橋"},{"name":"拉斯維加斯 頂級賭場大道","desc":"拉斯維加斯賭城核心"},{"name":"芝加哥 千禧公園","desc":"芝加哥地標公共藝術空間"},{"name":"西雅圖 派克市場","desc":"西雅圖歷史市場，海鮮聞名"},{"name":"奧蘭多 迪士尼世界","desc":"奧蘭多全球最大主題樂園"}]' style="margin-top: 25px; padding: 10px 22px; border-radius: 6px; border: none; cursor: pointer; background: white; color: var(--primary-color); font-weight: bold;">了解更多</button>
                             </div>
                         </div>
                     </div>
@@ -246,7 +246,7 @@
                             <div>
                                 <h3>城市特選</h3>
                                 <p style="color: white; margin-top: 10px; font-weight: bold;"><i class="fa-solid fa-map-pin"></i> 倫敦 ・ 愛丁堡 ・ 曼徹斯特</p>
-                                <button class="reserve-btn" data-country="英國" data-icon="fa-solid fa-clock" data-cities="倫敦 ・ 愛丁堡 ・ 曼徹斯特" data-more='["倫敦 大笨鐘與倫敦眼", "愛丁堡 古老城堡", "曼徹斯特 老特拉福德球場", "利物浦 皇家阿爾伯特碼頭", "牛津 大學城圖書館", "劍橋 康河撐船遊"]' style="margin-top: 25px; padding: 10px 22px; border-radius: 6px; border: none; cursor: pointer; background: white; color: var(--primary-color); font-weight: bold;">了解更多</button>
+                                <button class="reserve-btn" data-country="英國" data-icon="fa-solid fa-clock" data-cities="倫敦 ・ 愛丁堡 ・ 曼徹斯特" data-more='[{"name":"倫敦 大笨鐘與倫敦眼","desc":"倫敦經典地標"},{"name":"愛丁堡 古老城堡","desc":"愛丁堡蘇格蘭象徵建築"},{"name":"曼徹斯特 老特拉福德球場","desc":"曼徹斯特足球聖地"},{"name":"利物浦 皇家阿爾伯特碼頭","desc":"利物浦世界遺產港區"},{"name":"牛津 大學城圖書館","desc":"牛津學術重鎮"},{"name":"劍橋 康河撐船遊","desc":"劍橋經典體驗"}]' style="margin-top: 25px; padding: 10px 22px; border-radius: 6px; border: none; cursor: pointer; background: white; color: var(--primary-color); font-weight: bold;">了解更多</button>
                             </div>
                         </div>
                     </div>
@@ -268,7 +268,7 @@
                             <div>
                                 <h3>城市特選</h3>
                                 <p style="color: white; margin-top: 10px; font-weight: bold;"><i class="fa-solid fa-map-pin"></i> 羅馬 ・ 威尼斯 ・ 佛羅倫斯</p>
-                                <button class="reserve-btn" data-country="義大利" data-icon="fa-solid fa-landmark-dome" data-cities="羅馬 ・ 威尼斯 ・ 佛羅倫斯" data-more='["羅馬 萬神殿與競技場", "威尼斯 聖馬可廣場", "佛羅倫斯 烏菲茲美術館", "米蘭 埃馬努埃萊二世拱廊", "比薩 比薩斜塔", "拿坡里 龐貝古城遺址"]' style="margin-top: 25px; padding: 10px 22px; border-radius: 6px; border: none; cursor: pointer; background: white; color: var(--primary-color); font-weight: bold;">了解更多</button>
+                                <button class="reserve-btn" data-country="義大利" data-icon="fa-solid fa-landmark-dome" data-cities="羅馬 ・ 威尼斯 ・ 佛羅倫斯" data-more='[{"name":"羅馬 萬神殿與競技場","desc":"羅馬古蹟代表"},{"name":"威尼斯 聖馬可廣場","desc":"威尼斯水都中心"},{"name":"佛羅倫斯 烏菲茲美術館","desc":"佛羅倫斯文藝復興藝術寶庫"},{"name":"米蘭 埃馬努埃萊二世拱廊","desc":"米蘭時尚購物廊"},{"name":"比薩 比薩斜塔","desc":"著名傾斜建築奇觀"},{"name":"拿坡里 龐貝古城遺址","desc":"拿坡里火山掩埋的古羅馬城"}]' style="margin-top: 25px; padding: 10px 22px; border-radius: 6px; border: none; cursor: pointer; background: white; color: var(--primary-color); font-weight: bold;">了解更多</button>
                             </div>
                         </div>
                     </div>
@@ -290,7 +290,7 @@
                             <div>
                                 <h3>城市特選</h3>
                                 <p style="color: white; margin-top: 10px; font-weight: bold;"><i class="fa-solid fa-map-pin"></i> 奧斯陸 ・ 卑爾根 ・ 特羅姆瑟</p>
-                                <button class="reserve-btn" data-country="挪威" data-icon="fa-solid fa-snowflake" data-cities="奧斯陸 ・ 卑爾根 ・ 特羅姆瑟" data-more='["奧斯陸 奧斯陸歌劇院", "卑爾根 Bryggen 木造屋", "特羅姆瑟 極光觀測站", "蓋朗厄爾 峽灣峭壁遊船", "羅弗敦群島 仙境漁村", "斯塔萬格 聖壇岩攀登"]' style="margin-top: 25px; padding: 10px 22px; border-radius: 6px; border: none; cursor: pointer; background: white; color: var(--primary-color); font-weight: bold;">了解更多</button>
+                                <button class="reserve-btn" data-country="挪威" data-icon="fa-solid fa-snowflake" data-cities="奧斯陸 ・ 卑爾根 ・ 特羅姆瑟" data-more='[{"name":"奧斯陸 奧斯陸歌劇院","desc":"奧斯陸歌劇院：現代建築與海港景觀"},{"name":"卑爾根 Bryggen木造屋","desc":"卑爾根世界遺產老城"},{"name":"特羅姆瑟 極光觀測站","desc":"特羅姆瑟北極光勝地"},{"name":"蓋朗厄爾 峽灣峭壁遊船","desc":"蓋朗厄爾壯麗峽灣景色"},{"name":"羅弗敦群島 仙境漁村","desc":"羅弗敦群島漁村風光"},{"name":"斯塔萬格 聖壇岩攀登","desc":"斯塔萬格懸崖健行地標"}]' style="margin-top: 25px; padding: 10px 22px; border-radius: 6px; border: none; cursor: pointer; background: white; color: var(--primary-color); font-weight: bold;">了解更多</button>
                             </div>
                         </div>
                     </div>
@@ -312,7 +312,7 @@
                             <div>
                                 <h3>城市特選</h3>
                                 <p style="color: white; margin-top: 10px; font-weight: bold;"><i class="fa-solid fa-map-pin"></i> 巴塞隆納 ・ 馬德里 ・ 塞維亞</p>
-                                <button class="reserve-btn" data-country="西班牙" data-icon="fa-solid fa-sun" data-cities="巴塞隆納 ・ 馬德里 ・ 塞維亞" data-more='["巴塞隆納 聖家堂與奎爾公園", "馬德里 普拉多博物館", "塞維亞 西班牙廣場", "瓦倫西亞 藝術科學城", "格拉納達 阿爾罕布拉宮", "馬拉加 畢卡索博物館"]' style="margin-top: 25px; padding: 10px 22px; border-radius: 6px; border: none; cursor: pointer; background: white; color: var(--primary-color); font-weight: bold;">了解更多</button>
+                                <button class="reserve-btn" data-country="西班牙" data-icon="fa-solid fa-sun" data-cities="巴塞隆納 ・ 馬德里 ・ 塞維亞" data-more='[{"name":"巴塞隆納 聖家堂與奎爾公園","desc":"巴塞隆納高第建築傑作"},{"name":"馬德里 普拉多博物館","desc":"馬德里世界級藝術館"},{"name":"塞維亞 西班牙廣場","desc":"塞維亞摩爾風格地標"},{"name":"瓦倫西亞 藝術科學城","desc":"瓦倫西亞未來感建築群"},{"name":"格拉納達 阿爾罕布拉宮","desc":"格拉納達摩爾王朝宮殿"},{"name":"馬拉加 畢卡索博物館","desc":"馬拉加紀念藝術大師故鄉"}]' style="margin-top: 25px; padding: 10px 22px; border-radius: 6px; border: none; cursor: pointer; background: white; color: var(--primary-color); font-weight: bold;">了解更多</button>
                             </div>
                         </div>
                     </div>
@@ -373,7 +373,7 @@
     </main>
 
     <!-- 動態探索彈窗主體 -->
-    <div id="booking-modal" class="modal-overlay" >
+    <div id="booking-modal" class="modal-overlay">
         <div class="modal-content">
             <button class="modal-close" id="modal-close-btn" aria-label="關閉彈窗">&times;</button>
             <div class="modal-body" id="modal-dynamic-body">

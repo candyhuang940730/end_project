@@ -1,6 +1,11 @@
 // 宣告全域行程表陣列
 let itineraryList = [];
 
+// 重置滾動位置確保每次進入都是從頂部開始
+if(window.history.scrollRestoration) {
+    window.history.scrollRestoration = 'manual';
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     // 1. 開場動畫時序
     initOpeningAnimation();
@@ -35,6 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 💡 10. 初始化行程規劃牆的拖拽事件監聽 (動態資料庫雙向綁定引擎)
     initItineraryDragAndDrop();
 
+    // 11. 初始化頂部滾動進度條
     initScrollProgressBar();
 });
 
@@ -187,7 +193,7 @@ function initMarquee(track) {
     track.dataset.marqueeReady = 'true';
 }
 
-// 深度探索動態渲染彈窗功能 (含行程添加聯動)
+// 💡 深度探索動態渲染彈窗功能 (含行程添加聯動與詳細描述渲染機制)
 function initExploreModal() {
     const bookingModal = document.getElementById('booking-modal');
     const modalBody = document.getElementById('modal-dynamic-body');
@@ -235,19 +241,25 @@ function initExploreModal() {
             moreCities = [];
         }
 
-        // 動態拼裝帶有「加入行程」互動按鈕的清單 DOM
+        // 💡 動態拼裝帶有「景點描述」與「加入行程」互動按鈕的清單 DOM
         let cityItemsHtml = '';
         moreCities.forEach(city => {
             // 檢查該城市是否已被規劃在行程表中
-            const isAdded = itineraryList.some(item => item.city === city && item.country === country);
+            const isAdded = itineraryList.some(item => item.city === city.name && item.country === country);
             const btnText = isAdded ? '<i class="fa-solid fa-check"></i> 已加入' : '<i class="fa-solid fa-plus"></i> 加入行程';
             const btnClass = isAdded ? 'modal-add-city-btn added' : 'modal-add-city-btn';
             const btnDisabled = isAdded ? 'disabled="true"' : '';
 
             cityItemsHtml += `
                 <div class="modal-city-item">
-                    <span><i class="fa-solid fa-location-dot" style="margin-right: 8px; color: var(--primary-color);"></i> ${city}</span>
-                    <button class="${btnClass}" data-country="${country}" data-city="${city}" data-icon="${iconClass}" ${btnDisabled}>${btnText}</button>
+                    <div class="modal-city-info">
+                        <span class="modal-city-name">
+                            <i class="fa-solid fa-location-dot" style="margin-right: 8px; color: var(--primary-color);"></i> 
+                            ${city.name}
+                        </span>
+                        <p class="modal-city-desc">${city.desc}</p>
+                    </div>
+                    <button class="${btnClass}" data-country="${country}" data-city="${city.name}" data-icon="${iconClass}" ${btnDisabled}>${btnText}</button>
                 </div>
             `;
         });
@@ -342,7 +354,7 @@ function updateItineraryUI() {
     }
 }
 
-// 💡 全新！我的專屬行程拖曳排序與記憶體資料庫雙向綁定引擎 (Itinerary Drag & Drop Engine)
+// 我的專屬行程拖曳排序與記憶體資料庫雙向綁定引擎 (Itinerary Drag & Drop Engine)
 function initItineraryDragAndDrop() {
     const gridEl = document.getElementById('itinerary-grid');
     if (!gridEl) return;
@@ -362,7 +374,7 @@ function initItineraryDragAndDrop() {
         if (card) {
             card.classList.remove('dragging');
         }
-        // 💡 核心：當使用者放開滑鼠完成排序，立刻重新讀取 DOM 結構，更新 JS 記憶體中的陣列順序！
+        // 當使用者放開滑鼠完成排序，立刻重新讀取 DOM 結構，更新 JS 記憶體中的陣列順序！
         syncItineraryArrayFromDOM();
     });
 
@@ -391,7 +403,7 @@ function initItineraryDragAndDrop() {
     });
 }
 
-// 💡 重新抓取網格中卡片的順序，將全新的 DOM 結構順序同步寫回 itineraryList 陣列中！
+// 重新抓取網格中卡片的順序，將全新的 DOM 結構順序同步寫回 itineraryList 陣列中！
 function syncItineraryArrayFromDOM() {
     const gridEl = document.getElementById('itinerary-grid');
     if (!gridEl) return;
@@ -581,7 +593,7 @@ function initTechChart() {
     });
 }
 
-// 導航欄與巨型菜單聯動
+// 導導欄與巨型菜單聯動
 function initNavbarInteraction() {
     const header = document.getElementById('main-header');
     const megaTrigger = document.getElementById('mega-trigger');
@@ -629,21 +641,15 @@ function initNavbarInteraction() {
     }
 }
 
+// 頂部滾動進度條
 function initScrollProgressBar() {
     const progressBar = document.querySelector('.progress-bar');
     if (!progressBar) return;
 
-    // 監聽網頁滾動事件
     window.addEventListener('scroll', () => {
-        // 獲取當前滾動距離
         const scrollTop = window.scrollY || document.documentElement.scrollTop;
-        // 獲取網頁可滾動的總高度（總高度 - 視窗高度）
         const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        
-        // 計算滾動百分比 (0 ~ 100)
         const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-        
-        // 動態改變進度條的寬度
         progressBar.style.width = scrollPercent + '%';
     }, { passive: true });
 }
